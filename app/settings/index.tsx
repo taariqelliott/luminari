@@ -18,7 +18,6 @@ export default function Settings() {
 
       <View className="w-full gap-2 space-y-4 rounded-2xl bg-card p-4 shadow">
         <View className="flex-row items-center justify-center gap-2">
-          <Text>Toggle Theme</Text>
           <ThemeToggle />
         </View>
 
