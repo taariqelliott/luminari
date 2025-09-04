@@ -68,7 +68,7 @@ export default function SignUpScreen() {
 
   if (pendingVerification) {
     return (
-      <View className="flex-1 items-center justify-center gap-2">
+      <View className="flex-1 items-center justify-center gap-2 px-4">
         <Text>Verify your email</Text>
         <Input
           value={code}
@@ -83,7 +83,7 @@ export default function SignUpScreen() {
   }
 
   return (
-    <View className="flex-1 items-center justify-center gap-2">
+    <View className="flex-1 items-center justify-center gap-2 px-4">
       <Text>Sign up</Text>
       <Input
         autoCapitalize="none"
