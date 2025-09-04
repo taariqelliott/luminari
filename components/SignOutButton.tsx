@@ -1,6 +1,5 @@
 import { useClerk } from '@clerk/clerk-expo';
 import * as Linking from 'expo-linking';
-import { TouchableOpacity } from 'react-native';
 import { Text } from './ui/text';
 import { Button } from './ui/button';
 import { router } from 'expo-router';
@@ -22,7 +21,7 @@ export const SignOutButton = () => {
   };
   return (
     <Button onPress={handleSignOut}>
-      <Text>Sign out</Text>
+      <Text>Sign Out</Text>
     </Button>
   );
 };
