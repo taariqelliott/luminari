@@ -10,10 +10,10 @@ export default function ProfileScreen() {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 70 }}>
       <View className="flex-1 items-center justify-center">
-        <Text>Profile Page</Text>
-        <Text>
+        <Text className="text-2xl font-bold">Profile Page</Text>
+        <Text className="text-xl font-semibold">
           Welcome{' '}
-          <Text className="font-bold text-primary">
+          <Text className="text-xl font-bold text-primary">
             {user?.emailAddresses[0].emailAddress ?? 'Guest'}!
           </Text>
         </Text>
