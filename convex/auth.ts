@@ -12,9 +12,15 @@ export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
         const name = githubProfile.name ?? githubProfile.login ?? 'GitHub User';
         const email = githubProfile.email ?? null;
         const image = githubProfile.avatar_url ?? null;
-        
-        console.log('GitHub profile data:', { id, name, email, image, originalId: githubProfile.id });
-        
+
+        console.log('GitHub profile data:', {
+          id,
+          name,
+          email,
+          image,
+          originalId: githubProfile.id,
+        });
+
         return {
           id,
           name,

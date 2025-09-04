@@ -29,10 +29,7 @@ export default function RootLayout() {
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
           <StatusBar style="auto" />
-          <Tabs
-            screenOptions={{
-              tabBarActiveTintColor: 'green',
-            }}>
+          <Tabs>
             <Tabs.Screen
               name="(home)"
               options={{

@@ -1,11 +1,12 @@
 import { useSignIn } from '@clerk/clerk-expo';
 import { Link, useRouter } from 'expo-router';
-import { TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import React from 'react';
 import { Text } from '@/components/ui/text';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
-export default function Page() {
+export default function SignInPage() {
   const { signIn, setActive, isLoaded } = useSignIn();
   const router = useRouter();
 
@@ -41,26 +42,27 @@ export default function Page() {
   };
 
   return (
-    <View>
-      <Text>Sign in</Text>
+    <View className="w-full gap-2">
+      <Text>Sign in with email & password</Text>
       <Input
         autoCapitalize="none"
         value={emailAddress}
-        placeholder="Enter email"
+        placeholder="Enter email..."
         onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
       />
       <Input
         value={password}
-        placeholder="Enter password"
+        placeholder="Enter password..."
         secureTextEntry={true}
         onChangeText={(password) => setPassword(password)}
       />
-      <TouchableOpacity onPress={onSignInPress}>
+      <Button onPress={onSignInPress}>
         <Text>Continue</Text>
-      </TouchableOpacity>
+      </Button>
       <View style={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
+        <Text>Don't have an account?</Text>
         <Link href="/sign-up">
-          <Text>Sign up</Text>
+          <Text className="text-primary">Sign up</Text>
         </Link>
       </View>
     </View>

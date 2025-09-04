@@ -4,6 +4,7 @@ import { useSignUp } from '@clerk/clerk-expo';
 import { Link, useRouter } from 'expo-router';
 import { Text } from '@/components/ui/text';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -67,46 +68,44 @@ export default function SignUpScreen() {
 
   if (pendingVerification) {
     return (
-      <>
+      <View className="flex-1 items-center justify-center gap-2">
         <Text>Verify your email</Text>
         <Input
           value={code}
-          placeholder="Enter your verification code"
+          placeholder="Enter your verification code..."
           onChangeText={(code) => setCode(code)}
         />
         <TouchableOpacity onPress={onVerifyPress}>
-          <Text>Verify</Text>
+          <Text className="text-primary">Verify</Text>
         </TouchableOpacity>
-      </>
+      </View>
     );
   }
 
   return (
-    <View>
-      <>
-        <Text>Sign up</Text>
-        <Input
-          autoCapitalize="none"
-          value={emailAddress}
-          placeholder="Enter email"
-          onChangeText={(email) => setEmailAddress(email)}
-        />
-        <Input
-          value={password}
-          placeholder="Enter password"
-          secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
-        />
-        <TouchableOpacity onPress={onSignUpPress}>
-          <Text>Continue</Text>
-        </TouchableOpacity>
-        <View style={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-          <Text>Already have an account?</Text>
-          <Link href="/sign-in">
-            <Text>Sign in</Text>
-          </Link>
-        </View>
-      </>
+    <View className="flex-1 items-center justify-center gap-2">
+      <Text>Sign up</Text>
+      <Input
+        autoCapitalize="none"
+        value={emailAddress}
+        placeholder="Enter email"
+        onChangeText={(email) => setEmailAddress(email)}
+      />
+      <Input
+        value={password}
+        placeholder="Enter password"
+        secureTextEntry={true}
+        onChangeText={(password) => setPassword(password)}
+      />
+      <Button onPress={onSignUpPress}>
+        <Text>Continue</Text>
+      </Button>
+      <View style={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
+        <Text>Already have an account?</Text>
+        <Link href="/" asChild>
+          <Text className="text-primary">Sign in</Text>
+        </Link>
+      </View>
     </View>
   );
 }
