@@ -12,6 +12,7 @@ import { ConvexReactClient } from 'convex/react';
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { ConvexProviderWithClerk } from 'convex/react-clerk';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
+import { HapticTab } from '@/components/HapticTab';
 
 const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL!, {
   unsavedChangesWarning: false,
@@ -35,6 +36,7 @@ export default function RootLayout() {
               options={{
                 title: 'Home',
                 tabBarLabel: 'Home',
+                tabBarButton: HapticTab,
                 headerShown: false,
                 tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
               }}
@@ -44,6 +46,7 @@ export default function RootLayout() {
               options={{
                 title: 'About',
                 tabBarLabel: 'About',
+                tabBarButton: HapticTab,
                 headerShown: false,
                 tabBarIcon: ({ color, size }) => <User color={color} size={size} />,
               }}
