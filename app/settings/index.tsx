@@ -14,7 +14,7 @@ export default function Settings() {
         <Text className="mt-1 text-center text-muted-foreground">Customize your preferences</Text>
       </View>
 
-      <View className="gap-2 space-y-4 rounded-2xl bg-card p-4 shadow-sm">
+      <View className="gap-2 space-y-4 rounded-2xl bg-card p-4 shadow-lg shadow-primary">
         <View className="flex-row items-center justify-center gap-2">
           <Text>Toggle Theme</Text>
           <ThemeToggle />
