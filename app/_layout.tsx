@@ -9,53 +9,60 @@ import { PortalHost } from '@rn-primitives/portal';
 import ThemeToggle from '@/components/ThemeToggle';
 import { ThemeProvider } from '@react-navigation/native';
 import { ConvexReactClient } from 'convex/react';
-import { Platform } from 'react-native';
-import { ConvexAuthProvider } from '@convex-dev/auth/react';
-import * as SecureStore from 'expo-secure-store';
-
-import { ClerkProvider, useAuth } from '@clerk/clerk-react';
+import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { ConvexProviderWithClerk } from 'convex/react-clerk';
+import { tokenCache } from '@clerk/clerk-expo/token-cache';
 
 const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL!, {
   unsavedChangesWarning: false,
 });
 
-const secureStorage = {
-  getItem: SecureStore.getItemAsync,
-  setItem: SecureStore.setItemAsync,
-  removeItem: SecureStore.deleteItemAsync,
-};
+const clerkKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+if (!clerkKey) {
+  throw new Error('Missing EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in environment');
+}
 
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
   return (
-    <ConvexAuthProvider
-      client={convex}
-      storage={Platform.OS === 'android' || Platform.OS === 'ios' ? secureStorage : undefined}>
-      <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
-        <StatusBar style="auto" />
-        <Tabs>
-          <Tabs.Screen
-            name="index"
-            options={{
-              headerTitle: 'Home',
-              tabBarLabel: 'Home',
-              tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
-            }}
-          />
-          <Tabs.Screen
-            name="about"
-            options={{
-              headerTitle: 'About',
-              tabBarLabel: 'About',
-              headerShown: false,
-              tabBarIcon: ({ color, size }) => <User color={color} size={size} />,
-            }}
-          />
-        </Tabs>
-        <ThemeToggle />
-        <PortalHost />
-      </ThemeProvider>
-    </ConvexAuthProvider>
+    <ClerkProvider publishableKey={clerkKey} tokenCache={tokenCache}>
+      <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
+        <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
+          <StatusBar style="auto" />
+          <Tabs
+            screenOptions={{
+              tabBarActiveTintColor: 'green',
+            }}>
+            <Tabs.Screen
+              name="(home)"
+              options={{
+                title: 'Home',
+                tabBarLabel: 'Home',
+                headerShown: false,
+                tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
+              }}
+            />
+            <Tabs.Screen
+              name="about"
+              options={{
+                title: 'About',
+                tabBarLabel: 'About',
+                headerShown: false,
+                tabBarIcon: ({ color, size }) => <User color={color} size={size} />,
+              }}
+            />
+            <Tabs.Screen
+              name="(auth)"
+              options={{
+                headerShown: false,
+                href: null,
+              }}
+            />
+          </Tabs>
+          <ThemeToggle />
+          <PortalHost />
+        </ThemeProvider>
+      </ConvexProviderWithClerk>
+    </ClerkProvider>
   );
 }
