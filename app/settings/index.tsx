@@ -7,7 +7,7 @@ import { SignOutButton } from '@/components/SignOutButton';
 
 export default function Settings() {
   return (
-    <View className="w-full flex-1 justify-center bg-background px-6 py-8">
+    <View className="w-full flex-1 justify-center px-6 py-8">
       {/* Header */}
       <View className="mb-6">
         <Text className="text-center text-3xl font-bold text-primary">Settings</Text>
