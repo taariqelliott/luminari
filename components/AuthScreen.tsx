@@ -1,17 +1,48 @@
-import { Text } from './ui/text';
-import { useCallback } from 'react';
-import { View } from 'react-native';
-import { Button } from './ui/button';
+import * as React from 'react';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+} from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import GoogleSVG from './GoogleSVG';
+import GithubSVG from './GitHubSVG';
+import { OrSeparator } from './OrSeparator';
 import { useSSO } from '@clerk/clerk-expo';
-import SignInPage from '@/app/(auth)/sign-in';
 import * as AuthSession from 'expo-auth-session';
+import { useSignUp, useSignIn } from '@clerk/clerk-expo';
+import { useRouter } from 'expo-router';
 
 export default function AuthScreen() {
+  const router = useRouter();
+  const [tab, setTab] = React.useState<'signin' | 'signup'>('signin');
+
   const { startSSOFlow: startGoogle } = useSSO();
-
   const { startSSOFlow: startGithub } = useSSO();
+  const { isLoaded: signInLoaded, signIn, setActive: setActiveSignIn } = useSignIn();
+  const [signInEmail, setSignInEmail] = React.useState('');
+  const [signInPassword, setSignInPassword] = React.useState('');
 
-  const handleSSO = useCallback(async (provider: 'google' | 'github') => {
+  const { isLoaded: signUpLoaded, signUp, setActive: setActiveSignUp } = useSignUp();
+  const [signUpEmail, setSignUpEmail] = React.useState('');
+  const [signUpPassword, setSignUpPassword] = React.useState('');
+  const [pendingVerification, setPendingVerification] = React.useState(false);
+  const [verificationCode, setVerificationCode] = React.useState('');
+
+  const handleSSO = async (provider: 'google' | 'github') => {
     try {
       const { createdSessionId, setActive } = await (provider === 'google'
         ? startGoogle({
@@ -22,28 +53,191 @@ export default function AuthScreen() {
             strategy: 'oauth_github',
             redirectUrl: AuthSession.makeRedirectUri({ scheme: 'umoja' }),
           }));
+      if (createdSessionId) setActive!({ session: createdSessionId });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-      if (createdSessionId) {
-        setActive!({ session: createdSessionId });
+  const handleSignIn = async () => {
+    if (!signInLoaded) return;
+    try {
+      const attempt = await signIn.create({ identifier: signInEmail, password: signInPassword });
+      if (attempt.createdSessionId) {
+        await setActiveSignIn({ session: attempt.createdSessionId });
+        router.replace('/');
       }
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  };
+
+  const handleSignUp = async () => {
+    if (!signUpLoaded) return;
+    try {
+      await signUp.create({ emailAddress: signUpEmail, password: signUpPassword });
+      await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
+      setPendingVerification(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleVerify = async () => {
+    if (!signUpLoaded) return;
+    try {
+      const attempt = await signUp.attemptEmailAddressVerification({ code: verificationCode });
+      if (attempt.status === 'complete') {
+        await setActiveSignUp({ session: attempt.createdSessionId });
+        router.replace('/');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  if (pendingVerification) {
+    return (
+      <View className="flex-1 items-center justify-center gap-4 px-4">
+        <Card className="w-full max-w-sm">
+          <CardHeader>
+            <CardTitle>Verify your email</CardTitle>
+            <CardDescription>Enter the code sent to your email.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Input
+              placeholder="Enter verification code"
+              value={verificationCode}
+              onChangeText={setVerificationCode}
+            />
+          </CardContent>
+          <CardFooter>
+            <Button onPress={handleVerify} className="w-full">
+              <Text>Verify</Text>
+            </Button>
+          </CardFooter>
+        </Card>
+      </View>
+    );
+  }
 
   return (
-    <View className="w-full max-w-sm items-center">
-      <Text className="mb-6 text-2xl font-bold">Sign in to continue</Text>
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View className="flex-1 items-center justify-center px-4">
+          <Text className="mb-2 text-2xl font-bold">
+            {tab === 'signin' ? 'Sign In To Umoja' : 'Sign Up For Umoja'}
+          </Text>
+          <Text className="mb-6 text-muted-foreground">
+            {tab === 'signin'
+              ? 'Welcome back! Please sign in to continue'
+              : 'Create your account to get started'}
+          </Text>
 
-      <Button variant="secondary" onPress={() => handleSSO('google')} className="mb-3 w-full">
-        <Text className="text-center font-medium">Continue with Google</Text>
-      </Button>
+          <Tabs value={tab} onValueChange={(v) => setTab(v as 'signin' | 'signup')}>
+            <TabsList>
+              <TabsTrigger value="signin">
+                <Text>Sign In</Text>
+              </TabsTrigger>
+              <TabsTrigger value="signup">
+                <Text>Sign Up</Text>
+              </TabsTrigger>
+            </TabsList>
 
-      <Button variant="default" onPress={() => handleSSO('github')} className="mb-3 w-full">
-        <Text className="text-center font-medium">Continue with GitHub</Text>
-      </Button>
+            <TabsContent value="signin">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Sign In</CardTitle>
+                  <CardDescription>Use a social provider or enter your credentials</CardDescription>
+                </CardHeader>
+                <CardContent className="gap-4">
+                  <View className="flex-row justify-between gap-2">
+                    <Button
+                      variant="secondary"
+                      className="flex-1"
+                      onPress={() => handleSSO('google')}>
+                      <GoogleSVG />
+                      <Text className="ml-2">Google</Text>
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      className="flex-1"
+                      onPress={() => handleSSO('github')}>
+                      <GithubSVG />
+                      <Text className="ml-2">GitHub</Text>
+                    </Button>
+                  </View>
 
-      <SignInPage />
-    </View>
+                  <OrSeparator />
+
+                  <Input
+                    placeholder="Email address"
+                    value={signInEmail}
+                    onChangeText={setSignInEmail}
+                  />
+                  <Input
+                    placeholder="Password"
+                    secureTextEntry
+                    value={signInPassword}
+                    onChangeText={setSignInPassword}
+                  />
+                </CardContent>
+                <CardFooter className="w-full">
+                  <Button onPress={handleSignIn} className="w-full">
+                    <Text>Sign In</Text>
+                  </Button>
+                </CardFooter>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="signup">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Sign Up</CardTitle>
+                  <CardDescription>Use a social provider or create a new account</CardDescription>
+                </CardHeader>
+                <CardContent className="gap-4">
+                  <View className="flex-row justify-between gap-2">
+                    <Button
+                      variant="secondary"
+                      className="flex-1"
+                      onPress={() => handleSSO('google')}>
+                      <GoogleSVG />
+                      <Text className="ml-2">Google</Text>
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      className="flex-1"
+                      onPress={() => handleSSO('github')}>
+                      <GithubSVG />
+                      <Text className="ml-2">GitHub</Text>
+                    </Button>
+                  </View>
+
+                  <OrSeparator />
+
+                  <Input
+                    placeholder="Email address"
+                    value={signUpEmail}
+                    onChangeText={setSignUpEmail}
+                  />
+                  <Input
+                    placeholder="Password"
+                    secureTextEntry
+                    value={signUpPassword}
+                    onChangeText={setSignUpPassword}
+                  />
+                </CardContent>
+                <CardFooter className="w-full">
+                  <Button onPress={handleSignUp} className="w-full">
+                    <Text>Sign Up</Text>
+                  </Button>
+                </CardFooter>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
