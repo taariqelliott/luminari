@@ -4,7 +4,7 @@ import { NAV_THEME } from '@/lib/theme';
 import { StatusBar } from 'expo-status-bar';
 export { ErrorBoundary } from 'expo-router';
 import { useColorScheme } from 'nativewind';
-import { Home, User } from 'lucide-react-native';
+import { Home, User, Settings } from 'lucide-react-native';
 import { PortalHost } from '@rn-primitives/portal';
 import { ThemeProvider } from '@react-navigation/native';
 import { ConvexReactClient } from 'convex/react';
@@ -12,7 +12,6 @@ import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { ConvexProviderWithClerk } from 'convex/react-clerk';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import { HapticTab } from '@/components/HapticTab';
-import ThemeToggle from '@/components/ThemeToggle';
 
 const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL!, {
   unsavedChangesWarning: false,
@@ -42,13 +41,23 @@ export default function RootLayout() {
               }}
             />
             <Tabs.Screen
-              name="about"
+              name="profile"
               options={{
-                title: 'About',
-                tabBarLabel: 'About',
+                title: 'Profile',
+                tabBarLabel: 'Profile',
                 tabBarButton: HapticTab,
                 headerShown: false,
                 tabBarIcon: ({ color, size }) => <User color={color} size={size} />,
+              }}
+            />
+            <Tabs.Screen
+              name="settings"
+              options={{
+                title: 'Settings',
+                tabBarLabel: 'Settings',
+                tabBarButton: HapticTab,
+                headerShown: false,
+                tabBarIcon: ({ color, size }) => <Settings color={color} size={size} />,
               }}
             />
             <Tabs.Screen
@@ -59,7 +68,6 @@ export default function RootLayout() {
               }}
             />
           </Tabs>
-          <ThemeToggle />
           <PortalHost />
         </ThemeProvider>
       </ConvexProviderWithClerk>

@@ -12,12 +12,8 @@ export default function ThemeToggle() {
   const { colorScheme, toggleColorScheme } = useColorScheme();
 
   return (
-    <Button
-      onPressIn={toggleColorScheme}
-      size="icon"
-      variant="ghost"
-      className="absolute right-2 top-[3.75rem] rounded-full web:mx-4">
-      <Icon as={THEME_ICONS[colorScheme ?? 'light']} className="size-5" />
+    <Button onPressIn={toggleColorScheme} size="icon" variant="ghost">
+      <Icon as={THEME_ICONS[colorScheme ?? 'light']} className="size-10" />
     </Button>
   );
 }

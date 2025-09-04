@@ -4,22 +4,22 @@ import { Link } from 'expo-router';
 import { Button } from '@/components/ui/button';
 import { useUser } from '@clerk/clerk-expo';
 
-export default function AboutScreen() {
+export default function ProfileScreen() {
   const { user } = useUser();
 
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 70 }}>
       <View className="flex-1 items-center justify-center">
-        <Text>About Page</Text>
+        <Text>Profile Page</Text>
         <Text>
           Welcome{' '}
           <Text className="font-bold text-primary">
             {user?.emailAddresses[0].emailAddress ?? 'Guest'}!
           </Text>
         </Text>
-        <Link href="/about/edit" asChild>
+        <Link href="/profile/edit" asChild>
           <Button>
-            <Text>Edit About</Text>
+            <Text>Edit Profile</Text>
           </Button>
         </Link>
       </View>
