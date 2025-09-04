@@ -4,7 +4,7 @@ import { NAV_THEME } from '@/lib/theme';
 import { StatusBar } from 'expo-status-bar';
 export { ErrorBoundary } from 'expo-router';
 import { useColorScheme } from 'nativewind';
-import { Home, User, Settings } from 'lucide-react-native';
+import { Home, User, Settings, Telescope, Plus } from 'lucide-react-native';
 import { PortalHost } from '@rn-primitives/portal';
 import { ThemeProvider } from '@react-navigation/native';
 import { ConvexReactClient } from 'convex/react';
@@ -29,7 +29,10 @@ export default function RootLayout() {
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
           <StatusBar style="auto" />
-          <Tabs>
+          <Tabs
+            screenOptions={{
+              tabBarActiveTintColor: '#d97757',
+            }}>
             <Tabs.Screen
               name="(home)"
               options={{
@@ -38,6 +41,26 @@ export default function RootLayout() {
                 tabBarButton: HapticTab,
                 headerShown: false,
                 tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
+              }}
+            />
+            <Tabs.Screen
+              name="discover"
+              options={{
+                title: 'Discover',
+                tabBarLabel: 'Discover',
+                tabBarButton: HapticTab,
+                headerShown: false,
+                tabBarIcon: ({ color, size }) => <Telescope color={color} size={size} />,
+              }}
+            />
+            <Tabs.Screen
+              name="create"
+              options={{
+                title: 'Create',
+                tabBarLabel: 'Create',
+                tabBarButton: HapticTab,
+                headerShown: false,
+                tabBarIcon: ({ color, size }) => <Plus color={color} size={size} />,
               }}
             />
             <Tabs.Screen

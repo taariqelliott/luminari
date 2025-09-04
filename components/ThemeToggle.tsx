@@ -13,7 +13,7 @@ export default function ThemeToggle() {
 
   return (
     <Button onPressIn={toggleColorScheme} size="icon" variant="ghost">
-      <Icon as={THEME_ICONS[colorScheme ?? 'light']} className="size-10" />
+      <Icon as={THEME_ICONS[colorScheme ?? 'light']} className="size-7" />
     </Button>
   );
 }

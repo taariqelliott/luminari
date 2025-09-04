@@ -3,6 +3,7 @@ import * as Linking from 'expo-linking';
 import { TouchableOpacity } from 'react-native';
 import { Text } from './ui/text';
 import { Button } from './ui/button';
+import { router } from 'expo-router';
 
 export const SignOutButton = () => {
   // Use `useClerk()` to access the `signOut()` function
@@ -12,6 +13,7 @@ export const SignOutButton = () => {
       await signOut();
       // Redirect to your desired page
       Linking.openURL(Linking.createURL('/'));
+      router.push('/');
     } catch (err) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
