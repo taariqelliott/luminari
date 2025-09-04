@@ -6,13 +6,13 @@ export { ErrorBoundary } from 'expo-router';
 import { useColorScheme } from 'nativewind';
 import { Home, User } from 'lucide-react-native';
 import { PortalHost } from '@rn-primitives/portal';
-import ThemeToggle from '@/components/ThemeToggle';
 import { ThemeProvider } from '@react-navigation/native';
 import { ConvexReactClient } from 'convex/react';
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { ConvexProviderWithClerk } from 'convex/react-clerk';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import { HapticTab } from '@/components/HapticTab';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL!, {
   unsavedChangesWarning: false,
