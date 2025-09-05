@@ -49,7 +49,7 @@ export default function DeleteUserButton() {
             <AlertDialogCancel>
               <Text>Cancel</Text>
             </AlertDialogCancel>
-            <AlertDialogAction onPress={handleDelete} className='bg-destructive'>
+            <AlertDialogAction onPress={handleDelete} className="bg-destructive">
               <Text>Continue</Text>
             </AlertDialogAction>
           </AlertDialogFooter>
