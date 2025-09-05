@@ -1,6 +1,6 @@
 import '@/global.css';
 import { Tabs } from 'expo-router';
-import { NAV_THEME } from '@/lib/theme';
+import { NAV_THEME, THEME } from '@/lib/theme';
 import { StatusBar } from 'expo-status-bar';
 export { ErrorBoundary } from 'expo-router';
 import { useColorScheme } from 'nativewind';
@@ -13,26 +13,21 @@ import { ConvexProviderWithClerk } from 'convex/react-clerk';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import { HapticTab } from '@/components/HapticTab';
 
-const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL!, {
-  unsavedChangesWarning: false,
-});
-
+const convexUrl = process.env.EXPO_PUBLIC_CONVEX_URL;
+const convex = new ConvexReactClient(convexUrl!);
 const clerkKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
-if (!clerkKey) {
-  throw new Error('Missing EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in environment');
-}
 
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
+  const tabBarOptions = {
+    tabBarActiveTintColor: colorScheme === 'dark' ? THEME.dark.primary : THEME.light.primary,
+  };
   return (
     <ClerkProvider publishableKey={clerkKey} tokenCache={tokenCache}>
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
           <StatusBar style="auto" />
-          <Tabs
-            screenOptions={{
-              tabBarActiveTintColor: '#d97757',
-            }}>
+          <Tabs screenOptions={tabBarOptions}>
             <Tabs.Screen
               name="(home)"
               options={{
