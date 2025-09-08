@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo';
 import { Text } from '@/components/ui/text';
 import AuthScreen from '@/components/AuthScreen';
-import { SignOutButton } from '@/components/SignOutButton';
+import UserOnboardingForm from '@/components/UserOnboardingForm';
 
 export default function HomeScreen() {
   const { user } = useUser();
@@ -11,7 +11,7 @@ export default function HomeScreen() {
     <View className="flex-1 items-center justify-center p-4">
       <SignedIn>
         <Text className="text-xl font-bold">Welcome {user?.emailAddresses[0].emailAddress}</Text>
-        <SignOutButton />
+        <UserOnboardingForm />
       </SignedIn>
       <SignedOut>
         <AuthScreen />

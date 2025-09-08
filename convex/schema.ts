@@ -5,12 +5,13 @@ import { v } from 'convex/values';
 export default defineSchema({
   ...authTables,
   users: defineTable({
-    role: v.string(),
+    role: v.union(v.literal('student'), v.literal('faculty'), v.literal('organization')),
     email: v.string(),
     username: v.string(),
     firstName: v.string(),
     lastName: v.string(),
     schoolId: v.id('schools'),
+    schoolName: v.string(),
     organizationIds: v.optional(v.array(v.id('organizations'))),
     profileImgUrl: v.optional(v.string()),
     attendingEvents: v.optional(v.array(v.id('events'))),
@@ -32,7 +33,7 @@ export default defineSchema({
         })
       )
     ),
-  }),
+  }).index('by_name_zip', ['schoolName', 'zip']),
   organizations: defineTable({
     organizationName: v.string(),
     description: v.optional(v.string()),
