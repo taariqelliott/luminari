@@ -28,7 +28,7 @@ interface SchoolType {
 export default function UserOnboardingForm() {
   const onboardingSchema = z.object({
     role: z.union([z.literal('student'), z.literal('faculty'), z.literal('organization')]),
-    email: z.string().email(),
+    email: z.email(),
     username: z.string().min(6).max(25),
     firstName: z.string().min(1).max(50),
     lastName: z.string().min(1).max(50),
