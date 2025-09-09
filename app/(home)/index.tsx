@@ -11,7 +11,9 @@ import { Icon } from '@/components/ui/icon';
 import { BadgeCheckIcon } from 'lucide-react-native';
 
 export default function HomeScreen() {
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
+  console.log(user?.primaryEmailAddress?.emailAddress);
+
   const currentUser = useQuery(api.users.currentUser);
   const [splashScreenActive, setSplashScreenActive] = useState(true);
 
@@ -31,17 +33,21 @@ export default function HomeScreen() {
   return (
     <View className="flex-1 items-center justify-center p-4">
       <SignedIn>
-        {!currentUser ? (
+        {currentUser === undefined || !isLoaded ? (
           <UserOnboardingForm />
         ) : (
-          <View className="flex-row items-center justify-center">
-            <Text className="text-xl font-bold">Welcome </Text>
-            <Badge variant="secondary" className="bg-primary">
-              <Icon as={BadgeCheckIcon} className="text-primary-foreground" />
-              <Text className="text-md font-bold text-primary-foreground">
-                {currentUser.username}
-              </Text>
-            </Badge>
+          <View className="flex items-center justify-center">
+            {currentUser && currentUser?.username !== '' && (
+              <>
+                <Text className="text-xl font-bold">•Welcome•</Text>
+                <Badge variant="secondary" className="bg-primary">
+                  <Icon as={BadgeCheckIcon} className="text-primary-foreground" />
+                  <Text className="text-xl font-bold text-primary-foreground">
+                    {currentUser.username}
+                  </Text>
+                </Badge>
+              </>
+            )}
           </View>
         )}
       </SignedIn>
