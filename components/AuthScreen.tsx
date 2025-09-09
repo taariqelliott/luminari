@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -25,22 +24,22 @@ import { useSSO } from '@clerk/clerk-expo';
 import * as AuthSession from 'expo-auth-session';
 import { useSignUp, useSignIn } from '@clerk/clerk-expo';
 import { useRouter } from 'expo-router';
+import { useState } from 'react';
 
 export default function AuthScreen() {
   const router = useRouter();
-  const [tab, setTab] = React.useState<'signin' | 'signup'>('signin');
+  const [tab, setTab] = useState<'signin' | 'signup'>('signin');
+  const [signInEmail, setSignInEmail] = useState('');
+  const [signInPassword, setSignInPassword] = useState('');
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
+  const [pendingVerification, setPendingVerification] = useState(false);
+  const [verificationCode, setVerificationCode] = useState('');
 
   const { startSSOFlow: startGoogle } = useSSO();
   const { startSSOFlow: startGithub } = useSSO();
   const { isLoaded: signInLoaded, signIn, setActive: setActiveSignIn } = useSignIn();
-  const [signInEmail, setSignInEmail] = React.useState('');
-  const [signInPassword, setSignInPassword] = React.useState('');
-
   const { isLoaded: signUpLoaded, signUp, setActive: setActiveSignUp } = useSignUp();
-  const [signUpEmail, setSignUpEmail] = React.useState('');
-  const [signUpPassword, setSignUpPassword] = React.useState('');
-  const [pendingVerification, setPendingVerification] = React.useState(false);
-  const [verificationCode, setVerificationCode] = React.useState('');
 
   const handleSSO = async (provider: 'google' | 'github') => {
     try {
@@ -153,14 +152,14 @@ export default function AuthScreen() {
                 <CardContent className="gap-4">
                   <View className="flex-row justify-between gap-2">
                     <Button
-                      variant="secondary"
+                      variant="default"
                       className="flex-1"
                       onPress={() => handleSSO('google')}>
                       <GoogleSVG />
                       <Text className="ml-2">Google</Text>
                     </Button>
                     <Button
-                      variant="secondary"
+                      variant="default"
                       className="flex-1"
                       onPress={() => handleSSO('github')}>
                       <GithubSVG />
@@ -199,14 +198,14 @@ export default function AuthScreen() {
                 <CardContent className="gap-4">
                   <View className="flex-row justify-between gap-2">
                     <Button
-                      variant="secondary"
+                      variant="default"
                       className="flex-1"
                       onPress={() => handleSSO('google')}>
                       <GoogleSVG />
                       <Text className="ml-2">Google</Text>
                     </Button>
                     <Button
-                      variant="secondary"
+                      variant="default"
                       className="flex-1"
                       onPress={() => handleSSO('github')}>
                       <GithubSVG />

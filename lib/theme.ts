@@ -2,58 +2,58 @@ import { DarkTheme, DefaultTheme, type Theme } from '@react-navigation/native';
 
 export const THEME = {
   light: {
-    background: 'hsl(43.8462 86.6667% 94.1176%)', // --background
-    foreground: 'hsl(192.2034 80.8219% 14.3137%)', // --foreground
-    card: 'hsl(45.6 42.3729% 88.4314%)', // --card
-    cardForeground: 'hsl(192.2034 80.8219% 14.3137%)', // --card-foreground
-    popover: 'hsl(45.6 42.3729% 88.4314%)', // --popover
-    popoverForeground: 'hsl(192.2034 80.8219% 14.3137%)', // --popover-foreground
-    primary: 'hsl(330.9554 64.0816% 51.9608%)', // --primary
+    background: 'hsl(37.5 36.3636% 95.6863%)', // --background
+    foreground: 'hsl(8.8889 27.8351% 19.0196%)', // --foreground
+    card: 'hsl(37.5 36.3636% 95.6863%)', // --card
+    cardForeground: 'hsl(8.8889 27.8351% 19.0196%)', // --card-foreground
+    popover: 'hsl(37.5 36.3636% 95.6863%)', // --popover
+    popoverForeground: 'hsl(8.8889 27.8351% 19.0196%)', // --popover-foreground
+    primary: 'hsl(123.038 46.1988% 33.5294%)', // --primary
     primaryForeground: 'hsl(0 0% 100%)', // --primary-foreground
-    secondary: 'hsl(175.4622 58.6207% 39.8039%)', // --secondary
-    secondaryForeground: 'hsl(0 0% 100%)', // --secondary-foreground
-    muted: 'hsl(180 6.9307% 60.3922%)', // --muted
-    mutedForeground: 'hsl(192.2034 80.8219% 14.3137%)', // --muted-foreground
-    accent: 'hsl(17.5691 80.4444% 44.1176%)', // --accent
-    accentForeground: 'hsl(0 0% 100%)', // --accent-foreground
-    destructive: 'hsl(1.0405 71.1934% 52.3529%)', // --destructive
+    secondary: 'hsl(124.6154 39.3939% 93.5294%)', // --secondary
+    secondaryForeground: 'hsl(124.4776 55.3719% 23.7255%)', // --secondary-foreground
+    muted: 'hsl(33.75 34.7826% 90.9804%)', // --muted
+    mutedForeground: 'hsl(15 25.2874% 34.1176%)', // --muted-foreground
+    accent: 'hsl(122 37.5% 84.3137%)', // --accent
+    accentForeground: 'hsl(124.4776 55.3719% 23.7255%)', // --accent-foreground
+    destructive: 'hsl(0 66.3866% 46.6667%)', // --destructive
     destructiveForeground: 'hsl(0 0% 100%)', // --destructive-foreground
-    border: 'hsl(186.3158 8.2969% 55.098%)', // --border
-    input: 'hsl(186.3158 8.2969% 55.098%)', // --input
-    ring: 'hsl(330.9554 64.0816% 51.9608%)', // --ring
-    radius: '0.25rem', // --radius
-    chart1: 'hsl(204.7674 69.3548% 48.6275%)', // --chart-1
-    chart2: 'hsl(175.4622 58.6207% 39.8039%)', // --chart-2
-    chart3: 'hsl(330.9554 64.0816% 51.9608%)', // --chart-3
-    chart4: 'hsl(17.5691 80.4444% 44.1176%)', // --chart-4
-    chart5: 'hsl(1.0405 71.1934% 52.3529%)', // --chart-5
+    border: 'hsl(33.913 27.0588% 83.3333%)', // --border
+    input: 'hsl(33.913 27.0588% 83.3333%)', // --input
+    ring: 'hsl(123.038 46.1988% 33.5294%)', // --ring
+    radius: '0.5rem', // --radius
+    chart1: 'hsl(122.4242 39.4422% 49.2157%)', // --chart-1
+    chart2: 'hsl(122.7907 43.4343% 38.8235%)', // --chart-2
+    chart3: 'hsl(123.038 46.1988% 33.5294%)', // --chart-3
+    chart4: 'hsl(124.4776 55.3719% 23.7255%)', // --chart-4
+    chart5: 'hsl(125.7143 51.2195% 8.0392%)', // --chart-5
   },
   dark: {
-    background: 'hsl(192.2222 100% 10.5882%)', // --background
-    foreground: 'hsl(180 6.9307% 60.3922%)', // --foreground
-    card: 'hsl(192.2034 80.8219% 14.3137%)', // --card
-    cardForeground: 'hsl(180 6.9307% 60.3922%)', // --card-foreground
-    popover: 'hsl(192.2034 80.8219% 14.3137%)', // --popover
-    popoverForeground: 'hsl(180 6.9307% 60.3922%)', // --popover-foreground
-    primary: 'hsl(330.9554 64.0816% 51.9608%)', // --primary
-    primaryForeground: 'hsl(0 0% 100%)', // --primary-foreground
-    secondary: 'hsl(175.4622 58.6207% 39.8039%)', // --secondary
-    secondaryForeground: 'hsl(0 0% 100%)', // --secondary-foreground
-    muted: 'hsl(194.4828 14.1463% 40.1961%)', // --muted
-    mutedForeground: 'hsl(180 6.9307% 60.3922%)', // --muted-foreground
-    accent: 'hsl(17.5691 80.4444% 44.1176%)', // --accent
-    accentForeground: 'hsl(0 0% 100%)', // --accent-foreground
-    destructive: 'hsl(1.0405 71.1934% 52.3529%)', // --destructive
-    destructiveForeground: 'hsl(0 0% 100%)', // --destructive-foreground
-    border: 'hsl(194.4828 14.1463% 40.1961%)', // --border
-    input: 'hsl(194.4828 14.1463% 40.1961%)', // --input
-    ring: 'hsl(330.9554 64.0816% 51.9608%)', // --ring
-    radius: '0.25rem', // --radius
-    chart1: 'hsl(204.7674 69.3548% 48.6275%)', // --chart-1
-    chart2: 'hsl(175.4622 58.6207% 39.8039%)', // --chart-2
-    chart3: 'hsl(330.9554 64.0816% 51.9608%)', // --chart-3
-    chart4: 'hsl(17.5691 80.4444% 44.1176%)', // --chart-4
-    chart5: 'hsl(1.0405 71.1934% 52.3529%)', // --chart-5
+    background: 'hsl(132.8571 20% 13.7255%)', // --background
+    foreground: 'hsl(32.7273 26.8293% 91.9608%)', // --foreground
+    card: 'hsl(124.6154 12.6214% 20.1961%)', // --card
+    cardForeground: 'hsl(32.7273 26.8293% 91.9608%)', // --card-foreground
+    popover: 'hsl(124.6154 12.6214% 20.1961%)', // --popover
+    popoverForeground: 'hsl(32.7273 26.8293% 91.9608%)', // --popover-foreground
+    primary: 'hsl(122.4242 39.4422% 49.2157%)', // --primary
+    primaryForeground: 'hsl(125.7143 51.2195% 8.0392%)', // --primary-foreground
+    secondary: 'hsl(115.3846 9.6296% 26.4706%)', // --secondary
+    secondaryForeground: 'hsl(114 13.8889% 85.8824%)', // --secondary-foreground
+    muted: 'hsl(124.6154 12.6214% 20.1961%)', // --muted
+    mutedForeground: 'hsl(34.7368 19.1919% 80.5882%)', // --muted-foreground
+    accent: 'hsl(122.7907 43.4343% 38.8235%)', // --accent
+    accentForeground: 'hsl(32.7273 26.8293% 91.9608%)', // --accent-foreground
+    destructive: 'hsl(0 66.3866% 46.6667%)', // --destructive
+    destructiveForeground: 'hsl(32.7273 26.8293% 91.9608%)', // --destructive-foreground
+    border: 'hsl(115.3846 9.6296% 26.4706%)', // --border
+    input: 'hsl(115.3846 9.6296% 26.4706%)', // --input
+    ring: 'hsl(122.4242 39.4422% 49.2157%)', // --ring
+    radius: '0.5rem', // --radius
+    chart1: 'hsl(122.5714 38.4615% 64.3137%)', // --chart-1
+    chart2: 'hsl(122.8235 38.4615% 56.6667%)', // --chart-2
+    chart3: 'hsl(122.4242 39.4422% 49.2157%)', // --chart-3
+    chart4: 'hsl(122.5806 40.9692% 44.5098%)', // --chart-4
+    chart5: 'hsl(122.7907 43.4343% 38.8235%)', // --chart-5
   },
 };
 

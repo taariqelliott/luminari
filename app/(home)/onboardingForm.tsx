@@ -10,10 +10,11 @@ import {
 import * as z from 'zod';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
-import { Id } from '@/convex/_generated/dataModel';
 import { useUser } from '@clerk/clerk-expo';
-import { Text } from './ui/text';
-import { Input } from './ui/input';
+
+import { router } from 'expo-router';
+import { Text } from '@/components/ui/text';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -22,20 +23,8 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from './ui/select';
-import { Button } from './ui/button';
-
-interface School {
-  _id: Id<'schools'>;
-  _creationTime: number;
-  county?: string;
-  schoolType?: string;
-  street?: string;
-  city?: string;
-  state?: string;
-  zip?: string;
-  schoolName: string;
-}
+} from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
 
 export const onboardingSchema = z.object({
   role: z.enum(['student', 'faculty', 'organization']),
@@ -96,6 +85,7 @@ export default function OnboardingForm() {
       return;
     }
     addUser({ ...formData, clerkId: user.id });
+    router.replace('/');
   };
 
   return (
@@ -120,7 +110,7 @@ export default function OnboardingForm() {
                   key={_id}
                   onPress={() => handleSchoolSelect(schoolName.trim())}
                   className="rounded bg-secondary-foreground p-3">
-                  <Text className="text-primary-foreground">{schoolName.trim()}</Text>
+                  <Text className="text-primary">{schoolName.trim()}</Text>
                 </TouchableOpacity>
               ))}
 
