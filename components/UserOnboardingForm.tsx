@@ -100,61 +100,64 @@ export default function OnboardingForm() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <ScrollView>
-        <View className="min-w-full gap-2 px-4">
-          <Input
-            placeholder="Search for schools"
-            value={schoolSearch !== '' ? schoolSearch : schoolName}
-            onChangeText={(text) => {
-              setSchoolSearch(text);
-              setSchoolName('');
-            }}
-            ref={schoolSearchInputRef}
-          />
+      <View>
+        <Text>Complete Onboarding</Text>
+        <ScrollView>
+          <View className="min-w-full gap-2 px-4">
+            <Input
+              placeholder="Search for schools"
+              value={schoolSearch !== '' ? schoolSearch : schoolName}
+              onChangeText={(text) => {
+                setSchoolSearch(text);
+                setSchoolName('');
+              }}
+              ref={schoolSearchInputRef}
+            />
 
-          {schoolSearch.trim() !== '' &&
-            filteredSchools.map(({ _id, schoolName }) => (
-              <TouchableOpacity
-                key={_id}
-                onPress={() => handleSchoolSelect(schoolName.trim())}
-                className="rounded bg-secondary-foreground p-3">
-                <Text className="text-primary-foreground">{schoolName.trim()}</Text>
-              </TouchableOpacity>
-            ))}
+            {schoolSearch.trim() !== '' &&
+              filteredSchools.map(({ _id, schoolName }) => (
+                <TouchableOpacity
+                  key={_id}
+                  onPress={() => handleSchoolSelect(schoolName.trim())}
+                  className="rounded bg-secondary-foreground p-3">
+                  <Text className="text-primary-foreground">{schoolName.trim()}</Text>
+                </TouchableOpacity>
+              ))}
 
-          <Input placeholder="Username" value={username} onChangeText={setUsername} />
-          <Input placeholder="First name" value={firstName} onChangeText={setFirstName} />
-          <Input placeholder="Last name" value={lastName} onChangeText={setLastName} />
+            <Input placeholder="Username" value={username} onChangeText={setUsername} />
+            <Input placeholder="First name" value={firstName} onChangeText={setFirstName} />
+            <Input placeholder="Last name" value={lastName} onChangeText={setLastName} />
 
-          <TouchableOpacity onPress={() => setIsOnboardingComplete((prev) => !prev)}>
-            <Text>{isOnboardingComplete ? 'Completed' : 'Not Completed'}</Text>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={() => setIsOnboardingComplete((prev) => !prev)}>
+              <Text>{isOnboardingComplete ? 'Completed' : 'Not Completed'}</Text>
+            </TouchableOpacity>
 
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select a role" />
-            </SelectTrigger>
-            <SelectContent className="w-[180px]">
-              <SelectGroup>
-                <SelectLabel>Roles</SelectLabel>
-                {ROLES.map(({ label, value }) => (
-                  <SelectItem
-                    label={label}
-                    key={value}
-                    value={value}
-                    onPress={() => setRole(value)}>
-                    {label}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a role" />
+              </SelectTrigger>
+              <SelectContent className="w-[180px]">
+                <SelectGroup>
+                  <SelectLabel>Roles</SelectLabel>
+                  {ROLES.map(({ label, value }) => (
+                    <SelectItem
+                      label={label}
+                      key={value}
+                      value={value}
+                      onPress={() => setRole(value)}>
+                      {label}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
 
-          <Button onPress={handleSubmit}>
-            <Text>Add User</Text>
-          </Button>
-        </View>
-      </ScrollView>
+            <Button onPress={handleSubmit}>
+              <Text>Add User</Text>
+            </Button>
+          </View>
+        </ScrollView>
+      </View>
     </TouchableWithoutFeedback>
   );
 }

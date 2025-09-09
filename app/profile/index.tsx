@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useUser } from '@clerk/clerk-expo';
 import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
+import { Badge } from '@/components/ui/badge';
 
 export default function ProfileScreen() {
   const { user } = useUser();
@@ -26,13 +27,18 @@ export default function ProfileScreen() {
           </Button>
         </Link>
 
-        <View className="gap-2">
-          {Object.entries(currentUser as object).map(([key, value]) => (
-            <Text>
-              {key}: {value.toString()}
-            </Text>
-          ))}
-        </View>
+        {currentUser !== null && (
+          <View className="mt-2 w-full gap-2 px-3">
+            {Object.entries(currentUser as object).map(([key, value]) => (
+              <View key={key} className="flex-row gap-2">
+                <Text>{key}:</Text>
+                <Badge>
+                  <Text>{value.toString()}</Text>
+                </Badge>
+              </View>
+            ))}
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );
