@@ -13,38 +13,12 @@ export default function HomeScreen() {
   const { isSignedIn, isLoaded } = useAuth();
   const currentUser = useQuery(api.users.currentUser);
 
-  console.log('=== RENDER START ===');
-  console.log('Timestamp:', new Date().toISOString());
-  console.log('splashScreenActive:', splashScreenActive);
-  console.log('isLoaded:', isLoaded);
-  console.log('isSignedIn:', isSignedIn);
-  console.log('currentUser:', currentUser);
-  console.log('currentUser type:', typeof currentUser);
-
-  if (currentUser !== null && currentUser !== undefined) {
-    console.log('🔍 USER DATA DETAILS:');
-    console.log('  hasCompletedOnboarding:', currentUser.hasCompletedOnboarding);
-    console.log('  hasCompletedOnboarding type:', typeof currentUser.hasCompletedOnboarding);
-    console.log('  username:', currentUser.username);
-    console.log('  _id:', currentUser._id);
-  }
-
   useEffect(() => {
-    console.log('⏰ Setting splash screen timer');
     const timer = setTimeout(() => {
-      console.log('⏰ Splash screen timer finished - setting splashScreenActive to false');
       setSplashScreenActive(false);
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
-
-  console.log('🔍 CHECKING CONDITIONS:');
-  console.log('  splashScreenActive:', splashScreenActive);
-  console.log('  !isLoaded:', !isLoaded);
-  console.log(
-    '  isSignedIn && currentUser === undefined:',
-    isSignedIn && currentUser === undefined
-  );
 
   if (
     splashScreenActive ||
@@ -52,8 +26,6 @@ export default function HomeScreen() {
     (isSignedIn && currentUser === undefined) ||
     (isSignedIn && currentUser === null)
   ) {
-    console.log('✋ SHOWING LOADING SCREEN');
-    console.log('=== RENDER END (LOADING) ===\n');
     return (
       <View className="flex-1 items-center justify-center">
         <Text className="text-2xl font-bold">Umoja</Text>
@@ -62,27 +34,12 @@ export default function HomeScreen() {
   }
 
   if (!isSignedIn) {
-    console.log('✋ SHOWING AUTH SCREEN');
-    console.log('=== RENDER END (AUTH) ===\n');
     return (
       <View className="flex-1 items-center justify-center">
         <AuthScreen />
       </View>
     );
   }
-
-  console.log('🎯 ABOUT TO RENDER MAIN UI');
-  console.log('  currentUser exists:', !!currentUser);
-  console.log('  Will show onboarding button:', !currentUser);
-  console.log('  Will show welcome message:', !!currentUser);
-
-  if (currentUser) {
-    console.log('👋 RENDERING WELCOME MESSAGE');
-  } else {
-    console.log('🚀 RENDERING ONBOARDING BUTTON');
-  }
-
-  console.log('=== RENDER END (MAIN UI) ===\n');
 
   return (
     <View className="flex-1 items-center justify-center p-4">
