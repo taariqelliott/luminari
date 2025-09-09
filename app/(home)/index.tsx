@@ -40,7 +40,7 @@ export default function HomeScreen() {
             <Text>Welcome </Text>
             <Badge variant="secondary" className="bg-primary">
               <Icon as={BadgeCheckIcon} className="text-white" />
-              <Text className="text-primary-foreground">Verified</Text>
+              <Text className="text-primary-foreground">{currentUser.username}</Text>
             </Badge>
           </View>
         )}
