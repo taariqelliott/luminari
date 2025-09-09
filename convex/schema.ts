@@ -5,18 +5,20 @@ import { v } from 'convex/values';
 export default defineSchema({
   ...authTables,
   users: defineTable({
+    clerkId: v.string(),
     role: v.union(v.literal('student'), v.literal('faculty'), v.literal('organization')),
     email: v.string(),
     username: v.string(),
     firstName: v.string(),
     lastName: v.string(),
-    schoolId: v.id('schools'),
     schoolName: v.string(),
+    hasCompletedOnboarding: v.boolean(),
+    schoolId: v.optional(v.id('schools')),
     organizationIds: v.optional(v.array(v.id('organizations'))),
     profileImgUrl: v.optional(v.string()),
     attendingEvents: v.optional(v.array(v.id('events'))),
     maybeAttendingEvents: v.optional(v.array(v.id('events'))),
-  }),
+  }).index('byClerkId', ['clerkId']),
   schools: defineTable({
     schoolName: v.string(),
     county: v.optional(v.string()),
@@ -59,7 +61,7 @@ export default defineSchema({
     eventImgUrl: v.optional(v.string()),
     eventShareUrl: v.optional(v.string()),
   }),
-  requests: defineTable({
+  eventRequests: defineTable({
     eventRequestName: v.string(),
     eventRequestCreatedBy: v.id('users'),
     eventRequestSchoolId: v.id('schools'),
