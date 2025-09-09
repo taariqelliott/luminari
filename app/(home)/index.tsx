@@ -31,16 +31,16 @@ export default function HomeScreen() {
   return (
     <View className="flex-1 items-center justify-center p-4">
       <SignedIn>
-        <Text className="text-xl font-bold">Welcome {user?.emailAddresses[0].emailAddress}</Text>
-
         {!currentUser ? (
           <UserOnboardingForm />
         ) : (
           <View className="flex-row items-center justify-center">
-            <Text>Welcome </Text>
+            <Text className="text-xl font-bold">Welcome </Text>
             <Badge variant="secondary" className="bg-primary">
-              <Icon as={BadgeCheckIcon} className="text-white" />
-              <Text className="text-primary-foreground">{currentUser.username}</Text>
+              <Icon as={BadgeCheckIcon} className="text-primary-foreground" />
+              <Text className="text-md font-bold text-primary-foreground">
+                {currentUser.username}
+              </Text>
             </Badge>
           </View>
         )}

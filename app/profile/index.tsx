@@ -3,9 +3,12 @@ import { Text } from '@/components/ui/text';
 import { Link } from 'expo-router';
 import { Button } from '@/components/ui/button';
 import { useUser } from '@clerk/clerk-expo';
+import { useQuery } from 'convex/react';
+import { api } from '@/convex/_generated/api';
 
 export default function ProfileScreen() {
   const { user } = useUser();
+  const currentUser = useQuery(api.users.currentUser);
 
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 70 }}>
@@ -22,6 +25,14 @@ export default function ProfileScreen() {
             <Text>Edit Profile</Text>
           </Button>
         </Link>
+
+        <View className="gap-2">
+          {Object.entries(currentUser as object).map(([key, value]) => (
+            <Text>
+              {key}: {value.toString()}
+            </Text>
+          ))}
+        </View>
       </View>
     </SafeAreaView>
   );
