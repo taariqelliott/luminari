@@ -12,6 +12,7 @@ export default function HomeScreen() {
   const [splashScreenActive, setSplashScreenActive] = useState(true);
   const { isSignedIn, isLoaded } = useAuth();
   const currentUser = useQuery(api.users.currentUser);
+  const [onboardingChecked, setOnboardingChecked] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,12 +21,7 @@ export default function HomeScreen() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (
-    splashScreenActive ||
-    !isLoaded ||
-    (isSignedIn && currentUser === undefined) ||
-    (isSignedIn && currentUser === null)
-  ) {
+  if (splashScreenActive || !isLoaded || (isSignedIn && currentUser === undefined)) {
     return (
       <View className="flex-1 items-center justify-center">
         <Text className="text-2xl font-bold">Umoja</Text>
