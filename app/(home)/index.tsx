@@ -24,7 +24,7 @@ export default function HomeScreen() {
   if (splashScreenActive || !isLoaded || (isSignedIn && currentUser === undefined)) {
     return (
       <View className="flex-1 items-center justify-center">
-        <Text className="text-2xl font-bold">luminari</Text>
+        <Text className="text-2xl font-bold">Luminari</Text>
       </View>
     );
   }
@@ -40,7 +40,7 @@ export default function HomeScreen() {
   return (
     <View className="flex-1 items-center justify-center p-4">
       <View className="flex items-center justify-center">
-        <Text className="text-xl font-bold">•Welcome To luminari•</Text>
+        <Text className="text-xl font-bold">•Welcome To Luminari•</Text>
       </View>
       {currentUser ? (
         <Text className="mt-2">Hello, {currentUser.username} 👋</Text>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from './ui/button';
 import { useUser } from '@clerk/clerk-react';
 import { Text } from './ui/text';

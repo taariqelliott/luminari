@@ -1,5 +1,4 @@
 import { Image, View } from 'react-native';
-import React from 'react';
 import ThemeToggle from '@/components/ThemeToggle';
 import { Text } from '@/components/ui/text';
 import { SignedIn, useUser } from '@clerk/clerk-expo';
