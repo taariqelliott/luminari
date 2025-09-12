@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "umoja",
-    "slug": "umoja",
+    "name": "luminari",
+    "slug": "luminari",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "umoja",
+    "scheme": "luminari",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {

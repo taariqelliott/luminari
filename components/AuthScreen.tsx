@@ -46,11 +46,11 @@ export default function AuthScreen() {
       const { createdSessionId, setActive } = await (provider === 'google'
         ? startGoogle({
             strategy: 'oauth_google',
-            redirectUrl: AuthSession.makeRedirectUri({ scheme: 'umoja' }),
+            redirectUrl: AuthSession.makeRedirectUri({ scheme: 'luminari' }),
           })
         : startGithub({
             strategy: 'oauth_github',
-            redirectUrl: AuthSession.makeRedirectUri({ scheme: 'umoja' }),
+            redirectUrl: AuthSession.makeRedirectUri({ scheme: 'luminari' }),
           }));
       if (createdSessionId) setActive!({ session: createdSessionId });
     } catch (err) {
@@ -125,7 +125,7 @@ export default function AuthScreen() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View className="flex-1 items-center justify-center px-4">
           <Text className="mb-2 text-2xl font-bold">
-            {tab === 'signin' ? 'Sign In To Umoja' : 'Sign Up For Umoja'}
+            {tab === 'signin' ? 'Sign In To luminari' : 'Sign Up For luminari'}
           </Text>
           <Text className="mb-6 text-muted-foreground">
             {tab === 'signin'
