@@ -6,7 +6,7 @@ export default function HomeLayout() {
       <Stack.Screen name="index" options={{ title: 'Luminari', headerShadowVisible: false }} />
       <Stack.Screen
         name="onboardingForm"
-        options={{ title: 'Onboarding', headerShadowVisible: false }}
+        options={{ title: 'Onboarding Form', headerShadowVisible: false }}
       />
     </Stack>
   );

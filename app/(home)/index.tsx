@@ -1,25 +1,37 @@
-import { View } from 'react-native';
-import { useAuth } from '@clerk/clerk-expo';
-import { Text } from '@/components/ui/text';
 import AuthScreen from '@/components/AuthScreen';
-import { useEffect, useState } from 'react';
-import { useQuery } from 'convex/react';
-import { api } from '@/convex/_generated/api';
-import { Link } from 'expo-router';
+import { OnboardingAlert } from '@/components/OnboardingAlert';
 import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { api } from '@/convex/_generated/api';
+import { THEME } from '@/lib/theme';
+import { useAuth } from '@clerk/clerk-expo';
+import { useQuery } from 'convex/react';
+import { Link } from 'expo-router';
+import { ArrowBigRight } from 'lucide-react-native';
+import { useColorScheme } from 'nativewind';
+import { useEffect, useState } from 'react';
+import { View } from 'react-native';
 
 export default function HomeScreen() {
+  const { colorScheme } = useColorScheme();
   const [splashScreenActive, setSplashScreenActive] = useState(true);
   const { isSignedIn, isLoaded } = useAuth();
   const currentUser = useQuery(api.users.currentUser);
-  const [onboardingChecked, setOnboardingChecked] = useState(false);
+  const [showOnboardingAlert, setShowOnboardingAlert] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setSplashScreenActive(false);
-    }, 1000);
+    const timer = setTimeout(() => setSplashScreenActive(false), 1000);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (!splashScreenActive && isSignedIn && currentUser === null) {
+      const onboardingTimer = setTimeout(() => {
+        setShowOnboardingAlert(true);
+      }, 1000);
+      return () => clearTimeout(onboardingTimer);
+    }
+  }, [splashScreenActive, isSignedIn, currentUser]);
 
   if (splashScreenActive || !isLoaded || (isSignedIn && currentUser === undefined)) {
     return (
@@ -37,22 +49,31 @@ export default function HomeScreen() {
     );
   }
 
+  if (!currentUser) {
+    return (
+      <View className="flex-1 items-center justify-center p-4">
+        <Text className="text-xl">Welcome To Luminari!</Text>
+        <Link href="/(home)/onboardingForm" asChild>
+          <Button variant="outline">
+            <ArrowBigRight
+              color={
+                colorScheme === 'dark'
+                  ? THEME.dark.secondaryForeground
+                  : THEME.light.secondaryForeground
+              }
+            />
+            <Text>Complete Onboarding</Text>
+          </Button>
+        </Link>
+        {showOnboardingAlert && <OnboardingAlert />}
+      </View>
+    );
+  }
+
   return (
     <View className="flex-1 items-center justify-center p-4">
-      <View className="flex items-center justify-center">
-        <Text className="text-xl font-bold">•Welcome To Luminari•</Text>
-      </View>
-      {currentUser ? (
-        <Text className="mt-2">Hello, {currentUser.username} 👋</Text>
-      ) : (
-        <View className="mt-4">
-          <Link href="/(home)/onboardingForm" asChild>
-            <Button>
-              <Text>Complete Your Onboarding</Text>
-            </Button>
-          </Link>
-        </View>
-      )}
+      <Text className="text-xl font-bold">•Welcome To Luminari•</Text>
+      <Text className="mt-2">Hello, {currentUser.username} 👋</Text>
     </View>
   );
 }

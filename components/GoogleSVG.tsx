@@ -1,4 +1,4 @@
-import Svg, { G, Path, Defs, ClipPath, Rect } from 'react-native-svg';
+import Svg, { ClipPath, Defs, G, Path, Rect } from 'react-native-svg';
 
 export default function GoogleSVG() {
   return (

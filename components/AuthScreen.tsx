@@ -1,3 +1,19 @@
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Text } from '@/components/ui/text';
+import { useSignIn, useSignUp, useSSO } from '@clerk/clerk-expo';
+import * as AuthSession from 'expo-auth-session';
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -5,26 +21,9 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card';
-import { Text } from '@/components/ui/text';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import GoogleSVG from './GoogleSVG';
 import GithubSVG from './GitHubSVG';
+import GoogleSVG from './GoogleSVG';
 import { OrSeparator } from './OrSeparator';
-import { useSSO } from '@clerk/clerk-expo';
-import * as AuthSession from 'expo-auth-session';
-import { useSignUp, useSignIn } from '@clerk/clerk-expo';
-import { useRouter } from 'expo-router';
-import { useState } from 'react';
 
 export default function AuthScreen() {
   const router = useRouter();

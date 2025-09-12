@@ -1,18 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
-import {
-  Keyboard,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-import * as z from 'zod';
-import { useMutation, useQuery } from 'convex/react';
-import { api } from '@/convex/_generated/api';
-import { useUser } from '@clerk/clerk-expo';
-import { router } from 'expo-router';
-import { Text } from '@/components/ui/text';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -23,7 +9,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { api } from '@/convex/_generated/api';
+import { useUser } from '@clerk/clerk-expo';
+import { useMutation, useQuery } from 'convex/react';
+import { router } from 'expo-router';
+import { useMemo, useRef, useState } from 'react';
+import {
+  Keyboard,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import * as z from 'zod';
 
 export const onboardingSchema = z.object({
   role: z.enum(['student', 'faculty', 'organization']),
@@ -52,7 +52,6 @@ export default function OnboardingForm() {
   const [lastName, setLastName] = useState('');
   const [schoolName, setSchoolName] = useState('');
   const [schoolSearch, setSchoolSearch] = useState('');
-  const [isOnboardingComplete, setIsOnboardingComplete] = useState(false);
   const schoolSearchInputRef = useRef<TextInput>(null);
   const allSchools = useQuery(api.schools.getAllSchools) || [];
   const addUser = useMutation(api.users.addUser);
@@ -78,7 +77,7 @@ export default function OnboardingForm() {
       firstName,
       lastName,
       schoolName,
-      hasCompletedOnboarding: isOnboardingComplete,
+      hasCompletedOnboarding: true,
     };
     if (!user) {
       return;
@@ -90,7 +89,7 @@ export default function OnboardingForm() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View>
-        <Text>Complete Onboarding</Text>
+        <Text className="my-4 text-center font-bold">Please Enter Your Information</Text>
         <ScrollView>
           <View className="min-w-full gap-2 px-4">
             <Input
@@ -117,15 +116,11 @@ export default function OnboardingForm() {
             <Input placeholder="First name" value={firstName} onChangeText={setFirstName} />
             <Input placeholder="Last name" value={lastName} onChangeText={setLastName} />
 
-            <TouchableOpacity onPress={() => setIsOnboardingComplete((prev) => !prev)}>
-              <Text>{isOnboardingComplete ? 'Completed' : 'Not Completed'}</Text>
-            </TouchableOpacity>
-
             <Select>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a role" />
               </SelectTrigger>
-              <SelectContent className="w-[180px]">
+              <SelectContent className="w-[250px]">
                 <SelectGroup>
                   <SelectLabel>Roles</SelectLabel>
                   {ROLES.map(({ label, value }) => (

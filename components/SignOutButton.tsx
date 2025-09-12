@@ -1,8 +1,8 @@
 import { useClerk } from '@clerk/clerk-expo';
 import * as Linking from 'expo-linking';
-import { Text } from './ui/text';
-import { Button } from './ui/button';
 import { router } from 'expo-router';
+import { Button } from './ui/button';
+import { Text } from './ui/text';
 
 export const SignOutButton = () => {
   // Use `useClerk()` to access the `signOut()` function

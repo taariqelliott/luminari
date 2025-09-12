@@ -1,7 +1,3 @@
-import { Button } from './ui/button';
-import { useUser } from '@clerk/clerk-react';
-import { Text } from './ui/text';
-import { router } from 'expo-router';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,6 +9,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { useUser } from '@clerk/clerk-react';
+import { router } from 'expo-router';
+import { Button } from './ui/button';
+import { Text } from './ui/text';
 
 export default function DeleteUserButton() {
   const { user } = useUser();

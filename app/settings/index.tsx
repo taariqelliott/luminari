@@ -1,9 +1,9 @@
-import { Image, View } from 'react-native';
+import DeleteUserButton from '@/components/DeleteUserButton';
+import { SignOutButton } from '@/components/SignOutButton';
 import ThemeToggle from '@/components/ThemeToggle';
 import { Text } from '@/components/ui/text';
 import { SignedIn, useUser } from '@clerk/clerk-expo';
-import { SignOutButton } from '@/components/SignOutButton';
-import DeleteUserButton from '@/components/DeleteUserButton';
+import { Image, View } from 'react-native';
 
 export default function Settings() {
   const { user } = useUser();

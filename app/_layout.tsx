@@ -1,17 +1,17 @@
-import '@/global.css';
-import { Tabs } from 'expo-router';
-import { NAV_THEME, THEME } from '@/lib/theme';
-import { StatusBar } from 'expo-status-bar';
-export { ErrorBoundary } from 'expo-router';
-import { useColorScheme } from 'nativewind';
-import { Home, User, Settings, Telescope, Plus } from 'lucide-react-native';
-import { PortalHost } from '@rn-primitives/portal';
-import { ThemeProvider } from '@react-navigation/native';
-import { ConvexReactClient } from 'convex/react';
-import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
-import { ConvexProviderWithClerk } from 'convex/react-clerk';
-import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import { HapticTab } from '@/components/HapticTab';
+import '@/global.css';
+import { NAV_THEME, THEME } from '@/lib/theme';
+import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
+import { tokenCache } from '@clerk/clerk-expo/token-cache';
+import { ThemeProvider } from '@react-navigation/native';
+import { PortalHost } from '@rn-primitives/portal';
+import { ConvexReactClient } from 'convex/react';
+import { ConvexProviderWithClerk } from 'convex/react-clerk';
+import { Tabs } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { Home, Plus, Settings, Telescope, User } from 'lucide-react-native';
+import { useColorScheme } from 'nativewind';
+export { ErrorBoundary } from 'expo-router';
 
 const convexUrl = process.env.EXPO_PUBLIC_CONVEX_URL;
 const convex = new ConvexReactClient(convexUrl!);
@@ -23,7 +23,7 @@ export default function RootLayout() {
     tabBarActiveTintColor: colorScheme === 'dark' ? THEME.dark.primary : THEME.light.primary,
   };
   return (
-    <ClerkProvider publishableKey={clerkKey} tokenCache={tokenCache}>
+    <ClerkProvider publishableKey={clerkKey} tokenCache={tokenCache} telemetry={false}>
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
           <StatusBar style="auto" />

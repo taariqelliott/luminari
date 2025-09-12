@@ -1,7 +1,7 @@
+import { MoonStarIcon, SunIcon } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import { Button } from './ui/button';
 import { Icon } from './ui/icon';
-import { MoonStarIcon, SunIcon } from 'lucide-react-native';
 import { Text } from './ui/text';
 
 const THEME_ICONS = {

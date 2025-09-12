@@ -1,6 +1,6 @@
-import { View } from 'react-native';
 import { Text } from '@/components/ui/text';
 import { Link } from 'expo-router';
+import { View } from 'react-native';
 
 export default function CreateScreen() {
   return (
