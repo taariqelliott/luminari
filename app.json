@@ -17,7 +17,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.taariqelliott.luminari"
     },
     "android": {
       "edgeToEdgeEnabled": true,
@@ -38,6 +39,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "a6ba4dc2-3aab-448e-a23f-3dc0396b7f2a"
+      }
     }
   }
 }
