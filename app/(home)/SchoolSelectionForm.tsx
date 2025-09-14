@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
 import { useUser } from '@clerk/clerk-expo';
@@ -17,6 +16,8 @@ import { router } from 'expo-router';
 import { useMemo, useRef, useState } from 'react';
 import {
   Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
   TextInput,
   TouchableOpacity,
@@ -78,52 +79,55 @@ export default function SchoolSelectionForm() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View className="flex-1 items-center justify-center">
-        <Text className="my-4 text-center font-bold">Select Your School</Text>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        className="flex-1">
+        <View className="w-full flex-1 items-center justify-center">
+          <Text className="my-4 text-center font-bold">Select Your School</Text>
 
-        <Card className="w-full max-w-sm">
-          <CardHeader className="flex-row">
-            <View className="flex-1 gap-1.5">
-              <CardTitle>Find Your School</CardTitle>
-              <CardDescription>Search and select your educational institution</CardDescription>
-            </View>
-          </CardHeader>
-          <CardContent>
-            <View className="w-full justify-center gap-4">
-              <Input
-                placeholder="Search for schools"
-                className="w-full"
-                autoCapitalize="none"
-                autoCorrect={false}
-                value={schoolSearchQuery !== '' ? schoolSearchQuery : selectedSchool}
-                onChangeText={(text) => {
-                  setSchoolSearchQuery(text);
-                  setSelectedSchool('');
-                }}
-                ref={schoolInputRef}
-              />
+          <Card className="w-full max-w-sm">
+            <CardHeader className="flex-row">
+              <View className="flex-1 gap-1.5">
+                <CardTitle>Find Your School</CardTitle>
+                <CardDescription>Search and select your educational institution</CardDescription>
+              </View>
+            </CardHeader>
+            <CardContent>
+              <View className="w-full justify-center gap-4">
+                <Input
+                  placeholder="Search for schools"
+                  className="w-full"
+                  autoCorrect={false}
+                  value={schoolSearchQuery !== '' ? schoolSearchQuery : selectedSchool}
+                  onChangeText={(text) => {
+                    setSchoolSearchQuery(text);
+                    setSelectedSchool('');
+                  }}
+                  ref={schoolInputRef}
+                />
 
-              <ScrollView className="flex h-[265px] w-full gap-3">
-                {schoolSearchQuery.trim() !== '' &&
-                  matchingSchools.map(({ _id, schoolName }) => (
-                    <View key={_id} className="my-1">
-                      <TouchableOpacity
-                        onPress={() => handleSchoolChoice(schoolName.trim())}
-                        className="rounded bg-secondary-foreground p-3">
-                        <Text className="text-secondary">{schoolName.trim()}</Text>
-                      </TouchableOpacity>
-                    </View>
-                  ))}
-              </ScrollView>
-            </View>
-          </CardContent>
-          <CardFooter className="flex-col gap-2">
-            <Button onPress={handleFormSubmit} className="w-full">
-              <Text>Complete Setup</Text>
-            </Button>
-          </CardFooter>
-        </Card>
-      </View>
+                <ScrollView className="flex h-[265px] w-full gap-3">
+                  {schoolSearchQuery.trim() !== '' &&
+                    matchingSchools.map(({ _id, schoolName }) => (
+                      <View key={_id} className="my-1">
+                        <TouchableOpacity
+                          onPress={() => handleSchoolChoice(schoolName.trim())}
+                          className="rounded bg-secondary-foreground p-3">
+                          <Text className="text-secondary">{schoolName.trim()}</Text>
+                        </TouchableOpacity>
+                      </View>
+                    ))}
+                </ScrollView>
+              </View>
+            </CardContent>
+            <CardFooter className="flex-col gap-2">
+              <Button onPress={handleFormSubmit} className="w-full">
+                <Text>Complete Setup</Text>
+              </Button>
+            </CardFooter>
+          </Card>
+        </View>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 }

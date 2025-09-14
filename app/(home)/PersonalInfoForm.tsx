@@ -22,7 +22,13 @@ import { Text } from '@/components/ui/text';
 import { useUser } from '@clerk/clerk-expo';
 import { Link } from 'expo-router';
 import { useState } from 'react';
-import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 
 const USER_ROLES = [
   { label: 'Student', value: 'student' },
@@ -39,80 +45,82 @@ export default function PersonalInfoForm() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View className="w-full flex-1 items-center justify-center">
-        <Text className="my-4 text-center font-bold">Tell us about yourself</Text>
-        <Card className="w-full max-w-sm">
-          <CardHeader className="flex-row">
-            <View className="flex-1 gap-1.5">
-              <CardTitle>Get Started</CardTitle>
-              <CardDescription>Enter your basic information to continue</CardDescription>
-            </View>
-          </CardHeader>
-          <CardContent>
-            <View className="w-full justify-center gap-4">
-              <View className="gap-2">
-                <Label htmlFor="username">Username</Label>
-                <Input
-                  placeholder="Choose your username"
-                  value={username}
-                  onChangeText={setUsername}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        className="w-full flex-1 items-center justify-center">
+        <View>
+          <Text className="my-4 text-center font-bold">Tell us about yourself</Text>
+          <Card className="w-full max-w-sm">
+            <CardHeader className="flex-row">
+              <View className="flex-1 gap-1.5">
+                <CardTitle>Get Started</CardTitle>
+                <CardDescription>Enter your basic information to continue</CardDescription>
               </View>
-              <View className="gap-2">
-                <Label htmlFor="firstname">First name</Label>
-                <Input
-                  placeholder="What's your first name?"
-                  value={firstName}
-                  onChangeText={setFirstName}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                />
+            </CardHeader>
+            <CardContent>
+              <View className="w-full justify-center gap-4">
+                <View className="gap-2">
+                  <Label htmlFor="username">Username</Label>
+                  <Input
+                    placeholder="Choose your username"
+                    value={username}
+                    onChangeText={setUsername}
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                  />
+                </View>
+                <View className="gap-2">
+                  <Label htmlFor="firstname">First name</Label>
+                  <Input
+                    placeholder="What's your first name?"
+                    value={firstName}
+                    onChangeText={setFirstName}
+                    autoCorrect={false}
+                  />
+                </View>
+                <View className="gap-2">
+                  <Label htmlFor="lastname">Last name</Label>
+                  <Input
+                    placeholder="What's your last name?"
+                    value={lastName}
+                    onChangeText={setLastName}
+                    autoCorrect={false}
+                  />
+                </View>
+                <View className="gap-2">
+                  <Label htmlFor="role">Role</Label>
+                  <Select>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="What's your role?" />
+                    </SelectTrigger>
+                    <SelectContent className="mx-auto flex w-[76%] justify-center">
+                      <SelectGroup>
+                        <SelectLabel>Select Role</SelectLabel>
+                        {USER_ROLES.map(({ label, value }) => (
+                          <SelectItem
+                            label={label}
+                            key={value}
+                            value={value}
+                            onPress={() => setUserRole(value)}>
+                            {label}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </View>
               </View>
-              <View className="gap-2">
-                <Label htmlFor="lastname">Last name</Label>
-                <Input
-                  placeholder="What's your last name?"
-                  value={lastName}
-                  onChangeText={setLastName}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                />
-              </View>
-              <View className="gap-2">
-                <Label htmlFor="role">Role</Label>
-                <Select>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="What's your role?" />
-                  </SelectTrigger>
-                  <SelectContent className="w-full">
-                    <SelectGroup>
-                      <SelectLabel>Select Role</SelectLabel>
-                      {USER_ROLES.map(({ label, value }) => (
-                        <SelectItem
-                          label={label}
-                          key={value}
-                          value={value}
-                          onPress={() => setUserRole(value)}>
-                          {label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </View>
-            </View>
-          </CardContent>
-          <CardFooter className="flex-col gap-2">
-            <Link href="/(home)/SchoolSelectionForm" className="w-full" asChild>
-              <Button>
-                <Text>Continue</Text>
-              </Button>
-            </Link>
-          </CardFooter>
-        </Card>
-      </View>
+            </CardContent>
+            <CardFooter className="flex-col gap-2">
+              <Link href="/(home)/SchoolSelectionForm" className="w-full" asChild>
+                <Button>
+                  <Text>Continue</Text>
+                </Button>
+              </Link>
+            </CardFooter>
+          </Card>
+        </View>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 }
