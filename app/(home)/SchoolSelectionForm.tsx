@@ -1,6 +1,6 @@
 import { useUser } from '@clerk/clerk-expo';
 import { useMutation, useQuery } from 'convex/react';
-import { router } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useMemo, useRef, useState } from 'react';
 import {
   Keyboard,
@@ -96,7 +96,7 @@ export default function SchoolSelectionForm() {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         className="flex-1">
         <View className="w-full flex-1 items-center justify-center">
-          <Text className="my-4 text-center font-bold">Select Your School</Text>
+          <Text className="my-4 text-center font-bold">Select your school</Text>
 
           <Card className="w-full max-w-sm">
             <CardHeader className="flex-row">
@@ -134,10 +134,23 @@ export default function SchoolSelectionForm() {
               </View>
             </CardContent>
 
-            <CardFooter className="flex-col gap-2">
-              <Button onPress={handleFormSubmit} className="w-full">
-                <Text>Complete Onboarding</Text>
+            <CardFooter className="mx-auto flex-row items-center justify-center gap-2">
+              <Button
+                className="w-36"
+                onPress={() => {
+                  router.back();
+                }}>
+                <Text>Back</Text>
               </Button>
+              <Link href="/(home)/UserDetailConfirmation" asChild>
+                <Button className="w-36">
+                  <Text>Continue</Text>
+                </Button>
+              </Link>
+
+              {/* <Button onPress={handleFormSubmit} className="w-full">
+                <Text>Complete Onboarding</Text>
+              </Button> */}
             </CardFooter>
           </Card>
         </View>

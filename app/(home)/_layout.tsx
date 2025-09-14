@@ -12,6 +12,10 @@ export default function HomeLayout() {
         name="SchoolSelectionForm"
         options={{ title: 'Select Your School', headerShadowVisible: false }}
       />
+      <Stack.Screen
+        name="UserDetailConfirmation"
+        options={{ title: 'Confirm Your Details', headerShadowVisible: false }}
+      />
     </Stack>
   );
 }

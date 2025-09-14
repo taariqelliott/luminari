@@ -93,7 +93,7 @@ export default function PersonalInfoForm() {
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="What's your role?" />
                     </SelectTrigger>
-                    <SelectContent className="mx-auto flex w-[76%] justify-center">
+                    <SelectContent className="w-full">
                       <SelectGroup>
                         <SelectLabel>Select Role</SelectLabel>
                         {USER_ROLES.map(({ label, value }) => (
