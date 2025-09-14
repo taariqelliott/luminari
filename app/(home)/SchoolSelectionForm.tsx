@@ -122,7 +122,7 @@ export default function SchoolSelectionForm() {
             </CardContent>
             <CardFooter className="flex-col gap-2">
               <Button onPress={handleFormSubmit} className="w-full">
-                <Text>Complete Setup</Text>
+                <Text>Complete Onboaring</Text>
               </Button>
             </CardFooter>
           </Card>
