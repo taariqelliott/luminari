@@ -1,15 +1,3 @@
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Text } from '@/components/ui/text';
-import { api } from '@/convex/_generated/api';
 import { useUser } from '@clerk/clerk-expo';
 import { useMutation, useQuery } from 'convex/react';
 import { router } from 'expo-router';
@@ -25,6 +13,24 @@ import {
   View,
 } from 'react-native';
 import * as z from 'zod';
+import { api } from '@/convex/_generated/api';
+import {
+  useFirstNameStore,
+  useLastNameStore,
+  useRoleStore,
+  useUsernameStore,
+} from '@/stores/stores';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Text } from '@/components/ui/text';
 
 export const onboardingSchema = z.object({
   role: z.enum(['student', 'faculty', 'organization']),
@@ -40,12 +46,19 @@ export type OnboardingFormData = z.infer<typeof onboardingSchema>;
 
 export default function SchoolSelectionForm() {
   const { user } = useUser();
-  const [userEmail] = useState(user?.emailAddresses[0].emailAddress ?? '');
+
+  const [email] = useState(user?.emailAddresses[0].emailAddress ?? '');
   const [selectedSchool, setSelectedSchool] = useState('');
   const [schoolSearchQuery, setSchoolSearchQuery] = useState('');
   const schoolInputRef = useRef<TextInput>(null);
+
   const schoolsList = useQuery(api.schools.getAllSchools) || [];
   const createUser = useMutation(api.users.addUser);
+
+  const role = useRoleStore((state) => state.role);
+  const username = useUsernameStore((state) => state.username);
+  const firstName = useFirstNameStore((state) => state.firstName);
+  const lastName = useLastNameStore((state) => state.lastName);
 
   const matchingSchools = useMemo(
     () =>
@@ -61,18 +74,18 @@ export default function SchoolSelectionForm() {
   };
 
   const handleFormSubmit = () => {
+    if (!user) return;
+
     const formData: OnboardingFormData = {
-      //   role,
-      email: userEmail,
-      //   username,
-      //   firstName,
-      //   lastName,
+      role,
+      email,
+      username,
+      firstName,
+      lastName,
       schoolName: selectedSchool,
       hasCompletedOnboarding: true,
     };
-    if (!user) {
-      return;
-    }
+
     createUser({ ...formData, clerkId: user.id });
     router.replace('/');
   };
@@ -92,6 +105,7 @@ export default function SchoolSelectionForm() {
                 <CardDescription>Search and select your educational institution</CardDescription>
               </View>
             </CardHeader>
+
             <CardContent>
               <View className="w-full justify-center gap-4">
                 <Input
@@ -105,7 +119,6 @@ export default function SchoolSelectionForm() {
                   }}
                   ref={schoolInputRef}
                 />
-
                 <ScrollView className="flex h-[265px] w-full gap-3">
                   {schoolSearchQuery.trim() !== '' &&
                     matchingSchools.map(({ _id, schoolName }) => (
@@ -120,9 +133,10 @@ export default function SchoolSelectionForm() {
                 </ScrollView>
               </View>
             </CardContent>
+
             <CardFooter className="flex-col gap-2">
               <Button onPress={handleFormSubmit} className="w-full">
-                <Text>Complete Onboaring</Text>
+                <Text>Complete Onboarding</Text>
               </Button>
             </CardFooter>
           </Card>

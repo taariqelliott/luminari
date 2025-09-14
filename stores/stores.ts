@@ -18,7 +18,7 @@ type EmailState = {
 };
 
 type RoleState = {
-  role: string;
+  role: 'student' | 'faculty' | 'organization';
 };
 
 type SchoolNameState = {
@@ -72,7 +72,7 @@ export const useEmailStore = create<EmailState & EmailAction>((set) => ({
 }));
 
 export const useRoleStore = create<RoleState & RoleAction>((set) => ({
-  role: '',
+  role: 'student',
   updateRole: (role) => set(() => ({ role: role })),
 }));
 
