@@ -14,26 +14,26 @@ import { View } from 'react-native';
 
 export default function HomeScreen() {
   const { colorScheme } = useColorScheme();
-  const [splashScreenActive, setSplashScreenActive] = useState(true);
   const { isSignedIn, isLoaded } = useAuth();
   const currentUser = useQuery(api.users.currentUser);
+  const [isSplashScreenActive, setIsSplashScreenActive] = useState(true);
   const [showOnboardingAlert, setShowOnboardingAlert] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setSplashScreenActive(false), 1000);
+    const timer = setTimeout(() => setIsSplashScreenActive(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    if (!splashScreenActive && isSignedIn && currentUser === null) {
-      const onboardingTimer = setTimeout(() => {
-        setShowOnboardingAlert(true);
-      }, 1000);
-      return () => clearTimeout(onboardingTimer);
-    }
-  }, [splashScreenActive, isSignedIn, currentUser]);
+  // useEffect(() => {
+  //   if (!isSplashScreenActive && isSignedIn && currentUser === null) {
+  //     const onboardingTimer = setTimeout(() => {
+  //       setShowOnboardingAlert(true);
+  //     }, 1000);
+  //     return () => clearTimeout(onboardingTimer);
+  //   }
+  // }, [isSplashScreenActive, isSignedIn, currentUser]);
 
-  if (splashScreenActive || !isLoaded || (isSignedIn && currentUser === undefined)) {
+  if (isSplashScreenActive || !isLoaded || (isSignedIn && currentUser === undefined)) {
     return (
       <View className="flex-1 items-center justify-center">
         <Text className="text-2xl font-bold">Luminari</Text>
@@ -53,7 +53,7 @@ export default function HomeScreen() {
     return (
       <View className="flex-1 items-center justify-center p-4">
         <Text className="text-xl">Welcome To Luminari!</Text>
-        <Link href="/(home)/onboardingForm" asChild>
+        <Link href="/(home)/PersonalInfoForm" asChild>
           <Button variant="outline">
             <ArrowBigRight
               color={

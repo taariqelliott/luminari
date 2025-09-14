@@ -5,8 +5,12 @@ export default function HomeLayout() {
     <Stack>
       <Stack.Screen name="index" options={{ title: 'Luminari', headerShadowVisible: false }} />
       <Stack.Screen
-        name="onboardingForm"
-        options={{ title: 'Onboarding Form', headerShadowVisible: false }}
+        name="PersonalInfoForm"
+        options={{ title: 'Get Started', headerShadowVisible: false }}
+      />
+      <Stack.Screen
+        name="SchoolSelectionForm"
+        options={{ title: 'Select Your School', headerShadowVisible: false }}
       />
     </Stack>
   );

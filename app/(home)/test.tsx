@@ -1,5 +1,14 @@
 import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -13,7 +22,7 @@ import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
 import { useUser } from '@clerk/clerk-expo';
 import { useMutation, useQuery } from 'convex/react';
-import { router } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useMemo, useRef, useState } from 'react';
 import {
   Keyboard,
@@ -88,59 +97,85 @@ export default function OnboardingForm() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View>
+      <View className="flex-1 items-center justify-center">
         <Text className="my-4 text-center font-bold">Please Enter Your Information</Text>
-        <ScrollView>
+
+        <Card className="w-full max-w-sm">
+          <CardHeader className="flex-row">
+            <View className="flex-1 gap-1.5">
+              <CardTitle>Subscribe to our newsletter</CardTitle>
+              <CardDescription>Enter your details to receive updates and tips</CardDescription>
+            </View>
+          </CardHeader>
+          <CardContent>
+            <View className="w-full justify-center gap-4">
+              <View className="gap-2">
+                <Label htmlFor="username">Username</Label>
+                <Input
+                  placeholder="Username"
+                  value={username}
+                  onChangeText={setUsername}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                />
+              </View>
+              <View className="gap-2">
+                <Label htmlFor="firstname">First name</Label>
+                <Input
+                  placeholder="First name"
+                  value={firstName}
+                  onChangeText={setFirstName}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                />
+              </View>
+              <View className="gap-2">
+                <Label htmlFor="lastname">Last name</Label>
+                <Input
+                  placeholder="Last name"
+                  value={lastName}
+                  onChangeText={setLastName}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                />
+              </View>
+            </View>
+          </CardContent>
+          <CardFooter className="flex-col gap-2">
+            <Link href="/(home)/SchoolSelectionForm" className="w-full" asChild>
+              <Button>
+                <Text>Continue</Text>
+              </Button>
+            </Link>
+          </CardFooter>
+        </Card>
+        {/* <ScrollView>
           <View className="min-w-full gap-2 px-4">
             <Input
-              placeholder="Search for schools"
-              value={schoolSearch !== '' ? schoolSearch : schoolName}
-              onChangeText={(text) => {
-                setSchoolSearch(text);
-                setSchoolName('');
-              }}
-              ref={schoolSearchInputRef}
+              placeholder="Username"
+              value={username}
+              onChangeText={setUsername}
+              autoCorrect={false}
+              autoCapitalize="none"
+            />
+            <Input
+              placeholder="First name"
+              value={firstName}
+              onChangeText={setFirstName}
+              autoCorrect={false}
+              autoCapitalize="none"
+            />
+            <Input
+              placeholder="Last name"
+              value={lastName}
+              onChangeText={setLastName}
+              autoCorrect={false}
+              autoCapitalize="none"
             />
 
-            {schoolSearch.trim() !== '' &&
-              filteredSchools.map(({ _id, schoolName }) => (
-                <TouchableOpacity
-                  key={_id}
-                  onPress={() => handleSchoolSelect(schoolName.trim())}
-                  className="rounded bg-secondary-foreground p-3">
-                  <Text className="text-primary">{schoolName.trim()}</Text>
-                </TouchableOpacity>
-              ))}
-
-            <Input placeholder="Username" value={username} onChangeText={setUsername} />
-            <Input placeholder="First name" value={firstName} onChangeText={setFirstName} />
-            <Input placeholder="Last name" value={lastName} onChangeText={setLastName} />
-
-            <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select a role" />
-              </SelectTrigger>
-              <SelectContent className="w-[250px]">
-                <SelectGroup>
-                  <SelectLabel>Roles</SelectLabel>
-                  {ROLES.map(({ label, value }) => (
-                    <SelectItem
-                      label={label}
-                      key={value}
-                      value={value}
-                      onPress={() => setRole(value)}>
-                      {label}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-
-            <Button onPress={handleSubmit}>
-              <Text>Add User</Text>
-            </Button>
+    
           </View>
-        </ScrollView>
+        </ScrollView> */}
       </View>
     </TouchableWithoutFeedback>
   );
