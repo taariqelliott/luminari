@@ -19,21 +19,22 @@ import { Image, Pressable, Text, View } from 'react-native';
 export default function EventCreationForm() {
   return (
     <View>
-      <CameraUploadOptions />
+      <ImageUploadSection />
     </View>
   );
 }
 
-export function CameraUploadOptions() {
+export function ImageUploadSection() {
   const { colorScheme } = useColorScheme();
-  const [image, setImage] = useState<string | undefined>(undefined);
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
 
   const iconColor = colorScheme === 'dark' ? THEME.dark.accent : THEME.light.accentForeground;
   const buttonTextColor = colorScheme === 'dark' ? 'text-accent' : 'text-accent-foreground';
   const cancelTextColor =
     colorScheme === 'dark' ? 'text-accent-foreground' : 'text-accent-foreground';
+  const uploadIconColor = colorScheme === 'light' ? iconColor : THEME.dark.primary;
 
-  const uploadImage = async (mode?: string) => {
+  const launchImagePicker = async (mode?: string) => {
     try {
       let result: ImagePicker.ImagePickerResult;
 
@@ -56,54 +57,53 @@ export function CameraUploadOptions() {
       }
 
       if (!result.canceled) {
-        await saveImage(result.assets[0].uri);
+        await handleImageSave(result.assets[0].uri);
       }
     } catch (error) {
+      console.error('Image picker error:', error);
       throw error;
     }
   };
 
-  const saveImage = async (image: string) => {
+  const handleImageSave = async (imageUri: string) => {
     try {
-      setImage(image);
-      console.log(image);
+      setSelectedImage(imageUri);
+      console.log('Image saved:', imageUri);
     } catch (error) {
+      console.error('Save image error:', error);
       throw error;
     }
   };
 
-  const removeImage = () => {
-    setImage(undefined);
+  const handleImageRemove = () => {
+    setSelectedImage(undefined);
   };
 
   return (
     <View className="gap-2">
       <Dialog>
-        <DialogTrigger disabled={!image}>
+        <DialogTrigger disabled={!selectedImage}>
           <Image
-            source={{ uri: image }}
-            className="h-[150px] w-[150px] rounded-full border-4 border-primary"></Image>
+            source={{ uri: selectedImage }}
+            className="h-[150px] w-[150px] rounded-full border-4 border-primary"
+          />
         </DialogTrigger>
         <DialogContent>
           <DialogClose asChild>
             <Pressable>
-              <Image source={{ uri: image }} className="h-[375px] w-[375px] object-cover" />
+              <Image source={{ uri: selectedImage }} className="h-[375px] w-[375px] object-cover" />
             </Pressable>
           </DialogClose>
         </DialogContent>
       </Dialog>
+
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="outline" className="mx-auto mb-2 shadow-sm">
-            {/* <Text className={cancelTextColor}>Upload</Text> */}
-            <Upload
-              // size={15}
-              color={colorScheme === 'light' ? iconColor : THEME.dark.primary}
-              strokeWidth={2}
-              className="h-24 w-24"
-            />
+            <Upload color={uploadIconColor} strokeWidth={2} className="h-24 w-24" />
           </Button>
         </DialogTrigger>
+
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Upload Image</DialogTitle>
@@ -115,34 +115,31 @@ export function CameraUploadOptions() {
               <Button
                 variant="default"
                 className="h-20 w-24 flex-col gap-0.5 rounded-2xl shadow-sm"
-                onPress={() => {
-                  uploadImage();
-                }}>
+                onPress={() => launchImagePicker()}>
                 <CameraIcon color={iconColor} size={24} strokeWidth={2} />
                 <Text className={buttonTextColor}>Camera</Text>
               </Button>
             </DialogClose>
 
-            <DialogTrigger asChild>
+            <DialogClose asChild>
               <Button
                 variant="default"
                 className="h-20 w-24 flex-col gap-0.5 rounded-2xl shadow-sm"
-                onPress={() => {
-                  uploadImage('gallery');
-                }}>
+                onPress={() => launchImagePicker('gallery')}>
                 <Images color={iconColor} size={24} strokeWidth={2} />
                 <Text className={buttonTextColor}>Gallery</Text>
               </Button>
-            </DialogTrigger>
-            <DialogTrigger asChild>
+            </DialogClose>
+
+            <DialogClose asChild>
               <Button
                 variant="default"
                 className="h-20 w-24 flex-col gap-0.5 rounded-2xl shadow-sm"
-                onPress={removeImage}>
+                onPress={handleImageRemove}>
                 <Trash2 color={iconColor} size={24} strokeWidth={2} />
                 <Text className={buttonTextColor}>Remove</Text>
               </Button>
-            </DialogTrigger>
+            </DialogClose>
           </View>
 
           <DialogFooter>
