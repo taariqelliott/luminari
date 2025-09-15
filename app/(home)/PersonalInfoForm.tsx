@@ -19,6 +19,12 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Text } from '@/components/ui/text';
+import {
+  useFirstNameStore,
+  useLastNameStore,
+  useRoleStore,
+  useUsernameStore,
+} from '@/stores/stores';
 import { useUser } from '@clerk/clerk-expo';
 import { Link } from 'expo-router';
 import { useState } from 'react';
@@ -37,11 +43,15 @@ const USER_ROLES = [
 ] as const;
 
 export default function PersonalInfoForm() {
-  const { user } = useUser();
   const [username, setUsername] = useState('');
   const [userRole, setUserRole] = useState<'student' | 'faculty' | 'organization'>('student');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+
+  const updateUsername = useUsernameStore((state) => state.updateUsername);
+  const updateFirstName = useFirstNameStore((state) => state.updateFirstname);
+  const updateLastName = useLastNameStore((state) => state.updateLastname);
+  const updateRole = useRoleStore((state) => state.updateRole);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -64,7 +74,10 @@ export default function PersonalInfoForm() {
                   <Input
                     placeholder="Choose your username"
                     value={username}
-                    onChangeText={setUsername}
+                    onChangeText={(username) => {
+                      setUsername(username);
+                      updateUsername(username);
+                    }}
                     autoCorrect={false}
                     autoCapitalize="none"
                   />
@@ -74,7 +87,10 @@ export default function PersonalInfoForm() {
                   <Input
                     placeholder="What's your first name?"
                     value={firstName}
-                    onChangeText={setFirstName}
+                    onChangeText={(firstName) => {
+                      setFirstName(firstName);
+                      updateFirstName(firstName);
+                    }}
                     autoCorrect={false}
                   />
                 </View>
@@ -83,7 +99,10 @@ export default function PersonalInfoForm() {
                   <Input
                     placeholder="What's your last name?"
                     value={lastName}
-                    onChangeText={setLastName}
+                    onChangeText={(lastName) => {
+                      setLastName(lastName);
+                      updateLastName(lastName);
+                    }}
                     autoCorrect={false}
                   />
                 </View>
@@ -101,7 +120,10 @@ export default function PersonalInfoForm() {
                             label={label}
                             key={value}
                             value={value}
-                            onPress={() => setUserRole(value)}>
+                            onPress={() => {
+                              setUserRole(value);
+                              updateRole(value)
+                            }}>
                             {label}
                           </SelectItem>
                         ))}

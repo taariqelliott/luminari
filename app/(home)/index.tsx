@@ -24,15 +24,6 @@ export default function HomeScreen() {
     return () => clearTimeout(timer);
   }, []);
 
-  // useEffect(() => {
-  //   if (!isSplashScreenActive && isSignedIn && currentUser === null) {
-  //     const onboardingTimer = setTimeout(() => {
-  //       setShowOnboardingAlert(true);
-  //     }, 1000);
-  //     return () => clearTimeout(onboardingTimer);
-  //   }
-  // }, [isSplashScreenActive, isSignedIn, currentUser]);
-
   if (isSplashScreenActive || !isLoaded || (isSignedIn && currentUser === undefined)) {
     return (
       <View className="flex-1 items-center justify-center">
