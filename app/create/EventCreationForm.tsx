@@ -22,36 +22,37 @@ import { Image, Pressable, Text, View } from 'react-native';
 export default function EventCreationForm() {
   return (
     <View>
-      <ImageUploadSection />
+      <ProfileImageUploader />
     </View>
   );
 }
 
-export function ImageUploadSection() {
+export function ProfileImageUploader() {
   const { colorScheme } = useColorScheme();
-  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
+  const [localImageUri, setLocalImageUri] = useState<string | undefined>(undefined);
 
   const currentUser = useQuery(api.users.currentUser);
-  const sendImage = useMutation(api.profileImages.sendProfileImage);
-  const generateUploadUrl = useMutation(api.profileImages.generateUploadUrl);
-  const deleteProfileImage = useMutation(api.profileImages.deleteById);
+  const uploadProfileImage = useMutation(api.profileImages.sendProfileImage);
+  const generateUploadUrlMutation = useMutation(api.profileImages.generateUploadUrl);
+  const deleteProfileImageMutation = useMutation(api.profileImages.deleteProfileImageById);
 
   if (!currentUser) return;
-  const imageUrl = useQuery(api.profileImages.getProfileImage, { userId: currentUser?._id });
+  const currentProfileImage = useQuery(api.profileImages.getProfileImage, {
+    userId: currentUser?._id,
+  });
 
   const iconColor = colorScheme === 'dark' ? THEME.dark.accent : THEME.light.accentForeground;
   const buttonTextColor = colorScheme === 'dark' ? 'text-accent' : 'text-accent-foreground';
-  const cancelTextColor =
-    colorScheme === 'dark' ? 'text-accent-foreground' : 'text-accent-foreground';
-  const uploadIconColor = colorScheme === 'light' ? iconColor : THEME.dark.primary;
+  const cancelTextColor = 'text-accent-foreground';
+  const uploadButtonColor = colorScheme === 'light' ? iconColor : THEME.dark.primary;
 
-  const launchImagePicker = async (mode?: string) => {
+  const pickImage = async (mode?: 'camera' | 'gallery') => {
     try {
-      let result: ImagePicker.ImagePickerResult;
+      let pickerResult: ImagePicker.ImagePickerResult;
 
       if (mode === 'gallery') {
         await ImagePicker.requestMediaLibraryPermissionsAsync();
-        result = await ImagePicker.launchImageLibraryAsync({
+        pickerResult = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ['images'],
           allowsEditing: true,
           aspect: [1, 1],
@@ -59,7 +60,7 @@ export function ImageUploadSection() {
         });
       } else {
         await ImagePicker.requestCameraPermissionsAsync();
-        result = await ImagePicker.launchCameraAsync({
+        pickerResult = await ImagePicker.launchCameraAsync({
           cameraType: ImagePicker.CameraType.front,
           allowsEditing: true,
           aspect: [1, 1],
@@ -67,8 +68,8 @@ export function ImageUploadSection() {
         });
       }
 
-      if (!result.canceled) {
-        await handleImageSave(result.assets[0].uri);
+      if (!pickerResult.canceled) {
+        await saveSelectedImage(pickerResult.assets[0].uri);
       }
     } catch (error) {
       console.error('Image picker error:', error);
@@ -76,52 +77,50 @@ export function ImageUploadSection() {
     }
   };
 
-  const sendImageToDB = async (imageUri: string) => {
+  const sendImageToStorage = async (imageUri: string) => {
     if (!imageUri) return;
     const response = await fetch(imageUri);
-    const blob = await response.blob();
-    const postUrl = await generateUploadUrl();
-    const result = await fetch(postUrl, {
+    const imageBlob = await response.blob();
+    const uploadUrl = await generateUploadUrlMutation();
+    const uploadResult = await fetch(uploadUrl, {
       method: 'POST',
-      headers: { 'Content-Type': blob.type },
-      body: blob,
+      headers: { 'Content-Type': imageBlob.type },
+      body: imageBlob,
     });
-    const json = await result.json();
-    console.log(json);
+    const uploadJson = await uploadResult.json();
+    console.log(uploadJson);
 
-    if (!result.ok) {
-      throw new Error(`Upload failed: ${JSON.stringify(json)}`);
+    if (!uploadResult.ok) {
+      throw new Error(`Upload failed: ${JSON.stringify(uploadJson)}`);
     }
-    const { storageId } = json;
+    const { storageId } = uploadJson;
     if (!currentUser) return;
-    await sendImage({ storageId, createdBy: currentUser?._id });
+    await uploadProfileImage({ storageId, createdBy: currentUser?._id });
   };
 
-  const handleImageSave = async (imageUri: string) => {
+  const saveSelectedImage = async (imageUri: string) => {
     try {
-      setSelectedImage(imageUri);
-      await sendImageToDB(imageUri);
+      setLocalImageUri(imageUri);
+      await sendImageToStorage(imageUri);
     } catch (error) {
       console.error('Save image error:', error);
       throw error;
     }
   };
 
-  const handleImageRemove = () => {
-    if (!imageUrl) {
-      return;
-    }
-    setSelectedImage(undefined);
-    deleteProfileImage({ storageId: imageUrl.storageId });
+  const removeProfileImage = () => {
+    if (!currentProfileImage) return;
+    setLocalImageUri(undefined);
+    deleteProfileImageMutation({ storageId: currentProfileImage.storageId });
   };
 
   return (
     <View className="gap-2">
       <Dialog>
-        <DialogTrigger disabled={!imageUrl} className="flex items-center">
-          <Avatar alt="Zach Nugent's Avatar" className="h-24 w-24">
+        <DialogTrigger disabled={!currentProfileImage} className="flex items-center">
+          <Avatar alt="User Avatar" className="h-24 w-24">
             <AvatarImage
-              source={{ uri: imageUrl?.url ?? undefined }}
+              source={{ uri: currentProfileImage?.url ?? undefined }}
               className="rounded-full border border-primary"
             />
             <AvatarFallback>
@@ -133,7 +132,7 @@ export function ImageUploadSection() {
           <DialogClose asChild>
             <Pressable>
               <Image
-                source={{ uri: imageUrl?.url ?? undefined }}
+                source={{ uri: currentProfileImage?.url ?? undefined }}
                 className="h-[375px] w-[375px] object-cover"
               />
             </Pressable>
@@ -144,7 +143,7 @@ export function ImageUploadSection() {
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="outline" className="mx-auto mb-2 shadow-sm">
-            <Upload color={uploadIconColor} strokeWidth={2} className="h-24 w-24" />
+            <Upload color={uploadButtonColor} strokeWidth={2} className="h-24 w-24" />
           </Button>
         </DialogTrigger>
 
@@ -159,7 +158,7 @@ export function ImageUploadSection() {
               <Button
                 variant="default"
                 className="h-20 w-24 flex-col gap-0.5 rounded-2xl shadow-sm"
-                onPress={() => launchImagePicker()}>
+                onPress={() => pickImage('camera')}>
                 <CameraIcon color={iconColor} size={24} strokeWidth={2} />
                 <Text className={buttonTextColor}>Camera</Text>
               </Button>
@@ -169,7 +168,7 @@ export function ImageUploadSection() {
               <Button
                 variant="default"
                 className="h-20 w-24 flex-col gap-0.5 rounded-2xl shadow-sm"
-                onPress={() => launchImagePicker('gallery')}>
+                onPress={() => pickImage('gallery')}>
                 <Images color={iconColor} size={24} strokeWidth={2} />
                 <Text className={buttonTextColor}>Gallery</Text>
               </Button>
@@ -179,7 +178,7 @@ export function ImageUploadSection() {
               <Button
                 variant="default"
                 className="h-20 w-24 flex-col gap-0.5 rounded-2xl shadow-sm"
-                onPress={handleImageRemove}>
+                onPress={removeProfileImage}>
                 <Trash2 color={iconColor} size={24} strokeWidth={2} />
                 <Text className={buttonTextColor}>Remove</Text>
               </Button>
