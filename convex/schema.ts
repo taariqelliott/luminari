@@ -90,4 +90,13 @@ export default defineSchema({
   })
     .index('by_createdBy', ['createdBy'])
     .index('by_storageId', ['storageId']),
+  eventImages: defineTable({
+    createdBy: v.id('users'),
+    eventName: v.id('events'),
+    storageId: v.id('_storage'),
+    format: v.string(),
+  })
+    .index('by_createdBy', ['createdBy'])
+    .index('by_storageId', ['storageId'])
+    .index('by_eventName', ['eventName']),
 });

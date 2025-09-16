@@ -11,7 +11,9 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { api } from '@/convex/_generated/api';
+import { Id } from '@/convex/_generated/dataModel';
 import { THEME } from '@/lib/theme';
+import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { useMutation, useQuery } from 'convex/react';
 import * as ImagePicker from 'expo-image-picker';
 import { CameraIcon, Images, Trash2, Upload } from 'lucide-react-native';
@@ -22,24 +24,30 @@ import { Image, Pressable, Text, View } from 'react-native';
 export default function EventCreationForm() {
   return (
     <View>
-      <ProfileImageUploader />
+      <SignedIn>
+        <ProfileImageUploader />
+      </SignedIn>
+      <SignedOut>
+        <Text>Login To Create Event Data</Text>
+      </SignedOut>
     </View>
   );
 }
 
 export function ProfileImageUploader() {
   const { colorScheme } = useColorScheme();
-  const [localImageUri, setLocalImageUri] = useState<string | undefined>(undefined);
 
   const currentUser = useQuery(api.users.currentUser);
   const uploadProfileImage = useMutation(api.profileImages.sendProfileImage);
   const generateUploadUrlMutation = useMutation(api.profileImages.generateUploadUrl);
   const deleteProfileImageMutation = useMutation(api.profileImages.deleteProfileImageById);
 
-  if (!currentUser) return;
-  const currentProfileImage = useQuery(api.profileImages.getProfileImage, {
-    userId: currentUser?._id,
-  });
+  const currentProfileImage = useQuery(
+    api.profileImages.getProfileImage,
+    currentUser ? { userId: currentUser._id } : 'skip'
+  );
+
+  if (!currentUser) return null;
 
   const iconColor = colorScheme === 'dark' ? THEME.dark.accent : THEME.light.accentForeground;
   const buttonTextColor = colorScheme === 'dark' ? 'text-accent' : 'text-accent-foreground';
@@ -79,6 +87,10 @@ export function ProfileImageUploader() {
 
   const sendImageToStorage = async (imageUri: string) => {
     if (!imageUri) return;
+
+    if (currentProfileImage?.url) {
+      deleteProfileImageMutation({ storageId: currentProfileImage.storageId });
+    }
     const response = await fetch(imageUri);
     const imageBlob = await response.blob();
     const uploadUrl = await generateUploadUrlMutation();
@@ -100,7 +112,6 @@ export function ProfileImageUploader() {
 
   const saveSelectedImage = async (imageUri: string) => {
     try {
-      setLocalImageUri(imageUri);
       await sendImageToStorage(imageUri);
     } catch (error) {
       console.error('Save image error:', error);
@@ -110,7 +121,6 @@ export function ProfileImageUploader() {
 
   const removeProfileImage = () => {
     if (!currentProfileImage) return;
-    setLocalImageUri(undefined);
     deleteProfileImageMutation({ storageId: currentProfileImage.storageId });
   };
 
