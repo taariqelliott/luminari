@@ -1,5 +1,5 @@
-import { defineSchema, defineTable } from 'convex/server';
 import { authTables } from '@convex-dev/auth/server';
+import { defineSchema, defineTable } from 'convex/server';
 import { v } from 'convex/values';
 
 export default defineSchema({
@@ -83,4 +83,11 @@ export default defineSchema({
     updatedAt: v.optional(v.string()),
     status: v.optional(v.string()),
   }),
+  profileImages: defineTable({
+    createdBy: v.id('users'),
+    storageId: v.id('_storage'),
+    format: v.string(),
+  })
+    .index('by_createdBy', ['createdBy'])
+    .index('by_storageId', ['storageId']),
 });

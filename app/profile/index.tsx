@@ -1,33 +1,16 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Text } from '@/components/ui/text';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
 import { useUser } from '@clerk/clerk-expo';
 import { useQuery } from 'convex/react';
 import { Link } from 'expo-router';
-import { View, ScrollView } from 'react-native';
+import { View } from 'react-native';
 
 export default function ProfileScreen() {
   const { user } = useUser();
   const currentUser = useQuery(api.users.currentUser);
-
-  const formatKey = (key: string) => {
-    return key
-      .replace(/([A-Z])/g, ' $1')
-      .replace(/^./, (str) => str.toUpperCase())
-      .replace(/Id$/, 'ID');
-  };
-
-  const formatValue = (value: any) => {
-    if (typeof value === 'boolean') {
-      return value ? 'Yes' : 'No';
-    }
-    if (value === null || value === undefined) {
-      return 'Not set';
-    }
-    return value.toString();
-  };
 
   return (
     <View className="flex-1 items-center justify-center p-4">
