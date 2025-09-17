@@ -1,12 +1,11 @@
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
 import { useUser } from '@clerk/clerk-expo';
 import { useQuery } from 'convex/react';
-import { Link } from 'expo-router';
 import { View } from 'react-native';
+import ProfileImageUploader from '../../components/ProfileImageUploader';
 
 export default function ProfileScreen() {
   const { user } = useUser();
@@ -27,6 +26,8 @@ export default function ProfileScreen() {
             !
           </Text>
         </CardHeader>
+
+        <ProfileImageUploader />
 
         {currentUser && (
           <CardContent className="space-y-4">
@@ -52,14 +53,6 @@ export default function ProfileScreen() {
             )}
           </CardContent>
         )}
-
-        <CardFooter>
-          <Link href="/profile/edit" asChild className="w-full">
-            <Button className="w-full">
-              <Text>Edit Profile</Text>
-            </Button>
-          </Link>
-        </CardFooter>
       </Card>
     </View>
   );

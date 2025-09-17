@@ -11,30 +11,15 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { api } from '@/convex/_generated/api';
-import { Id } from '@/convex/_generated/dataModel';
 import { THEME } from '@/lib/theme';
-import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { useMutation, useQuery } from 'convex/react';
 import * as ImagePicker from 'expo-image-picker';
 import { CameraIcon, Images, Trash2, Upload } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
-import React, { useState } from 'react';
+import React from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
 
-export default function EventCreationForm() {
-  return (
-    <View>
-      <SignedIn>
-        <ProfileImageUploader />
-      </SignedIn>
-      <SignedOut>
-        <Text>Login To Create Event Data</Text>
-      </SignedOut>
-    </View>
-  );
-}
-
-export function ProfileImageUploader() {
+export default function ProfileImageUploader() {
   const { colorScheme } = useColorScheme();
 
   const currentUser = useQuery(api.users.currentUser);

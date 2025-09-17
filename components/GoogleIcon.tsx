@@ -1,6 +1,6 @@
 import Svg, { ClipPath, Defs, G, Path, Rect } from 'react-native-svg';
 
-export default function GoogleSVG() {
+export default function GoogleIcon() {
   return (
     <Svg fill="none" height={20} width={20} viewBox="0 0 20 20">
       <G clipPath="url(#clip0_98_45)">

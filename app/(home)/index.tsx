@@ -1,5 +1,4 @@
 import AuthScreen from '@/components/AuthScreen';
-import { OnboardingAlert } from '@/components/OnboardingAlert';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
@@ -17,7 +16,6 @@ export default function HomeScreen() {
   const { isSignedIn, isLoaded } = useAuth();
   const currentUser = useQuery(api.users.currentUser);
   const [isSplashScreenActive, setIsSplashScreenActive] = useState(true);
-  const [showOnboardingAlert, setShowOnboardingAlert] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsSplashScreenActive(false), 1000);
@@ -56,7 +54,6 @@ export default function HomeScreen() {
             <Text>Complete Onboarding</Text>
           </Button>
         </Link>
-        {showOnboardingAlert && <OnboardingAlert />}
       </View>
     );
   }

@@ -21,8 +21,8 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import GithubSVG from './GitHubSVG';
-import GoogleSVG from './GoogleSVG';
+import GithubIcon from './GitHubIcon';
+import GoogleIcon from './GoogleIcon';
 import { OrSeparator } from './OrSeparator';
 
 export default function AuthScreen() {
@@ -154,14 +154,14 @@ export default function AuthScreen() {
                       variant="default"
                       className="flex-1"
                       onPress={() => handleSSO('google')}>
-                      <GoogleSVG />
+                      <GoogleIcon />
                       <Text className="ml-2">Google</Text>
                     </Button>
                     <Button
                       variant="default"
                       className="flex-1"
                       onPress={() => handleSSO('github')}>
-                      <GithubSVG />
+                      <GithubIcon />
                       <Text className="ml-2">GitHub</Text>
                     </Button>
                   </View>
@@ -200,14 +200,14 @@ export default function AuthScreen() {
                       variant="default"
                       className="flex-1"
                       onPress={() => handleSSO('google')}>
-                      <GoogleSVG />
+                      <GoogleIcon />
                       <Text className="ml-2">Google</Text>
                     </Button>
                     <Button
                       variant="default"
                       className="flex-1"
                       onPress={() => handleSSO('github')}>
-                      <GithubSVG />
+                      <GithubIcon />
                       <Text className="ml-2">GitHub</Text>
                     </Button>
                   </View>
