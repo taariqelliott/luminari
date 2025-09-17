@@ -36,7 +36,24 @@
     "plugins": [
       "expo-router",
       "expo-secure-store",
-      "expo-web-browser"
+      "expo-web-browser",
+      "react-native-bottom-tabs",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow the app to access your photos so you can choose a profile picture.",
+          "cameraPermission": "Allow the app to use your camera to take a profile picture.",
+          "microphonePermission": "Allow the app to use your microphone when recording videos."
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

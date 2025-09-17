@@ -1,21 +1,31 @@
-import { HapticTab } from '@/components/HapticTab';
 import '@/global.css';
 import { NAV_THEME, THEME } from '@/lib/theme';
+import {
+  createNativeBottomTabNavigator,
+  NativeBottomTabNavigationEventMap,
+  NativeBottomTabNavigationOptions,
+} from '@bottom-tabs/react-navigation';
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
-import { ThemeProvider } from '@react-navigation/native';
+import { ParamListBase, TabNavigationState, ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { ConvexReactClient } from 'convex/react';
 import { ConvexProviderWithClerk } from 'convex/react-clerk';
-import { Tabs } from 'expo-router';
+import { withLayoutContext } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { Home, Plus, Settings, Telescope, User } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 export { ErrorBoundary } from 'expo-router';
 
 const convexUrl = process.env.EXPO_PUBLIC_CONVEX_URL;
 const convex = new ConvexReactClient(convexUrl!);
 const clerkKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+const BottomTabNavigator = createNativeBottomTabNavigator().Navigator;
+const Tabs = withLayoutContext<
+  NativeBottomTabNavigationOptions,
+  typeof BottomTabNavigator,
+  TabNavigationState<ParamListBase>,
+  NativeBottomTabNavigationEventMap
+>(BottomTabNavigator);
 
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
@@ -33,9 +43,7 @@ export default function RootLayout() {
               options={{
                 title: 'Home',
                 tabBarLabel: 'Home',
-                tabBarButton: HapticTab,
-                headerShown: false,
-                tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
+                tabBarIcon: () => ({ sfSymbol: 'house' }),
               }}
             />
             <Tabs.Screen
@@ -43,9 +51,7 @@ export default function RootLayout() {
               options={{
                 title: 'Discover',
                 tabBarLabel: 'Discover',
-                tabBarButton: HapticTab,
-                headerShown: false,
-                tabBarIcon: ({ color, size }) => <Telescope color={color} size={size} />,
+                tabBarIcon: () => ({ sfSymbol: 'magnifyingglass' }),
               }}
             />
             <Tabs.Screen
@@ -53,9 +59,7 @@ export default function RootLayout() {
               options={{
                 title: 'Create',
                 tabBarLabel: 'Create',
-                tabBarButton: HapticTab,
-                headerShown: false,
-                tabBarIcon: ({ color, size }) => <Plus color={color} size={size} />,
+                tabBarIcon: () => ({ sfSymbol: 'plus' }),
               }}
             />
             <Tabs.Screen
@@ -63,9 +67,7 @@ export default function RootLayout() {
               options={{
                 title: 'Profile',
                 tabBarLabel: 'Profile',
-                tabBarButton: HapticTab,
-                headerShown: false,
-                tabBarIcon: ({ color, size }) => <User color={color} size={size} />,
+                tabBarIcon: () => ({ sfSymbol: 'person' }),
               }}
             />
             <Tabs.Screen
@@ -73,16 +75,13 @@ export default function RootLayout() {
               options={{
                 title: 'Settings',
                 tabBarLabel: 'Settings',
-                tabBarButton: HapticTab,
-                headerShown: false,
-                tabBarIcon: ({ color, size }) => <Settings color={color} size={size} />,
+                tabBarIcon: ({}) => ({ sfSymbol: 'gear' }),
               }}
             />
             <Tabs.Screen
               name="(auth)"
               options={{
-                headerShown: false,
-                href: null,
+                tabBarItemHidden: true,
               }}
             />
           </Tabs>

@@ -17,7 +17,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { CameraIcon, Images, Trash2, Upload } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import React from 'react';
-import { Image, Pressable, Text, View } from 'react-native';
+import { Alert, Image, Pressable, Text, View } from 'react-native';
 
 export default function ProfileImageUploader() {
   const { colorScheme } = useColorScheme();
@@ -42,6 +42,11 @@ export default function ProfileImageUploader() {
   const pickImage = async (mode?: 'camera' | 'gallery') => {
     try {
       let pickerResult: ImagePicker.ImagePickerResult;
+      const perms = await ImagePicker.requestCameraPermissionsAsync();
+      if (perms.granted === false) {
+        Alert.alert('This app requires user permission to use the camera.');
+        return;
+      }
 
       if (mode === 'gallery') {
         await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -113,13 +118,15 @@ export default function ProfileImageUploader() {
     <View className="gap-2">
       <Dialog>
         <DialogTrigger disabled={!currentProfileImage} className="flex items-center">
-          <Avatar alt="User Avatar" className="h-24 w-24">
+          <Avatar alt="User Avatar" className="h-36 w-36">
             <AvatarImage
               source={{ uri: currentProfileImage?.url ?? undefined }}
               className="rounded-full border border-primary"
             />
             <AvatarFallback>
-              <Text className="text-primary">TE</Text>
+              <View className="h-full w-full items-center justify-center bg-secondary object-contain">
+                {/* <Text className="scale-[3]">✨</Text> */}
+              </View>
             </AvatarFallback>
           </Avatar>
         </DialogTrigger>
@@ -138,7 +145,7 @@ export default function ProfileImageUploader() {
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="outline" className="mx-auto mb-2 shadow-sm">
-            <Upload color={uploadButtonColor} strokeWidth={2} className="h-24 w-24" />
+            <Upload color={uploadButtonColor} strokeWidth={2} size={19} />
           </Button>
         </DialogTrigger>
 
