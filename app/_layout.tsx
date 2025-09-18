@@ -75,7 +75,7 @@ export default function RootLayout() {
               options={{
                 title: 'Settings',
                 tabBarLabel: 'Settings',
-                tabBarIcon: () => ({ sfSymbol: 'gear' }),
+                tabBarIcon: () => ({ sfSymbol: 'gearshape.2' }),
               }}
             />
             <Tabs.Screen
