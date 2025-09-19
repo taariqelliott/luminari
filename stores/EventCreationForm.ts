@@ -1,4 +1,5 @@
 import { Id } from '@/convex/_generated/dataModel';
+import { create } from 'zustand';
 
 //States
 type EventNameState = {
@@ -127,3 +128,89 @@ type EventImageUrlAction = {
 type EventShareUrlAction = {
   updateEventShareUrl: (eventShareUrl: EventShareUrlState['eventShareUrl']) => void;
 };
+
+// Stores
+export const useEventNameStore = create<EventNameState & EventNameAction>((set) => ({
+  eventName: '',
+  updateEventName: (eventName) => set(() => ({ eventName })),
+}));
+
+export const useEventDateStore = create<EventDateState & EventDateAction>((set) => ({
+  eventDate: '',
+  updateEventDate: (eventDate) => set(() => ({ eventDate })),
+}));
+
+export const useEventTimeFromStore = create<EventTimeFromState & EventTimeFromAction>((set) => ({
+  eventTimeFrom: '',
+  updateEventTimeFrom: (eventTimeFrom) => set(() => ({ eventTimeFrom })),
+}));
+
+export const useEventTimeToStore = create<EventTimeToState & EventTimeToAction>((set) => ({
+  eventTimeTo: '',
+  updateEventTimeTo: (eventTimeTo) => set(() => ({ eventTimeTo })),
+}));
+
+export const useEventContactPersonStore = create<
+  EventContactPersonState & EventContactPersonAction
+>((set) => ({
+  eventContactPerson: '',
+  updateEventContactPerson: (eventContactPerson) => set(() => ({ eventContactPerson })),
+}));
+
+export const useEventContactEmailStore = create<EventContactEmailState & EventContactEmailAction>(
+  (set) => ({
+    eventContactEmail: '',
+    updateEventContactEmail: (eventContactEmail) => set(() => ({ eventContactEmail })),
+  })
+);
+
+export const useEventContactPhoneStore = create<EventContactPhoneState & EventContactPhoneAction>(
+  (set) => ({
+    eventContactPhone: '',
+    updateEventContactPhone: (eventContactPhone) => set(() => ({ eventContactPhone })),
+  })
+);
+
+export const useEventOrganizationIdStore = create<
+  EventOrganizationIdState & EventOrganizationIdAction
+>((set) => ({
+  eventOrganizationId: '' as Id<'organizations'>,
+  updateEventOrganizationId: (eventOrganizationId) => set(() => ({ eventOrganizationId })),
+}));
+
+export const useEventSchoolIdStore = create<EventSchoolIdState & EventSchoolIdAction>((set) => ({
+  eventSchoolId: '' as Id<'schools'>,
+  updateEventSchoolId: (eventSchoolId) => set(() => ({ eventSchoolId })),
+}));
+
+export const useAttendingCountStore = create<AttendingCountState & AttendingCountAction>((set) => ({
+  attendingCount: 0,
+  updateAttendingCount: (attendingCount) => set(() => ({ attendingCount })),
+}));
+
+export const useMaybeAttendingCountStore = create<
+  MaybeAttendingCountState & MaybeAttendingCountAction
+>((set) => ({
+  maybeAttendingCount: 0,
+  updateMaybeAttendingCount: (maybeAttendingCount) => set(() => ({ maybeAttendingCount })),
+}));
+
+export const useCreatedByStore = create<CreatedByState & CreatedByAction>((set) => ({
+  createdBy: '' as Id<'users'>,
+  updateCreatedBy: (createdBy) => set(() => ({ createdBy })),
+}));
+
+export const useEventTagsStore = create<EventTagsState & EventTagsAction>((set) => ({
+  eventTags: [],
+  updateEventTags: (eventTags) => set(() => ({ eventTags })),
+}));
+
+export const useEventImageUrlStore = create<EventImageUrlState & EventImageUrlAction>((set) => ({
+  eventImgUrl: '',
+  updateEventImgUrl: (eventImgUrl) => set(() => ({ eventImgUrl })),
+}));
+
+export const useEventShareUrlStore = create<EventShareUrlState & EventShareUrlAction>((set) => ({
+  eventShareUrl: '',
+  updateEventShareUrl: (eventShareUrl) => set(() => ({ eventShareUrl })),
+}));
