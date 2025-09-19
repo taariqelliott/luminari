@@ -10,8 +10,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
-import { useSchoolNameStore } from '@/stores/stores';
-import { useMutation, useQuery } from 'convex/react';
+import { useSchoolNameStore } from '@/stores/UserInformationStore';
+import { useQuery } from 'convex/react';
 import { Link, router } from 'expo-router';
 import { useMemo, useRef, useState } from 'react';
 import {

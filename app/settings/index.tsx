@@ -2,12 +2,10 @@ import DeleteUserButton from '@/components/DeleteUserButton';
 import { SignOutButton } from '@/components/SignOutButton';
 import ThemeToggle from '@/components/ThemeToggle';
 import { Text } from '@/components/ui/text';
-import { SignedIn, useUser } from '@clerk/clerk-expo';
-import { Image, View } from 'react-native';
+import { SignedIn } from '@clerk/clerk-expo';
+import { View } from 'react-native';
 
 export default function Settings() {
-  const { user } = useUser();
-
   return (
     <View className="w-full flex-1 justify-center px-6 py-8">
       <View className="mb-6">
@@ -22,10 +20,6 @@ export default function Settings() {
 
         <SignedIn>
           <View className="w-full items-center gap-2">
-            {user?.imageUrl && (
-              <Image source={{ uri: user.imageUrl }} className="h-12 w-12 rounded-full" />
-            )}
-
             <View className="w-full gap-2">
               <SignOutButton />
               <DeleteUserButton />

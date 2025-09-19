@@ -24,8 +24,7 @@ import {
   useLastNameStore,
   useRoleStore,
   useUsernameStore,
-} from '@/stores/stores';
-import { useUser } from '@clerk/clerk-expo';
+} from '@/stores/UserInformationStore';
 import { Link } from 'expo-router';
 import { useState } from 'react';
 import {
@@ -122,7 +121,7 @@ export default function PersonalInfoForm() {
                             value={value}
                             onPress={() => {
                               setUserRole(value);
-                              updateRole(value)
+                              updateRole(value);
                             }}>
                             {label}
                           </SelectItem>

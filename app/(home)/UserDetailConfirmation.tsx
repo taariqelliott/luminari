@@ -1,20 +1,20 @@
-import { View } from 'react-native';
-import React from 'react';
-import { Text } from '@/components/ui/text';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { router } from 'expo-router';
+import { Text } from '@/components/ui/text';
+import { api } from '@/convex/_generated/api';
 import {
   useFirstNameStore,
   useLastNameStore,
   useRoleStore,
   useSchoolNameStore,
   useUsernameStore,
-} from '@/stores/stores';
+} from '@/stores/UserInformationStore';
 import { useUser } from '@clerk/clerk-react';
-import z from 'zod';
 import { useMutation } from 'convex/react';
-import { api } from '@/convex/_generated/api';
+import { router } from 'expo-router';
+import React from 'react';
+import { View } from 'react-native';
+import z from 'zod';
 
 export const onboardingSchema = z.object({
   role: z.enum(['student', 'faculty', 'organization']),

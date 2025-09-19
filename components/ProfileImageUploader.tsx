@@ -14,7 +14,7 @@ import { api } from '@/convex/_generated/api';
 import { THEME } from '@/lib/theme';
 import { useMutation, useQuery } from 'convex/react';
 import * as ImagePicker from 'expo-image-picker';
-import { CameraIcon, Images, Trash2, Upload } from 'lucide-react-native';
+import { CameraIcon, Images, Trash2 } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import React from 'react';
 import { Alert, Image, Pressable, Text, View } from 'react-native';
@@ -115,7 +115,7 @@ export default function ProfileImageUploader() {
   };
 
   return (
-    <View className="gap-2">
+    <View className="relative mx-auto inline-flex w-40 gap-2">
       <Dialog>
         <DialogTrigger disabled={!currentProfileImage} className="flex items-center">
           <Avatar alt="User Avatar" className="h-36 w-36">
@@ -125,7 +125,7 @@ export default function ProfileImageUploader() {
             />
             <AvatarFallback>
               <View className="h-full w-full items-center justify-center bg-secondary object-contain">
-                {/* <Text className="scale-[3]">✨</Text> */}
+                <Text>No Image</Text>
               </View>
             </AvatarFallback>
           </Avatar>
@@ -135,17 +135,20 @@ export default function ProfileImageUploader() {
             <Pressable>
               <Image
                 source={{ uri: currentProfileImage?.url ?? undefined }}
-                className="h-[375px] w-[375px] object-cover"
+                className="h-[350px] w-[350px] object-cover"
               />
             </Pressable>
           </DialogClose>
         </DialogContent>
       </Dialog>
 
-      <Dialog>
+      <Dialog className="absolute bottom-0 right-0">
         <DialogTrigger asChild>
-          <Button variant="outline" className="mx-auto mb-2 shadow-sm">
-            <Upload color={uploadButtonColor} strokeWidth={2} size={19} />
+          <Button
+            variant={colorScheme === 'dark' ? 'default' : 'outline'}
+            size={'icon'}
+            className="mx-auto rounded-full shadow-sm">
+            <CameraIcon color={colorScheme === 'dark' ? iconColor : uploadButtonColor} size={17} />
           </Button>
         </DialogTrigger>
 
