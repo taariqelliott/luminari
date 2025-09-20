@@ -16,7 +16,6 @@ import { useMutation, useQuery } from 'convex/react';
 import * as ImagePicker from 'expo-image-picker';
 import { CameraIcon, Images, Trash2 } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
-import React from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 
 export default function ProfileImageUploader() {

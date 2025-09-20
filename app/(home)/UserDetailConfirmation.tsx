@@ -12,7 +12,6 @@ import {
 import { useUser } from '@clerk/clerk-react';
 import { useMutation } from 'convex/react';
 import { router } from 'expo-router';
-import React from 'react';
 import { View } from 'react-native';
 import z from 'zod';
 
