@@ -17,7 +17,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { CameraIcon, Images, Trash2 } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import React from 'react';
-import { Alert, Image, Pressable, Text, View } from 'react-native';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
 
 export default function ProfileImageUploader() {
   const { colorScheme } = useColorScheme();
@@ -115,34 +115,20 @@ export default function ProfileImageUploader() {
   };
 
   return (
-    <View className="relative mx-auto inline-flex w-40 gap-2">
-      <Dialog>
-        <DialogTrigger disabled={!currentProfileImage} className="flex items-center">
-          <Avatar alt="User Avatar" className="h-36 w-36">
-            <AvatarImage
-              source={{ uri: currentProfileImage?.url ?? undefined }}
-              className="rounded-full border border-primary"
-            />
-            <AvatarFallback>
-              <View className="h-full w-full items-center justify-center bg-secondary object-contain">
-                <Text>No Image</Text>
-              </View>
-            </AvatarFallback>
-          </Avatar>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogClose asChild>
-            <Pressable>
-              <Image
-                source={{ uri: currentProfileImage?.url ?? undefined }}
-                className="h-[350px] w-[350px] object-cover"
-              />
-            </Pressable>
-          </DialogClose>
-        </DialogContent>
-      </Dialog>
+    <View className="relative mx-auto inline-flex gap-2">
+      <Avatar alt="User Avatar" className="h-40 w-40">
+        <AvatarImage
+          source={{ uri: currentProfileImage?.url ?? undefined }}
+          className="rounded-full border border-primary"
+        />
+        <AvatarFallback>
+          <View className="h-full w-full items-center justify-center object-contain">
+            <Text className="text-muted-foreground">No Image</Text>
+          </View>
+        </AvatarFallback>
+      </Avatar>
 
-      <Dialog className="absolute bottom-0 right-0">
+      <Dialog className="absolute bottom-0 right-0 rounded-full">
         <DialogTrigger asChild>
           <Button
             variant={colorScheme === 'dark' ? 'default' : 'outline'}
@@ -160,13 +146,14 @@ export default function ProfileImageUploader() {
 
           <View className="flex-row justify-between gap-2">
             <DialogClose asChild>
-              <Button
-                variant="default"
-                className="h-20 w-24 flex-col gap-0.5 rounded-2xl shadow-sm"
-                onPress={() => pickImage('camera')}>
-                <CameraIcon color={iconColor} size={24} strokeWidth={2} />
-                <Text className={buttonTextColor}>Camera</Text>
-              </Button>
+              <TouchableOpacity onPress={() => pickImage('camera')}>
+                <Button
+                  variant="default"
+                  className="h-20 w-24 flex-col gap-0.5 rounded-2xl shadow-sm">
+                  <CameraIcon color={iconColor} size={24} strokeWidth={2} />
+                  <Text className={buttonTextColor}>Camera</Text>
+                </Button>
+              </TouchableOpacity>
             </DialogClose>
 
             <DialogClose asChild>
