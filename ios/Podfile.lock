@@ -1,7 +1,7 @@
 PODS:
   - EXApplication (7.0.7):
     - ExpoModulesCore
-  - EXConstants (18.0.8):
+  - EXConstants (18.0.9):
     - ExpoModulesCore
   - EXImageLoader (6.0.0):
     - ExpoModulesCore
@@ -41,7 +41,7 @@ PODS:
     - ExpoModulesCore
   - ExpoHaptics (15.0.7):
     - ExpoModulesCore
-  - ExpoHead (6.0.4):
+  - ExpoHead (6.0.7):
     - ExpoModulesCore
     - RNScreens
   - ExpoImagePicker (17.0.8):
@@ -2347,7 +2347,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   EXApplication: 296622817d459f46b6c5fe8691f4aac44d2b79e7
-  EXConstants: 7e4654405af367ff908c863fe77a8a22d60bd37d
+  EXConstants: a95804601ee4a6aa7800645f9b070d753b1142b3
   EXImageLoader: 189e3476581efe3ad4d1d3fb4735b7179eb26f05
   Expo: e7fd83aab1bfff6cac8ce73b6a79aaf89e8b2b1e
   ExpoAsset: 84810d6fed8179f04d4a7a4a6b37028bbd726e26
@@ -2355,7 +2355,7 @@ SPEC CHECKSUMS:
   ExpoFileSystem: 4fb06865906e781329eb67166bd64fc4749c3019
   ExpoFont: 86ceec09ffed1c99cfee36ceb79ba149074901b5
   ExpoHaptics: 807476b0c39e9d82b7270349d6487928ce32df84
-  ExpoHead: 2aad68c730f967d2533599dabb64d1d2cd9f765a
+  ExpoHead: 9cfb3370834cab0459b3f516a9b76aae944f02f4
   ExpoImagePicker: d251aab45a1b1857e4156fed88511b278b4eee1c
   ExpoKeepAwake: 1a2e820692e933c94a565ec3fbbe38ac31658ffe
   ExpoLinking: f051f28e50ea9269ff539317c166adec81d9342d

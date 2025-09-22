@@ -10,12 +10,12 @@ type EventDateState = {
   eventDate: string;
 };
 
-type EventTimeFromState = {
-  eventTimeFrom: string;
+type EventStartTimeState = {
+  eventStartTime: string;
 };
 
-type EventTimeToState = {
-  eventTimeTo: string;
+type EventEndTimeState = {
+  eventEndTime: string;
 };
 
 type EventContactPersonState = {
@@ -58,10 +58,6 @@ type EventImageUrlState = {
   eventImgUrl: string;
 };
 
-type EventShareUrlState = {
-  eventShareUrl: string;
-};
-
 // Actions
 type EventNameAction = {
   updateEventName: (eventName: EventNameState['eventName']) => void;
@@ -71,12 +67,12 @@ type EventDateAction = {
   updateEventDate: (eventDate: EventDateState['eventDate']) => void;
 };
 
-type EventTimeFromAction = {
-  updateEventTimeFrom: (eventTimeFrom: EventTimeFromState['eventTimeFrom']) => void;
+type EventStartTimeAction = {
+  updateEventStartTime: (eventStartTime: EventStartTimeState['eventStartTime']) => void;
 };
 
-type EventTimeToAction = {
-  updateEventTimeTo: (eventTimeTo: EventTimeToState['eventTimeTo']) => void;
+type EventEndTimeAction = {
+  updateEventEndTime: (eventEndTime: EventEndTimeState['eventEndTime']) => void;
 };
 
 type EventContactPersonAction = {
@@ -121,12 +117,8 @@ type EventTagsAction = {
   updateEventTags: (eventTags: EventTagsState['eventTags']) => void;
 };
 
-type EventImageUrlAction = {
+type EventImgUrlAction = {
   updateEventImgUrl: (eventImgUrl: EventImageUrlState['eventImgUrl']) => void;
-};
-
-type EventShareUrlAction = {
-  updateEventShareUrl: (eventShareUrl: EventShareUrlState['eventShareUrl']) => void;
 };
 
 // Stores
@@ -140,14 +132,14 @@ export const useEventDateStore = create<EventDateState & EventDateAction>((set) 
   updateEventDate: (eventDate) => set(() => ({ eventDate })),
 }));
 
-export const useEventTimeFromStore = create<EventTimeFromState & EventTimeFromAction>((set) => ({
-  eventTimeFrom: '',
-  updateEventTimeFrom: (eventTimeFrom) => set(() => ({ eventTimeFrom })),
+export const useEventStartTimeStore = create<EventStartTimeState & EventStartTimeAction>((set) => ({
+  eventStartTime: '',
+  updateEventStartTime: (eventStartTime) => set(() => ({ eventStartTime })),
 }));
 
-export const useEventTimeToStore = create<EventTimeToState & EventTimeToAction>((set) => ({
-  eventTimeTo: '',
-  updateEventTimeTo: (eventTimeTo) => set(() => ({ eventTimeTo })),
+export const useEventEndTimeStore = create<EventEndTimeState & EventEndTimeAction>((set) => ({
+  eventEndTime: '',
+  updateEventEndTime: (eventEndTime) => set(() => ({ eventEndTime })),
 }));
 
 export const useEventContactPersonStore = create<
@@ -205,12 +197,7 @@ export const useEventTagsStore = create<EventTagsState & EventTagsAction>((set) 
   updateEventTags: (eventTags) => set(() => ({ eventTags })),
 }));
 
-export const useEventImageUrlStore = create<EventImageUrlState & EventImageUrlAction>((set) => ({
+export const useEventImgUrlStore = create<EventImageUrlState & EventImgUrlAction>((set) => ({
   eventImgUrl: '',
   updateEventImgUrl: (eventImgUrl) => set(() => ({ eventImgUrl })),
-}));
-
-export const useEventShareUrlStore = create<EventShareUrlState & EventShareUrlAction>((set) => ({
-  eventShareUrl: '',
-  updateEventShareUrl: (eventShareUrl) => set(() => ({ eventShareUrl })),
 }));

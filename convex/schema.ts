@@ -47,8 +47,8 @@ export default defineSchema({
   events: defineTable({
     eventName: v.string(),
     eventDate: v.string(),
-    eventTimeFrom: v.string(),
-    eventTimeTo: v.string(),
+    eventStartTime: v.string(),
+    eventEndTime: v.string(),
     eventContactPerson: v.optional(v.string()),
     eventContactEmail: v.optional(v.string()),
     eventContactPhone: v.optional(v.string()),
@@ -59,7 +59,6 @@ export default defineSchema({
     createdBy: v.id('users'),
     eventTags: v.array(v.string()),
     eventImgUrl: v.optional(v.string()),
-    eventShareUrl: v.optional(v.string()),
   }),
   eventRequests: defineTable({
     eventRequestName: v.string(),
