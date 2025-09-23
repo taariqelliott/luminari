@@ -5,9 +5,17 @@ export default function CreateLayout() {
     <Stack>
       <Stack.Screen name="index" options={{ title: 'Create', headerShadowVisible: false }} />
       <Stack.Screen
-        name="events/eventsStepOne"
+        name="events/eventsPageOne"
         options={{
           title: 'Step 1',
+          headerShadowVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="events/eventsPageTwo"
+        options={{
+          title: 'Step 2',
+          headerShadowVisible: false,
         }}
       />
     </Stack>

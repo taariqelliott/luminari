@@ -32,6 +32,7 @@ export default function RootLayout() {
   const tabBarOptions = {
     tabBarActiveTintColor: colorScheme === 'dark' ? THEME.dark.primary : THEME.light.primary,
   };
+
   return (
     <ClerkProvider publishableKey={clerkKey} tokenCache={tokenCache} telemetry={false}>
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
@@ -85,6 +86,7 @@ export default function RootLayout() {
               }}
             />
           </Tabs>
+
           <PortalHost />
         </ThemeProvider>
       </ConvexProviderWithClerk>

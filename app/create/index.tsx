@@ -6,7 +6,7 @@ import { View } from 'react-native';
 export default function CreateScreen() {
   return (
     <View className="flex-1 items-center justify-center gap-1">
-      <Link href="/create/events/eventsStepOne" asChild>
+      <Link href="/create/events/eventsPageOne" asChild>
         <Button>
           <Text>Events</Text>
         </Button>
