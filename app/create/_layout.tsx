@@ -18,6 +18,13 @@ export default function CreateLayout() {
           headerShadowVisible: false,
         }}
       />
+      <Stack.Screen
+        name="events/eventsCreationConfimration"
+        options={{
+          title: 'Confirm Your Details',
+          headerShadowVisible: false,
+        }}
+      />
     </Stack>
   );
 }

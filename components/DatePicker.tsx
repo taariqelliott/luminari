@@ -1,74 +1,81 @@
-import { Button } from '@/components/ui/button';
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { Text } from '@/components/ui/text';
+  useEventDateStore,
+  useEventEndTimeStore,
+  useEventStartTimeStore,
+} from '@/stores/EventCreationForm';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useState } from 'react';
 import { View } from 'react-native';
+import { Label } from './ui/label';
 
 export default function DatePicker() {
   const [date, setDate] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date());
+
+  const updateEventDate = useEventDateStore((state) => state.updateEventDate);
+  const updateStartTime = useEventStartTimeStore((state) => state.updateEventStartTime);
+  const updateEndTime = useEventEndTimeStore((state) => state.updateEventEndTime);
 
   return (
-    <View className="flex-1 items-center justify-center">
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button>
-            <Text>Choose A Date</Text>
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Choose your event date</DialogTitle>
-            <DialogDescription>
-              Make changes to your event date here. Click save when you're done.
-            </DialogDescription>
-          </DialogHeader>
-          <View className="grid gap-4">
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              display="inline"
-              mode={'datetime'}
-              onChange={(_, selectedDate) => {
-                if (selectedDate) {
-                  setDate(selectedDate);
-                }
-              }}
-            />
+    <View className="items-center justify-center">
+      <View className="grid gap-2">
+        {/* Event Date */}
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          display="inline"
+          mode="date"
+          onChange={(_, selectedDate) => {
+            if (selectedDate) {
+              setDate(selectedDate);
+              updateEventDate(selectedDate.toDateString());
+            }
+          }}
+        />
 
-            <Text>
-              {date.toLocaleString([], {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-              })}
-            </Text>
-          </View>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline">
-                <Text>Cancel</Text>
-              </Button>
-            </DialogClose>
-            <DialogClose asChild>
-              <Button>
-                <Text>Save changes</Text>
-              </Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+        {/* Start Time */}
+        <View className="flex-row items-center justify-between">
+          <Label htmlFor="startTime">Start Time</Label>
+          <DateTimePicker
+            value={startTime}
+            mode="time"
+            onChange={(_, selectedStart) => {
+              if (selectedStart) {
+                setStartTime(selectedStart);
+                updateStartTime(
+                  selectedStart.toLocaleString('en-US', {
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true,
+                  })
+                );
+              }
+            }}
+          />
+        </View>
+
+        {/* End Time */}
+        <View className="flex-row items-center justify-between">
+          <Label htmlFor="endTime">End Time</Label>
+          <DateTimePicker
+            value={endTime}
+            mode="time"
+            onChange={(_, selectedEnd) => {
+              if (selectedEnd) {
+                setEndTime(selectedEnd);
+                updateEndTime(
+                  selectedEnd.toLocaleString('en-US', {
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true,
+                  })
+                );
+              }
+            }}
+          />
+        </View>
+      </View>
     </View>
   );
 }
