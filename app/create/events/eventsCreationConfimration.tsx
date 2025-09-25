@@ -10,6 +10,7 @@ import {
   useEventEndTimeStore,
   useEventNameStore,
   useEventStartTimeStore,
+  useEventTagsStore,
 } from '@/stores/EventCreationForm';
 import { useUser } from '@clerk/clerk-expo';
 import { useMutation, useQuery } from 'convex/react';
@@ -36,18 +37,30 @@ export default function EventsCreationConfimrationPage() {
   const { user } = useUser();
   const currentUser = useQuery(api.users.currentUser);
 
+  const eventDate = useEventDateStore((state) => state.eventDate);
   const eventName = useEventNameStore((state) => state.eventName);
   const eventStartTime = useEventStartTimeStore((state) => state.eventStartTime);
   const eventEndTime = useEventEndTimeStore((state) => state.eventEndTime);
   const eventContactPerson = useEventContactPersonStore((state) => state.eventContactPerson);
   const eventContactEmail = useEventContactEmailStore((state) => state.eventContactEmail);
   const eventContactPhone = useEventContactPhoneStore((state) => state.eventContactPhone);
-  const eventDate = useEventDateStore((state) => state.eventDate);
+  const eventTags = useEventTagsStore((state) => state.eventTags);
   const createEvent = useMutation(api.eventCreation.addEvent);
-  const schoolEventTags = ['tag1', 'tag2', 'tag3'];
 
-  const handleFormSubmit = () => {
-    if (!user) return;
+  const submitEventForm = () => {
+    if (
+      !user ||
+      !eventDate ||
+      !eventName ||
+      !eventStartTime ||
+      !eventEndTime ||
+      !eventContactPerson ||
+      !eventContactEmail ||
+      !eventContactPhone ||
+      !eventTags
+    )
+      return;
+
     const formData: EventCreationFormData = {
       eventName,
       eventDate,
@@ -55,14 +68,13 @@ export default function EventsCreationConfimrationPage() {
       eventEndTime,
       eventContactPerson,
       eventContactEmail,
+      eventTags,
       eventContactPhone,
       eventSchoolName: currentUser?.schoolName!,
       createdBy: currentUser?._id!,
-      eventTags: schoolEventTags,
     };
     createEvent(formData);
-    router.dismissAll();
-    router.replace('/');
+    router.push('/discover');
   };
 
   return (
@@ -76,7 +88,7 @@ export default function EventsCreationConfimrationPage() {
         <Text>📧 Contact Email: {eventContactEmail || 'Not provided'}</Text>
         <Text>📱 Contact Phone: {eventContactPhone || 'Not provided'}</Text>
       </View>
-      <Button onPress={handleFormSubmit}>
+      <Button onPress={submitEventForm}>
         <Text>Submit</Text>
       </Button>
     </View>

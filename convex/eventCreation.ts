@@ -20,6 +20,7 @@ export const addEvent = mutation({
   },
   handler: async (ctx, args) => {
     const newEventId = await ctx.db.insert('events', args);
+    console.log(args);
     return newEventId;
   },
 });
@@ -29,5 +30,18 @@ export const getAllEvents = query({
   handler: async (ctx) => {
     const schools = await ctx.db.query('events').collect();
     return schools.sort((a, b) => a.eventName.localeCompare(b.eventName));
+  },
+});
+
+export const getEventById = query({
+  args: {
+    id: v.id('events'),
+  },
+  handler: async (ctx, args) => {
+    const event = await ctx.db
+      .query('events')
+      .filter((q) => q.eq(q.field('_id'), args.id))
+      .first();
+    return event;
   },
 });
