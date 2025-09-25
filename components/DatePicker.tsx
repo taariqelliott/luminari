@@ -20,7 +20,6 @@ export default function DatePicker() {
   return (
     <View className="items-center justify-center">
       <View className="grid gap-2">
-        {/* Event Date */}
         <DateTimePicker
           testID="dateTimePicker"
           value={date}
@@ -34,7 +33,6 @@ export default function DatePicker() {
           }}
         />
 
-        {/* Start Time */}
         <View className="flex-row items-center justify-between">
           <Label htmlFor="startTime">Start Time</Label>
           <DateTimePicker
@@ -55,7 +53,6 @@ export default function DatePicker() {
           />
         </View>
 
-        {/* End Time */}
         <View className="flex-row items-center justify-between">
           <Label htmlFor="endTime">End Time</Label>
           <DateTimePicker

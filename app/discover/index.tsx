@@ -84,7 +84,6 @@ export default function DiscoverScreen() {
                   </TouchableOpacity>
                 </Link>
 
-                {/* Tags section outside of TouchableOpacity */}
                 <View className="px-4 pb-4">
                   <ScrollView
                     horizontal
