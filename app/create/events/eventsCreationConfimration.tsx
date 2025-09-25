@@ -58,7 +58,6 @@ export default function EventsCreationConfimrationPage() {
       !eventEndTime ||
       !eventContactPerson ||
       !eventContactEmail ||
-      !eventContactPhone ||
       !eventTags
     )
       return;
@@ -119,7 +118,7 @@ export default function EventsCreationConfimrationPage() {
                   <Text className="mb-0.5 text-xs font-medium text-muted-foreground">
                     {detail.label}
                   </Text>
-                  <Text className="text-sm text-foreground">{detail.value || 'Not provided'}</Text>
+                  <Text className="text-sm text-foreground">{detail.value || 'N/A'}</Text>
                 </View>
               </View>
             ))}

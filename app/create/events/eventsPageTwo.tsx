@@ -71,6 +71,7 @@ export default function EventsPageTwo() {
                           Email
                         </Label>
                         <Input
+                          autoCapitalize="none"
                           id="eventContactEmail"
                           placeholder="e.g. alex@email.com"
                           className="h-11 rounded-lg"
@@ -84,7 +85,7 @@ export default function EventsPageTwo() {
                         </Label>
                         <Input
                           id="eventContactPhone"
-                          placeholder="e.g. +1 555 987 6543"
+                          placeholder="e.g. +1 555 123 5678"
                           className="h-11 rounded-lg"
                           onChangeText={updateEventContactPhone}
                         />

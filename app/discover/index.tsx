@@ -32,7 +32,7 @@ export default function DiscoverScreen() {
       )}
 
       <ScrollView
-        contentContainerClassName="px-4 py-6"
+        contentContainerClassName="px-4 py-2"
         showsVerticalScrollIndicator={false}
         className="flex-1">
         <View className="flex-row flex-wrap justify-between gap-y-6">
@@ -41,11 +41,11 @@ export default function DiscoverScreen() {
               <View className="min-h-[240px] overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
                 <Link href={`/discover/${event._id}`} asChild>
                   <TouchableOpacity activeOpacity={0.8} className="flex-1">
-                    <View className="bg-gradient-to-br from-primary to-primary/80 p-4 pb-6">
+                    <View className="p-4 pb-0">
                       <Text className="mb-2 text-lg font-bold leading-tight" numberOfLines={2}>
                         {event.eventName}
                       </Text>
-                      <View className="self-start rounded-full bg-background/20 px-3 py-1 backdrop-blur-sm">
+                      <View className="rounded-full py-1">
                         <Text className="text-xs font-medium">{event.eventSchoolName}</Text>
                       </View>
                     </View>
@@ -60,7 +60,7 @@ export default function DiscoverScreen() {
                         </Text>
                       </View>
 
-                      <View className="mb-4 space-y-2">
+                      <View className="mb-4">
                         <View className="flex-row items-center">
                           <View className="mr-2 h-2 w-2 rounded-full bg-green-500" />
                           <Text className="mr-2 text-xs text-muted-foreground">Start:</Text>
