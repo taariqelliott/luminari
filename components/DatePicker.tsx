@@ -13,6 +13,9 @@ export default function DatePicker() {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
 
+  startTime.setHours(9, 0, 0, 0);
+  endTime.setHours(12, 0, 0, 0);
+
   const updateEventDate = useEventDateStore((state) => state.updateEventDate);
   const updateStartTime = useEventStartTimeStore((state) => state.updateEventStartTime);
   const updateEndTime = useEventEndTimeStore((state) => state.updateEventEndTime);

@@ -1,3 +1,4 @@
+import BottomTabSpacer from '@/components/BottomTabSpacer';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
@@ -6,7 +7,6 @@ import { useUser } from '@clerk/clerk-expo';
 import { useQuery } from 'convex/react';
 import { View } from 'react-native';
 import ProfileImageUploader from '../../components/ProfileImageUploader';
-import BottomTabSpacer from '@/components/BottomTabSpacer';
 
 export default function ProfileScreen() {
   const { user } = useUser();
