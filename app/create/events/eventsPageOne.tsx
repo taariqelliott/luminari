@@ -15,7 +15,6 @@ import { ArrowRight } from 'lucide-react-native';
 import {
   Keyboard,
   KeyboardAvoidingView,
-  Platform,
   ScrollView,
   TouchableWithoutFeedback,
   View,

@@ -9,46 +9,97 @@ export default function DiscoverScreen() {
   const events = useQuery(api.eventCreation.getAllEvents);
 
   return (
-    <View className="flex-1">
-      <View className="px-4">
-        <Text className="text-2xl font-semibold">Discover</Text>
+    <View className="flex-1 bg-background">
+      <View className="bg-card/50 px-6 pb-6 pt-4">
+        <Text className="text-3xl font-bold text-foreground">Discover</Text>
+        <Text className="mt-2 text-sm text-muted-foreground">
+          Find exciting events happening around you
+        </Text>
       </View>
 
-      <ScrollView contentContainerClassName="px-4 py-4" showsVerticalScrollIndicator={false}>
-        <View className="flex-row flex-wrap justify-between gap-y-4">
+      {events?.length === 0 && (
+        <View className="flex-1 items-center justify-center px-8 pb-32">
+          <View className="items-center rounded-2xl border border-border bg-card p-8 shadow-sm">
+            <View className="mb-4 h-16 w-16 items-center justify-center rounded-full bg-muted">
+              <Text className="text-2xl">📅</Text>
+            </View>
+            <Text className="mb-2 text-xl font-semibold text-foreground">No Events Yet</Text>
+            <Text className="text-center text-sm leading-5 text-muted-foreground">
+              Check back later for exciting events in your area
+            </Text>
+          </View>
+        </View>
+      )}
+
+      <ScrollView
+        contentContainerClassName="px-4 py-6"
+        showsVerticalScrollIndicator={false}
+        className="flex-1">
+        <View className="flex-row flex-wrap justify-between gap-y-6">
           {events?.map((event) => (
-            <Link key={event._id} href={`/discover/${event._id}`} asChild>
-              <TouchableOpacity className="w-[48%]">
-                <View className="h-72 rounded-2xl border border-card-foreground bg-primary p-4 shadow-sm">
-                  <Text className="text-lg font-bold text-primary-foreground">
-                    {event.eventName}
-                  </Text>
-                  <Text className="text-sm text-card">{event.eventSchoolName}</Text>
+            <View key={event._id} className="w-[48%]">
+              <View className="min-h-[240px] overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
+                <Link href={`/discover/${event._id}`} asChild>
+                  <TouchableOpacity activeOpacity={0.8} className="flex-1">
+                    <View className="bg-gradient-to-br from-primary to-primary/80 p-4 pb-6">
+                      <Text className="mb-2 text-lg font-bold leading-tight" numberOfLines={2}>
+                        {event.eventName}
+                      </Text>
+                      <View className="self-start rounded-full bg-background/20 px-3 py-1 backdrop-blur-sm">
+                        <Text className="text-xs font-medium">{event.eventSchoolName}</Text>
+                      </View>
+                    </View>
 
-                  <View className="mt-3">
-                    <Text className="text-sm text-secondary-foreground">
-                      {event.eventContactPerson}
-                    </Text>
-                    <Text className="text-sm text-secondary-foreground">
-                      {event.eventContactEmail}
-                    </Text>
-                  </View>
+                    <View className="flex-1 p-4 pb-2">
+                      <View className="mb-4">
+                        <Text className="mb-1 text-sm font-semibold text-foreground">
+                          {event.eventContactPerson}
+                        </Text>
+                        <Text className="text-xs text-muted-foreground">
+                          {event.eventContactEmail}
+                        </Text>
+                      </View>
 
-                  <View className="mt-3">
-                    <Text className="text-sm text-accent-foreground">
-                      Start: {event.eventStartTime}
-                    </Text>
-                    <Text className="text-sm text-accent-foreground">
-                      End: {event.eventEndTime}
-                    </Text>
-                  </View>
+                      <View className="mb-4 space-y-2">
+                        <View className="flex-row items-center">
+                          <View className="mr-2 h-2 w-2 rounded-full bg-green-500" />
+                          <Text className="mr-2 text-xs text-muted-foreground">Start:</Text>
+                          <Text
+                            className="flex-1 text-xs font-medium text-foreground"
+                            numberOfLines={1}>
+                            {event.eventStartTime}
+                          </Text>
+                        </View>
+                        <View className="flex-row items-center">
+                          <View className="mr-2 h-2 w-2 rounded-full bg-red-500" />
+                          <Text className="mr-2 text-xs text-muted-foreground">End:</Text>
+                          <Text
+                            className="flex-1 text-xs font-medium text-foreground"
+                            numberOfLines={1}>
+                            {event.eventEndTime}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                </Link>
 
-                  <View className="mt-auto">
-                    <Text className="text-xs text-card">{event.eventTags}</Text>
-                  </View>
+                {/* Tags section outside of TouchableOpacity */}
+                <View className="px-4 pb-4">
+                  <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    className={`w-full rounded-md ${event.eventTags.length > 0 && 'bg-primary/10'} px-2 py-1`}
+                    contentContainerClassName="flex-row gap-x-2">
+                    {event.eventTags.map((tag) => (
+                      <Text className="text-xs font-medium text-primary" key={tag}>
+                        #{tag}
+                      </Text>
+                    ))}
+                  </ScrollView>
                 </View>
-              </TouchableOpacity>
-            </Link>
+              </View>
+            </View>
           ))}
         </View>
       </ScrollView>

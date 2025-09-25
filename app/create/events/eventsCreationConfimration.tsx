@@ -18,6 +18,7 @@ import { useMutation, useQuery } from 'convex/react';
 import { router } from 'expo-router';
 import { View } from 'react-native';
 import z from 'zod';
+import { useNavigation, CommonActions, StackActions } from '@react-navigation/native';
 
 export const eventCreationSchema = z.object({
   eventName: z.string(),
@@ -47,6 +48,7 @@ export default function EventsCreationConfimrationPage() {
   const eventContactPhone = useEventContactPhoneStore((state) => state.eventContactPhone);
   const eventTags = useEventTagsStore((state) => state.eventTags);
   const createEvent = useMutation(api.eventCreation.addEvent);
+  const navigation = useNavigation();
 
   const submitEventForm = () => {
     if (
@@ -69,13 +71,14 @@ export default function EventsCreationConfimrationPage() {
       eventEndTime,
       eventContactPerson,
       eventContactEmail,
-      eventTags,
+      eventTags: ['tag1', 'tag2', 'tag3', 'tag4', 'tag5', 'tag6'],
       eventContactPhone,
       eventSchoolName: currentUser?.schoolName!,
       createdBy: currentUser?._id!,
     };
     createEvent(formData);
-    router.push('/discover');
+    navigation.dispatch(StackActions.popToTop());
+    navigation.dispatch(CommonActions.navigate('discover'));
   };
 
   return (
