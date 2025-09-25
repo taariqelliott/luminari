@@ -1,3 +1,4 @@
+import BottomTabSpacer from '@/components/BottomTabSpacer';
 import DeleteUserButton from '@/components/DeleteUserButton';
 import { SignOutButton } from '@/components/SignOutButton';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -27,6 +28,7 @@ export default function Settings() {
           </View>
         </SignedIn>
       </View>
+      <BottomTabSpacer />
     </View>
   );
 }

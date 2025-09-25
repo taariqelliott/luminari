@@ -6,6 +6,7 @@ import { useUser } from '@clerk/clerk-expo';
 import { useQuery } from 'convex/react';
 import { View } from 'react-native';
 import ProfileImageUploader from '../../components/ProfileImageUploader';
+import BottomTabSpacer from '@/components/BottomTabSpacer';
 
 export default function ProfileScreen() {
   const { user } = useUser();
@@ -54,6 +55,7 @@ export default function ProfileScreen() {
           </CardContent>
         )}
       </Card>
+      <BottomTabSpacer />
     </View>
   );
 }

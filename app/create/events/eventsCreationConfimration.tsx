@@ -1,3 +1,4 @@
+import BottomTabSpacer from '@/components/BottomTabSpacer';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
@@ -91,6 +92,7 @@ export default function EventsCreationConfimrationPage() {
       <Button onPress={submitEventForm}>
         <Text>Submit</Text>
       </Button>
+      <BottomTabSpacer />
     </View>
   );
 }

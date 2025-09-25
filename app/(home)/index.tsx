@@ -1,4 +1,5 @@
 import AuthScreen from '@/components/AuthScreen';
+import BottomTabSpacer from '@/components/BottomTabSpacer';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
@@ -26,6 +27,7 @@ export default function HomeScreen() {
     return (
       <View className="flex-1 items-center justify-center">
         <Text className="text-2xl font-bold">Luminari</Text>
+        <BottomTabSpacer />
       </View>
     );
   }
@@ -34,6 +36,7 @@ export default function HomeScreen() {
     return (
       <View className="flex-1 items-center justify-center">
         <AuthScreen />
+        <BottomTabSpacer />
       </View>
     );
   }
@@ -54,6 +57,7 @@ export default function HomeScreen() {
             <Text>Complete Onboarding</Text>
           </Button>
         </Link>
+        <BottomTabSpacer />
       </View>
     );
   }
@@ -62,6 +66,7 @@ export default function HomeScreen() {
     <View className="flex-1 items-center justify-center p-4">
       <Text className="text-xl font-bold">•Welcome To Luminari•</Text>
       <Text className="mt-2">Hello, {currentUser.username} 👋</Text>
+      <BottomTabSpacer />
     </View>
   );
 }

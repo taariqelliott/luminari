@@ -15,7 +15,13 @@ import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { useQuery } from 'convex/react';
 import { Link } from 'expo-router';
 import { ArrowRight } from 'lucide-react-native';
-import { View } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 
 export default function EventsPageTwo() {
   const currentUser = useQuery(api.users.currentUser);
@@ -34,67 +40,73 @@ export default function EventsPageTwo() {
     <>
       <SignedIn>
         {currentUser ? (
-          <View className="flex-1 items-center justify-center px-4">
-            <Card className="w-full max-w-sm rounded-2xl shadow-md">
-              <CardHeader className="pb-2">
-                <CardDescription variant="h1" className="text-center text-lg font-semibold">
-                  Event Contact Details
-                </CardDescription>
-              </CardHeader>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <KeyboardAvoidingView
+              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+              className="flex-1 items-center justify-center">
+              <View className="mx-auto w-full items-center px-4">
+                <Card className="w-full max-w-sm shadow-md">
+                  <CardHeader className="pb-2">
+                    <CardDescription variant="h1" className="text-center text-lg font-semibold">
+                      Event Contact Details
+                    </CardDescription>
+                  </CardHeader>
 
-              <CardContent className="gap-5 px-4">
-                <View className="gap-4">
-                  <View className="gap-2">
-                    <Label htmlFor="eventContactPerson" className="text-sm text-muted-foreground">
-                      Name
-                    </Label>
-                    <Input
-                      id="eventContactPerson"
-                      placeholder="e.g. Alex Johnson"
-                      className="h-11 rounded-lg"
-                      onChangeText={updateEventContactPerson}
-                    />
-                  </View>
+                  <CardContent className="gap-5 px-4">
+                    <View className="gap-4">
+                      <View className="gap-2">
+                        <Label htmlFor="eventContactPerson" className="text-sm">
+                          Name
+                        </Label>
+                        <Input
+                          id="eventContactPerson"
+                          placeholder="e.g. Alex Johnson"
+                          className="h-11 rounded-lg"
+                          onChangeText={updateEventContactPerson}
+                        />
+                      </View>
 
-                  <View className="gap-2">
-                    <Label htmlFor="eventContactEmail" className="text-sm text-muted-foreground">
-                      Email
-                    </Label>
-                    <Input
-                      id="eventContactEmail"
-                      placeholder="e.g. alex@email.com"
-                      className="h-11 rounded-lg"
-                      onChangeText={updateEventContactEmail}
-                    />
-                  </View>
+                      <View className="gap-2">
+                        <Label htmlFor="eventContactEmail" className="text-sm">
+                          Email
+                        </Label>
+                        <Input
+                          id="eventContactEmail"
+                          placeholder="e.g. alex@email.com"
+                          className="h-11 rounded-lg"
+                          onChangeText={updateEventContactEmail}
+                        />
+                      </View>
 
-                  <View className="gap-2">
-                    <Label htmlFor="eventContactPhone" className="text-sm text-muted-foreground">
-                      Phone (optional)
-                    </Label>
-                    <Input
-                      id="eventContactPhone"
-                      placeholder="e.g. +1 555 987 6543"
-                      className="h-11 rounded-lg"
-                      onChangeText={updateEventContactPhone}
-                    />
-                  </View>
-                </View>
-              </CardContent>
+                      <View className="gap-2">
+                        <Label htmlFor="eventContactPhone" className="text-sm">
+                          Phone (optional)
+                        </Label>
+                        <Input
+                          id="eventContactPhone"
+                          placeholder="e.g. +1 555 987 6543"
+                          className="h-11 rounded-lg"
+                          onChangeText={updateEventContactPhone}
+                        />
+                      </View>
+                    </View>
+                  </CardContent>
 
-              <CardFooter className="flex-col items-center gap-4 py-4">
-                <Link href="/create/events/eventsCreationConfimration" asChild>
-                  <Button className="h-12 w-12 rounded-full">
-                    <ArrowRight
-                      color={THEME.dark.cardForeground}
-                      className="rounded-full"
-                      size={24}
-                    />
-                  </Button>
-                </Link>
-              </CardFooter>
-            </Card>
-          </View>
+                  <CardFooter className="flex-col items-center gap-4 py-4">
+                    <Link href="/create/events/eventsCreationConfimration" asChild>
+                      <Button className="h-12 w-12 rounded-full">
+                        <ArrowRight
+                          color={THEME.dark.cardForeground}
+                          className="rounded-full"
+                          size={24}
+                        />
+                      </Button>
+                    </Link>
+                  </CardFooter>
+                </Card>
+              </View>
+            </KeyboardAvoidingView>
+          </TouchableWithoutFeedback>
         ) : (
           <View className="flex-1 items-center justify-center">
             <Link href="/SchoolSelectionForm" asChild>
