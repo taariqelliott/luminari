@@ -9,13 +9,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { api } from '@/convex/_generated/api';
+import { Id } from '@/convex/_generated/dataModel';
 import { useUser } from '@clerk/clerk-expo';
+import { useMutation, useQuery } from 'convex/react';
 import { router } from 'expo-router';
 import { Button } from './ui/button';
 import { Text } from './ui/text';
-import { useMutation, useQuery } from 'convex/react';
-import { api } from '@/convex/_generated/api';
-import { Id } from '@/convex/_generated/dataModel';
 
 export default function DeleteUserButton() {
   const { user } = useUser();
