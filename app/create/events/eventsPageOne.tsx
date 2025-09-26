@@ -56,14 +56,13 @@ export default function EventsPageOne() {
                         </View>
                       </View>
                     </CardContent>
-                    <CardFooter className="flex-col gap-1">
+                    <CardFooter className="mt-2 flex-col">
                       <Link href="/create/events/eventsPageTwo" asChild>
-                        <Button className="h-12 w-12 rounded-full">
-                          <ArrowRight
-                            color={THEME.dark.cardForeground}
-                            className="rounded-full"
-                            size={24}
-                          />
+                        <Button className="h-14 w-full rounded-xl bg-primary">
+                          <Text className="mr-2 text-base font-semibold text-primary-foreground">
+                            Continue
+                          </Text>
+                          <ArrowRight color={THEME.dark.primaryForeground} size={20} />
                         </Button>
                       </Link>
                     </CardFooter>

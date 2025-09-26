@@ -19,6 +19,7 @@ export default defineSchema({
     attendingEvents: v.optional(v.array(v.id('events'))),
     maybeAttendingEvents: v.optional(v.array(v.id('events'))),
   }).index('byClerkId', ['clerkId']),
+
   schools: defineTable({
     schoolName: v.string(),
     county: v.optional(v.string()),
@@ -36,14 +37,17 @@ export default defineSchema({
       )
     ),
   }).index('by_name_zip', ['schoolName', 'zip']),
+
   organizations: defineTable({
     organizationName: v.string(),
     description: v.optional(v.string()),
     schoolId: v.id('schools'),
+    schoolName: v.optional(v.string()),
     memberIds: v.optional(v.array(v.id('users'))),
     orgImgUrl: v.optional(v.string()),
     contactEmail: v.optional(v.string()),
   }),
+
   events: defineTable({
     eventName: v.string(),
     eventDate: v.string(),
@@ -54,21 +58,25 @@ export default defineSchema({
     eventContactPhone: v.optional(v.string()),
     eventOrganizationId: v.optional(v.id('organizations')),
     eventSchoolName: v.string(),
+    eventSchoolId: v.optional(v.id('schools')),
     attendingCount: v.optional(v.number()),
     maybeAttendingCount: v.optional(v.number()),
     createdBy: v.id('users'),
     eventTags: v.array(v.string()),
     eventImgUrl: v.optional(v.string()),
   }),
+
   eventRequests: defineTable({
     eventRequestName: v.string(),
-    eventRequestCreatedBy: v.id('users'),
-    eventRequestSchoolId: v.id('schools'),
+    eventRequestCreatedById: v.id('users'),
+    eventRequestCreatedBy: v.string(),
+    eventRequestSchoolId: v.optional(v.id('schools')),
+    eventRequestSchoolName: v.string(),
     eventRequestOrganizationId: v.optional(v.id('organizations')),
     eventRequestTags: v.array(v.string()),
+    eventRequestContactEmail: v.string(),
     eventRequestLikeCount: v.number(),
     likedByUsers: v.optional(v.array(v.id('users'))),
-    eventRequestContactEmail: v.optional(v.string()),
     eventRequestMessages: v.optional(
       v.array(
         v.object({
@@ -78,10 +86,9 @@ export default defineSchema({
         })
       )
     ),
-    createdAt: v.string(),
-    updatedAt: v.optional(v.string()),
     status: v.optional(v.string()),
   }),
+
   profileImages: defineTable({
     createdBy: v.id('users'),
     storageId: v.id('_storage'),
@@ -89,6 +96,7 @@ export default defineSchema({
   })
     .index('by_createdBy', ['createdBy'])
     .index('by_storageId', ['storageId']),
+
   eventImages: defineTable({
     createdBy: v.id('users'),
     eventName: v.id('events'),

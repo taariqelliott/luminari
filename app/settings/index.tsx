@@ -5,30 +5,38 @@ import ThemeToggle from '@/components/ThemeToggle';
 import { Text } from '@/components/ui/text';
 import { SignedIn } from '@clerk/clerk-expo';
 import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Settings() {
   return (
-    <View className="w-full flex-1 justify-center px-6 py-8">
-      <View className="mb-6">
-        <Text className="text-center text-3xl font-bold text-primary">Settings</Text>
-        <Text className="mt-1 text-center text-muted-foreground">Customize your preferences</Text>
-      </View>
-
-      <View className="w-full gap-2 space-y-4 rounded-2xl bg-card p-4 shadow">
-        <View className="flex-row items-center justify-center gap-2">
-          <ThemeToggle />
+    <SafeAreaView className="flex-1">
+      <View className="flex-1 bg-background">
+        <View className="px-6 pb-6 pt-4">
+          <Text className="mb-2 text-3xl font-bold text-foreground">Settings</Text>
+          <Text className="text-sm text-muted-foreground">Manage your account settings</Text>
         </View>
 
-        <SignedIn>
-          <View className="w-full items-center gap-2">
-            <View className="w-full gap-2">
-              <SignOutButton />
-              <DeleteUserButton />
+        <View className="flex-1 px-6 py-24">
+          <View className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+            <View className="mb-6">
+              <Text className="mb-4 text-lg font-semibold text-foreground">Appearance</Text>
+              <ThemeToggle />
             </View>
+
+            <SignedIn>
+              <View className="border-t border-border pt-6">
+                <Text className="mb-4 text-lg font-semibold text-foreground">Account</Text>
+                <View className="gap-2 space-y-3">
+                  <SignOutButton />
+                  <DeleteUserButton />
+                </View>
+              </View>
+            </SignedIn>
           </View>
-        </SignedIn>
+        </View>
+
+        <BottomTabSpacer />
       </View>
-      <BottomTabSpacer />
-    </View>
+    </SafeAreaView>
   );
 }

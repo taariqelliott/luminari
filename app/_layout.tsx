@@ -14,7 +14,10 @@ import { ConvexProviderWithClerk } from 'convex/react-clerk';
 import { withLayoutContext } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'nativewind';
+import { LogBox } from 'react-native';
 export { ErrorBoundary } from 'expo-router';
+
+LogBox.ignoreLogs(['Open debugger to view warnings.']);
 
 const convexUrl = process.env.EXPO_PUBLIC_CONVEX_URL;
 const convex = new ConvexReactClient(convexUrl!);
