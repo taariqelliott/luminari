@@ -41,3 +41,11 @@ export const currentUser = query({
     return users[0] ?? null;
   },
 });
+
+export const deleteConvexUser = mutation({
+  args: { id: v.id('users') },
+  handler: async (ctx, args) => {
+    const deletedUser = await ctx.db.delete(args.id);
+    return deletedUser;
+  },
+});

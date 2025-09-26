@@ -1,3 +1,4 @@
+import BottomTabSpacer from '@/components/BottomTabSpacer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
@@ -113,11 +114,12 @@ export default function UserDetailConfirmation() {
               <Text>Back</Text>
             </Button>
             <Button onPress={handleFormSubmit} className="flex-1">
-              <Text>Confirm & Continue</Text>
+              <Text>Confirm</Text>
             </Button>
           </View>
         </CardFooter>
       </Card>
+      <BottomTabSpacer />
     </View>
   );
 }

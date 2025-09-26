@@ -1,3 +1,4 @@
+import BottomTabSpacer from '@/components/BottomTabSpacer';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -109,6 +110,7 @@ export default function SchoolSelectionForm() {
             </CardFooter>
           </Card>
         </View>
+        <BottomTabSpacer />
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );

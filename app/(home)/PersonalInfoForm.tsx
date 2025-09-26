@@ -1,3 +1,4 @@
+import BottomTabSpacer from '@/components/BottomTabSpacer';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -141,6 +142,7 @@ export default function PersonalInfoForm() {
             </CardFooter>
           </Card>
         </View>
+        <BottomTabSpacer />
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );

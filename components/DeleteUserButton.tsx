@@ -9,18 +9,25 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { useUser } from '@clerk/clerk-react';
+import { useUser } from '@clerk/clerk-expo';
 import { router } from 'expo-router';
 import { Button } from './ui/button';
 import { Text } from './ui/text';
+import { useMutation, useQuery } from 'convex/react';
+import { api } from '@/convex/_generated/api';
+import { Id } from '@/convex/_generated/dataModel';
 
 export default function DeleteUserButton() {
   const { user } = useUser();
+  const currentUser = useQuery(api.users.currentUser);
+  const currentUserId = currentUser?._id;
+  const deleteUser = useMutation(api.users.deleteConvexUser);
 
   const handleDelete = async () => {
     if (!user) return;
 
     try {
+      await deleteUser({ id: currentUserId as Id<'users'> });
       await user.delete();
       router.push('/');
     } catch (error) {
