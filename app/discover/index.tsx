@@ -38,7 +38,7 @@ export default function DiscoverScreen() {
         <View className="flex-row flex-wrap justify-between gap-y-6">
           {events?.map((event) => (
             <View key={event._id} className="w-[48%]">
-              <View className="min-h-[240px] overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
+              <View className="min-h-[290px] overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
                 <Link href={`/discover/${event._id}`} asChild>
                   <TouchableOpacity activeOpacity={0.8} className="flex-1">
                     <View className="p-4 pb-0">
@@ -50,7 +50,7 @@ export default function DiscoverScreen() {
                       </View>
                     </View>
 
-                    <View className="flex-1 p-4 pb-2">
+                    <View className="flex-1 p-4">
                       <View className="mb-4">
                         <Text className="mb-1 text-sm font-semibold text-foreground">
                           {event.eventContactPerson}
@@ -60,7 +60,7 @@ export default function DiscoverScreen() {
                         </Text>
                       </View>
 
-                      <View className="mb-4">
+                      <View>
                         <View className="flex-row items-center">
                           <View className="mr-2 h-2 w-2 rounded-full bg-green-500" />
                           <Text className="mr-2 text-xs text-muted-foreground">Start:</Text>
