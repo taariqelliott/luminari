@@ -22,7 +22,7 @@ export default function CreateLayout() {
         }}
       />
       <Stack.Screen
-        name="events/eventsCreationConfimration"
+        name="events/eventsCreationConfirmation"
         options={{
           title: 'Review & Publish',
           headerShadowVisible: false,

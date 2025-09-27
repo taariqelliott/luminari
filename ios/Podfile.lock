@@ -1393,6 +1393,28 @@ PODS:
     - react-native-config/App (= 1.5.9)
   - react-native-config/App (1.5.9):
     - React-Core
+  - react-native-mmkv (3.3.3):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
   - react-native-safe-area-context (5.6.1):
     - hermes-engine
     - RCTRequired
@@ -2136,6 +2158,7 @@ DEPENDENCIES:
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
   - react-native-bottom-tabs (from `../node_modules/react-native-bottom-tabs`)
   - react-native-config (from `../node_modules/react-native-config`)
+  - react-native-mmkv (from `../node_modules/react-native-mmkv`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-oscompat (from `../node_modules/react-native/ReactCommon/oscompat`)
@@ -2293,6 +2316,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-bottom-tabs"
   react-native-config:
     :path: "../node_modules/react-native-config"
+  react-native-mmkv:
+    :path: "../node_modules/react-native-mmkv"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-NativeModulesApple:
@@ -2426,6 +2451,7 @@ SPEC CHECKSUMS:
   React-microtasksnativemodule: 76142165bc0f6ea98eae79e06c071c1e3aa3ae85
   react-native-bottom-tabs: 22f8b0167c75ba041323e3472110760142735096
   react-native-config: d08b60865268872495a43e211059b4606131fe01
+  react-native-mmkv: 822021585d0c74d1f3650da559a3bb1d7afef16b
   react-native-safe-area-context: 8dc43e60dd67fd2be098486fd8195e143fb47c6f
   React-NativeModulesApple: a9464983ccc0f66f45e93558671f60fc7536e438
   React-oscompat: 73db7dbc80edef36a9d6ed3c6c4e1724ead4236d

@@ -7,7 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "luminari",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -50,13 +49,18 @@
         "expo-build-properties",
         {
           "ios": {
-            "useFrameworks": "static"
+            "useFrameworks": "static",
+            "newArchEnabled": true
+          },
+          "android": {
+            "newArchEnabled": true
           }
         }
       ]
     ],
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "turboModules": true
     },
     "extra": {
       "router": {},
