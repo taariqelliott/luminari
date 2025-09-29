@@ -56,23 +56,29 @@ export default function Index() {
                 <ScrollView className="max-h-[80vh]">
                   <CardContent className="gap-4">
                     <View className="gap-1">
-                      <Label htmlFor="eventRequestName">Request Name</Label>
+                      <Label htmlFor="eventRequestName">Request Name *</Label>
                       <Input
                         id="eventRequestName"
                         placeholder="e.g. Summer Festival 2025"
                         value={eventRequestName}
                         onChangeText={updateEventRequestName}
                       />
+                      <Text className="text-xs text-muted-foreground">
+                        A short, clear name for your event request
+                      </Text>
                     </View>
 
                     <View className="gap-1">
-                      <Label htmlFor="eventRequestDescription">Description</Label>
+                      <Label htmlFor="eventRequestDescription">Description *</Label>
                       <Input
                         id="eventRequestDescription"
                         placeholder="Briefly describe the event"
                         value={eventRequestDescription}
                         onChangeText={updateEventRequestDescription}
                       />
+                      <Text className="text-xs text-muted-foreground">
+                        Provide a short summary of the event idea
+                      </Text>
                     </View>
 
                     <View className="gap-1">
@@ -86,10 +92,13 @@ export default function Index() {
                           updateEventRequestTags(txt.split(',').map((t) => t.trim()))
                         }
                       />
+                      <Text className="text-xs text-muted-foreground">
+                        Use keywords to help categorize this request
+                      </Text>
                     </View>
 
                     <View className="gap-1">
-                      <Label htmlFor="eventRequestContactEmail">Contact Email</Label>
+                      <Label htmlFor="eventRequestContactEmail">Contact Email *</Label>
                       <Input
                         id="eventRequestContactEmail"
                         placeholder="you@example.com"
@@ -97,6 +106,9 @@ export default function Index() {
                         onChangeText={updateEventRequestContactEmail}
                         keyboardType="email-address"
                       />
+                      <Text className="text-xs text-muted-foreground">
+                        People can email you with questions about this request
+                      </Text>
                     </View>
                   </CardContent>
 
@@ -119,7 +131,7 @@ export default function Index() {
 
       <SignedOut>
         <View className="flex-1 items-center justify-center">
-          <Text>Welcome! Please sign in to start creating events</Text>
+          <Text>Welcome! Please sign in to start creating requests</Text>
           <Link href="/(home)" asChild>
             <Button>
               <Text>Get Started</Text>
