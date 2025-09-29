@@ -104,7 +104,7 @@ export default function Index() {
                     <Link href="/create/requests/eventRequestConfirmation" asChild>
                       <Button className="h-14 w-full flex-row items-center justify-center rounded-xl bg-primary">
                         <Text className="mr-2 text-base font-semibold text-primary-foreground">
-                          Continue
+                          Continue to Review
                         </Text>
                         <ArrowRight color={THEME.dark.primaryForeground} size={20} />
                       </Button>

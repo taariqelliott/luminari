@@ -1,3 +1,5 @@
+import BottomTabSpacer from '@/components/BottomTabSpacer';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
@@ -103,9 +105,11 @@ export default function EventsCreationConfimrationPage() {
               {eventName || 'Event Name'}
             </Text>
             <View className="self-start rounded-full bg-background/20 px-2 py-1">
-              <Text className="text-xs font-medium">
-                {currentUser?.schoolName || 'School Name'}
-              </Text>
+              <Badge>
+                <Text className="text-xs font-medium">
+                  {currentUser?.schoolName || 'School Name'}
+                </Text>
+              </Badge>
             </View>
           </View>
 
