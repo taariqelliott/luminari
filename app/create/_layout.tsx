@@ -33,7 +33,13 @@ export default function CreateLayout() {
         options={{
           title: 'Requests',
           headerShadowVisible: false,
-          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="requests/eventRequestConfirmation"
+        options={{
+          title: 'Review & Confirm',
+          headerShadowVisible: false,
         }}
       />
     </Stack>

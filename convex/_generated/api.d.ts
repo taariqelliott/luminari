@@ -18,6 +18,7 @@ import type * as crons from "../crons.js";
 import type * as eventCreation from "../eventCreation.js";
 import type * as http from "../http.js";
 import type * as profileImages from "../profileImages.js";
+import type * as requestCreation from "../requestCreation.js";
 import type * as schools from "../schools.js";
 import type * as users from "../users.js";
 
@@ -35,6 +36,7 @@ declare const fullApi: ApiFromModules<{
   eventCreation: typeof eventCreation;
   http: typeof http;
   profileImages: typeof profileImages;
+  requestCreation: typeof requestCreation;
   schools: typeof schools;
   users: typeof users;
 }>;

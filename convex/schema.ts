@@ -70,12 +70,13 @@ export default defineSchema({
     eventRequestName: v.string(),
     eventRequestCreatedById: v.id('users'),
     eventRequestCreatedBy: v.string(),
+    eventRequestDescription: v.string(),
     eventRequestSchoolId: v.optional(v.id('schools')),
     eventRequestSchoolName: v.string(),
     eventRequestOrganizationId: v.optional(v.id('organizations')),
     eventRequestTags: v.array(v.string()),
     eventRequestContactEmail: v.string(),
-    eventRequestLikeCount: v.number(),
+    eventRequestLikeCount: v.optional(v.number()),
     likedByUsers: v.optional(v.array(v.id('users'))),
     eventRequestMessages: v.optional(
       v.array(
@@ -86,7 +87,7 @@ export default defineSchema({
         })
       )
     ),
-    status: v.optional(v.string()),
+    eventRequestStatus: v.optional(v.string()),
   }),
 
   profileImages: defineTable({

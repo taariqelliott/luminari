@@ -42,6 +42,10 @@ type EventRequestStatus = {
   eventRequestStatus: string;
 };
 
+type EventRequestDescription = {
+  eventRequestDescription: string;
+};
+
 // Actions
 type EventRequestNameAction = {
   updateEventRequestName: (eventRequestName: EventRequestName['eventRequestName']) => void;
@@ -95,6 +99,12 @@ type EventRequestLikeCountAction = {
 
 type EventRequestStatusAction = {
   updateEventRequestStatus: (eventRequestStatus: EventRequestStatus['eventRequestStatus']) => void;
+};
+
+type EventRequestDescriptionAction = {
+  updateEventRequestDescription: (
+    eventRequestDescription: EventRequestDescription['eventRequestDescription']
+  ) => void;
 };
 
 // Stores
@@ -170,3 +180,11 @@ export const useEventRequestStatusStore = create<EventRequestStatus & EventReque
     updateEventRequestStatus: (eventRequestStatus) => set(() => ({ eventRequestStatus })),
   })
 );
+
+export const useEventRequestDescriptionStore = create<
+  EventRequestDescription & EventRequestDescriptionAction
+>((set) => ({
+  eventRequestDescription: '',
+  updateEventRequestDescription: (eventRequestDescription) =>
+    set(() => ({ eventRequestDescription })),
+}));
