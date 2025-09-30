@@ -100,7 +100,6 @@ export default function EventRequestConfirmation() {
 
       <View className="px-6 pb-6">
         <View className="mb-6 rounded-2xl border border-border bg-card shadow">
-          {/* Header with gradient and badge */}
           <View className="bg-gradient-to-r from-primary to-primary/80 p-4">
             <Text className="mb-2 text-lg font-bold" numberOfLines={2}>
               {eventRequestName || 'Request Name'}
@@ -114,7 +113,6 @@ export default function EventRequestConfirmation() {
             </View>
           </View>
 
-          {/* Request Details */}
           <View className="space-y-3 p-4">
             {requestDetails.map((detail, index) => (
               <View key={index} className="flex-row items-center">
@@ -128,7 +126,6 @@ export default function EventRequestConfirmation() {
               </View>
             ))}
 
-            {/* Tags Section */}
             {eventRequestTags && eventRequestTags.length > 0 && (
               <View className="mt-3 border-t border-border pt-3">
                 <Text className="mb-2 text-xs font-medium text-muted-foreground">Tags</Text>
@@ -144,7 +141,6 @@ export default function EventRequestConfirmation() {
           </View>
         </View>
 
-        {/* Missing Info Warning */}
         <View className="mb-6">
           {(!eventRequestName ||
             !eventRequestCreatedBy ||
@@ -162,7 +158,6 @@ export default function EventRequestConfirmation() {
           )}
         </View>
 
-        {/* Action Buttons */}
         <View className="gap-2 space-y-3">
           <Button
             onPress={submitRequest}
