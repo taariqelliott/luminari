@@ -70,7 +70,7 @@ export default function EventsCreationConfimrationPage() {
       eventEndTime,
       eventContactPerson,
       eventContactEmail,
-      eventTags: ['tag1', 'tag2', 'tag3', 'tag4', 'tag5', 'tag6'],
+      eventTags,
       eventContactPhone,
       eventSchoolName: currentUser?.schoolName!,
       createdBy: currentUser?._id!,
@@ -99,7 +99,7 @@ export default function EventsCreationConfimrationPage() {
       </View>
 
       <View className="px-6 pb-6">
-        <View className="mb-6 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <View className="mb-6 rounded-2xl border border-border bg-card shadow">
           <View className="bg-gradient-to-r from-primary to-primary/80 p-4">
             <Text className="mb-2 text-lg font-bold" numberOfLines={2}>
               {eventName || 'Event Name'}

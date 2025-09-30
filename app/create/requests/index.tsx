@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/co
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Text } from '@/components/ui/text';
+import { api } from '@/convex/_generated/api';
 import { THEME } from '@/lib/theme';
 import {
   useEventRequestContactEmailStore,
@@ -12,18 +13,22 @@ import {
   useEventRequestTagsStore,
 } from '@/stores/EventRequestForm';
 import { SignedIn, SignedOut } from '@clerk/clerk-expo';
+import { useQuery } from 'convex/react';
 import { Link } from 'expo-router';
 import { ArrowRight } from 'lucide-react-native';
 import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
+  Pressable,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { useState } from 'react';
 
 export default function Index() {
+  const currentUser = useQuery(api.users.currentUser);
+
   const eventRequestName = useEventRequestNameStore((s) => s.eventRequestName);
   const eventRequestDescription = useEventRequestDescriptionStore((s) => s.eventRequestDescription);
   const eventRequestTags = useEventRequestTagsStore((s) => s.eventRequestTags);
@@ -40,20 +45,25 @@ export default function Index() {
     (s) => s.updateEventRequestContactEmail
   );
 
+  const [currentTag, setCurrentTag] = useState('');
+
   return (
     <>
       <SignedIn>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-          <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            className="flex-1 items-center justify-center">
-            <View className="w-full max-w-sm">
-              <Card className="rounded-2xl shadow-md">
-                <CardHeader>
-                  <CardDescription variant="h1">Let&apos;s create a request!</CardDescription>
-                </CardHeader>
+        {currentUser ? (
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <KeyboardAvoidingView
+              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+              className="flex-1 items-center justify-center">
+              <View className="w-full max-w-sm">
+                <Card className="rounded-2xl shadow-md">
+                  <CardHeader>
+                    <Text className="text-2xl font-bold text-foreground">Create a Request</Text>
+                    <CardDescription>
+                      Share your idea so others can discover, support, or collaborate with you.
+                    </CardDescription>
+                  </CardHeader>
 
-                <ScrollView className="max-h-[80vh]">
                   <CardContent className="gap-4">
                     <View className="gap-1">
                       <Label htmlFor="eventRequestName">Request Name *</Label>
@@ -64,7 +74,7 @@ export default function Index() {
                         onChangeText={updateEventRequestName}
                       />
                       <Text className="text-xs text-muted-foreground">
-                        A short, clear name for your event request
+                        A short, clear title that describes your request
                       </Text>
                     </View>
 
@@ -72,42 +82,58 @@ export default function Index() {
                       <Label htmlFor="eventRequestDescription">Description *</Label>
                       <Input
                         id="eventRequestDescription"
-                        placeholder="Briefly describe the event"
+                        placeholder="Briefly describe what this request is about"
                         value={eventRequestDescription}
                         onChangeText={updateEventRequestDescription}
                       />
                       <Text className="text-xs text-muted-foreground">
-                        Provide a short summary of the event idea
+                        Provide a summary so others understand your idea
                       </Text>
                     </View>
 
                     <View className="gap-1">
-                      <Label htmlFor="eventRequestTags">Tags (comma separated)</Label>
+                      <Label htmlFor="eventRequestTags">Tags</Label>
                       <Input
                         autoCapitalize="none"
                         id="eventRequestTags"
-                        placeholder="music, food, community"
-                        value={eventRequestTags.join(', ')}
-                        onChangeText={(txt) =>
-                          updateEventRequestTags(txt.split(',').map((t) => t.trim()))
-                        }
+                        placeholder="Type a tag and press enter"
+                        value={currentTag}
+                        onChangeText={setCurrentTag}
+                        onSubmitEditing={() => {
+                          const newTag = currentTag.trim();
+                          if (newTag && !eventRequestTags.includes(newTag)) {
+                            updateEventRequestTags([...eventRequestTags, newTag]);
+                          }
+                          setCurrentTag('');
+                        }}
                       />
-                      <Text className="text-xs text-muted-foreground">
-                        Use keywords to help categorize this request
-                      </Text>
+                      <View className="mt-2 flex-row flex-wrap gap-1.5">
+                        {eventRequestTags.map((tag, index) => (
+                          <Pressable
+                            key={index}
+                            onPress={() => {
+                              const newTags = eventRequestTags.filter((_, i) => i !== index);
+                              updateEventRequestTags(newTags);
+                            }}>
+                            <View className="rounded-full bg-primary/10 px-2 py-1">
+                              <Text className="text-xs text-primary">#{tag} ×</Text>
+                            </View>
+                          </Pressable>
+                        ))}
+                      </View>
                     </View>
 
                     <View className="gap-1">
                       <Label htmlFor="eventRequestContactEmail">Contact Email *</Label>
                       <Input
                         id="eventRequestContactEmail"
-                        placeholder="you@example.com"
+                        placeholder="yourname@example.com"
                         value={eventRequestContactEmail}
                         onChangeText={updateEventRequestContactEmail}
                         keyboardType="email-address"
                       />
                       <Text className="text-xs text-muted-foreground">
-                        People can email you with questions about this request
+                        Others can contact you with questions about your request
                       </Text>
                     </View>
                   </CardContent>
@@ -122,11 +148,29 @@ export default function Index() {
                       </Button>
                     </Link>
                   </CardFooter>
-                </ScrollView>
-              </Card>
-            </View>
-          </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
+                </Card>
+              </View>
+            </KeyboardAvoidingView>
+          </TouchableWithoutFeedback>
+        ) : (
+          <View className="flex-1 items-center justify-center">
+            <Card className="rounded-2xl p-6 shadow-md">
+              <CardHeader>
+                <Text className="text-xl font-bold text-foreground">Complete Profile Setup</Text>
+                <CardDescription>
+                  You’ll need to finish setting up your account before creating requests.
+                </CardDescription>
+              </CardHeader>
+              <CardFooter className="mt-4">
+                <Link href="/(home)" asChild>
+                  <Button>
+                    <Text>Go to Home</Text>
+                  </Button>
+                </Link>
+              </CardFooter>
+            </Card>
+          </View>
+        )}
       </SignedIn>
 
       <SignedOut>
