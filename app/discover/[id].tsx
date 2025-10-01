@@ -19,7 +19,7 @@ export default function EventsPage() {
 
   return (
     <View className="flex-1 px-4 py-6">
-      <Text className="mb-4 text-2xl font-bold">Events Page {currentEvent?.eventName}</Text>
+      <Text className="mb-4 text-2xl font-bold">{currentEvent?.eventName}</Text>
       {currentEvent &&
         Object.entries(currentEvent).map(([key, value]) => (
           <View

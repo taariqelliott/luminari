@@ -1,7 +1,7 @@
 import { Id } from '@/convex/_generated/dataModel';
 import { create } from 'zustand';
 
-//States
+// States
 type EventNameState = {
   eventName: string;
 };

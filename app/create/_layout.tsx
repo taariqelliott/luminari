@@ -31,7 +31,7 @@ export default function CreateLayout() {
       <Stack.Screen
         name="requests/index"
         options={{
-          title: 'Requests',
+          title: 'Request',
           headerShadowVisible: false,
         }}
       />
