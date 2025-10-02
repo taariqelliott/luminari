@@ -8,9 +8,9 @@ import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function EventRequestDetailsPage() {
-  const { id } = useLocalSearchParams();
+  const { requestId } = useLocalSearchParams();
   const currentEvent = useQuery(api.requestCreation.getEventRequestById, {
-    id: id as Id<'eventRequests'>,
+    id: requestId as Id<'eventRequests'>,
   });
   const navigation = useNavigation();
 

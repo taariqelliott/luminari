@@ -19,7 +19,7 @@ export default function DiscoverScreen() {
           </Text>
         </View>
 
-        <Link href="/discover/all-requests" asChild>
+        <Link href="/discover/requests" asChild>
           <Button>
             <Text>Event Requests</Text>
           </Button>

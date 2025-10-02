@@ -40,7 +40,7 @@ export default function DiscoverRequestsScreen() {
             {requests?.map((request) => (
               <View key={request._id} className="w-[48%]">
                 <View className="min-h-[290px] rounded-2xl border border-border bg-card shadow-sm">
-                  <Link href={`/discover/all-requests/${request._id}`} asChild>
+                  <Link href={`/discover/requests/${request._id}`} asChild>
                     <TouchableOpacity activeOpacity={0.8} className="flex-1">
                       <View className="p-4 pb-0">
                         <Text className="mb-2 text-lg font-bold leading-tight" numberOfLines={2}>

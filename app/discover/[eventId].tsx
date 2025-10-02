@@ -7,8 +7,8 @@ import { useEffect } from 'react';
 import { View } from 'react-native';
 
 export default function EventsPage() {
-  const { id } = useLocalSearchParams();
-  const currentEvent = useQuery(api.eventCreation.getEventById, { id: id as Id<'events'> });
+  const { eventId } = useLocalSearchParams();
+  const currentEvent = useQuery(api.eventCreation.getEventById, { id: eventId as Id<'events'> });
   const navigation = useNavigation();
 
   useEffect(() => {
