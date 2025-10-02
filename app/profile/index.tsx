@@ -18,7 +18,7 @@ export default function ProfileScreen() {
         <Text className="text-3xl font-bold text-foreground">Profile</Text>
         <Text className="text-sm text-muted-foreground">Manage your account settings</Text>
       </View>
-      <View className="items-center justify-center px-4 pt-16">
+      <View className="items-center justify-center px-4 pt-16 shadow-sm">
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold">

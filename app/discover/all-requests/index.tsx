@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
 import { useQuery } from 'convex/react';
@@ -6,34 +5,28 @@ import { Link } from 'expo-router';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function DiscoverScreen() {
-  const events = useQuery(api.eventCreation.getAllEvents);
+export default function DiscoverRequestsScreen() {
+  const requests = useQuery(api.requestCreation.getAllEventRequests);
 
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1 bg-background">
         <View className="bg-card/50 px-6 pb-2 pt-4">
-          <Text className="text-3xl font-bold text-foreground">Discover</Text>
+          <Text className="text-3xl font-bold text-foreground">Event Requests</Text>
           <Text className="mt-2 text-sm text-muted-foreground">
-            Find exciting events happening around you
+            Browse requests for upcoming events
           </Text>
         </View>
 
-        <Link href="/discover/all-requests" asChild>
-          <Button>
-            <Text>Event Requests</Text>
-          </Button>
-        </Link>
-
-        {events?.length === 0 && (
+        {requests?.length === 0 && (
           <View className="flex-1 items-center justify-center px-8 pb-32">
             <View className="items-center rounded-2xl border border-border bg-card p-8 shadow-sm">
               <View className="mb-4 h-16 w-16 items-center justify-center rounded-full bg-muted">
                 <Text className="text-2xl">📅</Text>
               </View>
-              <Text className="mb-2 text-xl font-semibold text-foreground">No Events Yet</Text>
+              <Text className="mb-2 text-xl font-semibold text-foreground">No Requests Yet</Text>
               <Text className="text-center text-sm leading-5 text-muted-foreground">
-                Check back later for exciting events in your area
+                Check back later for event requests in your area
               </Text>
             </View>
           </View>
@@ -44,47 +37,49 @@ export default function DiscoverScreen() {
           showsVerticalScrollIndicator={false}
           className="flex-1">
           <View className="flex-row flex-wrap justify-between gap-y-2">
-            {events?.map((event) => (
-              <View key={event._id} className="w-[48%]">
+            {requests?.map((request) => (
+              <View key={request._id} className="w-[48%]">
                 <View className="min-h-[290px] rounded-2xl border border-border bg-card shadow-sm">
-                  <Link href={`/discover/${event._id}`} asChild>
+                  <Link href={`/discover/all-requests/${request._id}`} asChild>
                     <TouchableOpacity activeOpacity={0.8} className="flex-1">
                       <View className="p-4 pb-0">
                         <Text className="mb-2 text-lg font-bold leading-tight" numberOfLines={2}>
-                          {event.eventName}
+                          {request.eventRequestName}
                         </Text>
                         <View className="rounded-full py-1">
-                          <Text className="text-xs font-medium">{event.eventSchoolName}</Text>
+                          <Text className="text-xs font-medium">
+                            {request.eventRequestSchoolName}
+                          </Text>
                         </View>
                       </View>
 
                       <View className="flex-1 p-4">
                         <View className="mb-4">
                           <Text className="mb-1 text-sm font-semibold text-foreground">
-                            {event.eventContactPerson}
+                            {request.eventRequestCreatedBy}
                           </Text>
                           <Text className="text-xs text-muted-foreground">
-                            {event.eventContactEmail}
+                            {request.eventRequestContactEmail}
                           </Text>
                         </View>
 
                         <View>
                           <View className="flex-row items-center">
                             <View className="mr-2 h-2 w-2 rounded-full bg-green-500" />
-                            <Text className="mr-2 text-xs text-muted-foreground">Start:</Text>
+                            <Text className="mr-2 text-xs text-muted-foreground">Status:</Text>
                             <Text
                               className="flex-1 text-xs font-medium text-foreground"
                               numberOfLines={1}>
-                              {event.eventStartTime}
+                              {request.eventRequestStatus}
                             </Text>
                           </View>
                           <View className="flex-row items-center">
-                            <View className="mr-2 h-2 w-2 rounded-full bg-red-500" />
-                            <Text className="mr-2 text-xs text-muted-foreground">End:</Text>
+                            <View className="mr-2 h-2 w-2 rounded-full bg-blue-500" />
+                            <Text className="mr-2 text-xs text-muted-foreground">School ID:</Text>
                             <Text
                               className="flex-1 text-xs font-medium text-foreground"
                               numberOfLines={1}>
-                              {event.eventEndTime}
+                              {request.eventRequestDescription}
                             </Text>
                           </View>
                         </View>
@@ -96,9 +91,11 @@ export default function DiscoverScreen() {
                     <ScrollView
                       horizontal
                       showsHorizontalScrollIndicator={false}
-                      className={`w-full rounded-md ${event.eventTags.length > 0 && 'bg-primary/10'} px-2 py-1`}
+                      className={`w-full rounded-md ${
+                        request.eventRequestTags.length > 0 && 'bg-primary/10'
+                      } px-2 py-1`}
                       contentContainerClassName="flex-row gap-x-2">
-                      {event.eventTags.map((tag) => (
+                      {request.eventRequestTags.map((tag) => (
                         <Text className="text-xs font-medium text-primary" key={tag}>
                           #{tag}
                         </Text>
