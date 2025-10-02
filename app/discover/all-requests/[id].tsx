@@ -33,10 +33,22 @@ export default function EventRequestDetailsPage() {
   const displayFields = [
     { key: 'eventRequestName', label: 'Event Name', value: currentEvent.eventRequestName },
     { key: 'eventRequestSchoolName', label: 'School', value: currentEvent.eventRequestSchoolName },
-    { key: 'eventRequestCreatedBy', label: 'Created By', value: currentEvent.eventRequestCreatedBy },
-    { key: 'eventRequestContactEmail', label: 'Contact Email', value: currentEvent.eventRequestContactEmail },
+    {
+      key: 'eventRequestCreatedBy',
+      label: 'Created By',
+      value: currentEvent.eventRequestCreatedBy,
+    },
+    {
+      key: 'eventRequestContactEmail',
+      label: 'Contact Email',
+      value: currentEvent.eventRequestContactEmail,
+    },
     { key: 'eventRequestStatus', label: 'Status', value: currentEvent.eventRequestStatus },
-    { key: 'eventRequestDescription', label: 'Description', value: currentEvent.eventRequestDescription },
+    {
+      key: 'eventRequestDescription',
+      label: 'Description',
+      value: currentEvent.eventRequestDescription,
+    },
   ];
 
   return (
@@ -46,7 +58,7 @@ export default function EventRequestDetailsPage() {
           <Text className="mb-2 text-3xl font-bold text-foreground">
             {currentEvent.eventRequestName}
           </Text>
-          <View className="mt-2 rounded-full bg-primary/10 self-start px-3 py-1">
+          <View className="mt-2 self-start rounded-full bg-primary/10 px-3 py-1">
             <Text className="text-sm font-medium text-primary">
               {currentEvent.eventRequestStatus}
             </Text>
@@ -57,10 +69,10 @@ export default function EventRequestDetailsPage() {
           <Text className="mb-4 text-xl font-semibold text-foreground">Event Details</Text>
           {displayFields.slice(1).map((field) => (
             <View key={field.key} className="mb-4 last:mb-0">
-              <Text className="mb-1 text-xs font-medium text-muted-foreground uppercase tracking-wide">
+              <Text className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 {field.label}
               </Text>
-              <Text className="text-base text-foreground leading-5">
+              <Text className="text-base leading-5 text-foreground">
                 {field.value || 'Not specified'}
               </Text>
             </View>
