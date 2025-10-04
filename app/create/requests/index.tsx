@@ -16,6 +16,7 @@ import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { useQuery } from 'convex/react';
 import { Link } from 'expo-router';
 import { ArrowRight } from 'lucide-react-native';
+import { useState } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -24,7 +25,6 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { useState } from 'react';
 
 export default function Index() {
   const currentUser = useQuery(api.users.currentUser);

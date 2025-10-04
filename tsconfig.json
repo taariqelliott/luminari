@@ -7,7 +7,9 @@
       "@/*": [
         "*"
       ]
-    }
+    },
+    "skipLibCheck": true,
+    "moduleResolution": "Bundler"
   },
   "include": [
     "**/*.ts",
@@ -15,7 +17,5 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "nativewind-env.d.ts"
-  ],
-  "skipLibCheck": true,
-  "moduleResolution": "Bundler",
+  ]
 }

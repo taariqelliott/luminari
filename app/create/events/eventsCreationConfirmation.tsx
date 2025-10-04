@@ -1,4 +1,3 @@
-import BottomTabSpacer from '@/components/BottomTabSpacer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';

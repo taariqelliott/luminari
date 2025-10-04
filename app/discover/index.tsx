@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
 import { useQuery } from 'convex/react';
-import { Link } from 'expo-router';
+import { Href, Link } from 'expo-router';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -17,13 +17,12 @@ export default function DiscoverScreen() {
           <Text className="mt-2 text-sm text-muted-foreground">
             Find exciting events happening around you
           </Text>
+          <Link href="/discover/requests" asChild className="mt-2">
+            <Button>
+              <Text>Event Requests</Text>
+            </Button>
+          </Link>
         </View>
-
-        <Link href="/discover/requests" asChild>
-          <Button>
-            <Text>Event Requests</Text>
-          </Button>
-        </Link>
 
         {events?.length === 0 && (
           <View className="flex-1 items-center justify-center px-8 pb-32">
@@ -47,7 +46,7 @@ export default function DiscoverScreen() {
             {events?.map((event) => (
               <View key={event._id} className="w-[48%]">
                 <View className="min-h-[290px] rounded-2xl border border-border bg-card shadow-sm">
-                  <Link href={`/discover/${event._id}`} asChild>
+                  <Link href={`/discover/${event._id}` as Href} asChild>
                     <TouchableOpacity activeOpacity={0.8} className="flex-1">
                       <View className="p-4 pb-0">
                         <Text className="mb-2 text-lg font-bold leading-tight" numberOfLines={2}>
