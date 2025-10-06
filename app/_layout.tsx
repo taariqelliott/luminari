@@ -16,9 +16,9 @@ import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'nativewind';
 import { useEffect } from 'react';
 import { LogBox } from 'react-native';
-// import { MMKV } from 'react-native-mmkv';
+import { MMKV } from 'react-native-mmkv';
 
-// export const storage = new MMKV();
+export const storage = new MMKV();
 export { ErrorBoundary } from 'expo-router';
 
 LogBox.ignoreLogs(['Open debugger to view warnings.']);
@@ -43,18 +43,18 @@ export default function RootLayout() {
     tabBarActiveTintColor: colorScheme === 'dark' ? THEME.dark.primary : THEME.light.primary,
   };
 
-  // useEffect(() => {
-  //   const storedMode = storage.getString('colorScheme') as ColorSelection;
-  //   if (storedMode && storedMode !== colorScheme) {
-  //     setColorScheme(storedMode);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const storedMode = storage.getString('colorScheme') as ColorSelection;
+    if (storedMode && storedMode !== colorScheme) {
+      setColorScheme(storedMode);
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   if (colorScheme) {
-  //     storage.set('colorScheme', colorScheme);
-  //   }
-  // }, [colorScheme]);
+  useEffect(() => {
+    if (colorScheme) {
+      storage.set('colorScheme', colorScheme);
+    }
+  }, [colorScheme]);
   return (
     <ClerkProvider publishableKey={clerkKey} tokenCache={tokenCache} telemetry={false}>
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
