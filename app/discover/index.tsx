@@ -12,7 +12,7 @@ export default function DiscoverScreen() {
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1 bg-background">
-        <View className="bg-card/50 px-6 pb-2 pt-4">
+        <View className="px-6 pb-2 pt-4">
           <Text className="text-3xl font-bold text-foreground">Discover</Text>
           <Text className="mt-2 text-sm text-muted-foreground">
             Find exciting events happening around you

@@ -11,7 +11,7 @@ export default function DiscoverRequestsScreen() {
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1 bg-background">
-        <View className="bg-card/50 px-6 pb-2 pt-4">
+        <View className="px-6 pb-2 pt-4">
           <Text className="text-3xl font-bold text-foreground">Event Requests</Text>
           <Text className="mt-2 text-sm text-muted-foreground">
             Browse requests for upcoming events
