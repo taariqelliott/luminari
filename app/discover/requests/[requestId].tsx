@@ -4,7 +4,7 @@ import type { Id } from '@/convex/_generated/dataModel';
 import { useQuery } from 'convex/react';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import { useEffect } from 'react';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function EventRequestDetailsPage() {
@@ -52,46 +52,44 @@ export default function EventRequestDetailsPage() {
   ];
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView className="flex-1" contentContainerClassName="px-6 py-4">
-        <View className="mb-6">
-          <Text className="mb-2 text-3xl font-bold text-foreground">
-            {currentEvent.eventRequestName}
+    <View className="flex-1 px-6 py-4">
+      <View className="mb-6">
+        <Text className="mb-2 text-3xl font-bold text-foreground">
+          {currentEvent.eventRequestName}
+        </Text>
+        <View className="mt-2 self-start rounded-full bg-primary/10 px-3 py-1">
+          <Text className="text-sm font-medium text-primary">
+            {currentEvent.eventRequestStatus}
           </Text>
-          <View className="mt-2 self-start rounded-full bg-primary/10 px-3 py-1">
-            <Text className="text-sm font-medium text-primary">
-              {currentEvent.eventRequestStatus}
+        </View>
+      </View>
+
+      <View className="mb-6 rounded-2xl border border-border bg-card p-5 shadow-sm">
+        <Text className="mb-4 text-xl font-semibold text-foreground">Event Details</Text>
+        {displayFields.slice(1).map((field) => (
+          <View key={field.key} className="mb-4 last:mb-0">
+            <Text className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              {field.label}
+            </Text>
+            <Text className="text-base leading-5 text-foreground">
+              {field.value || 'Not specified'}
             </Text>
           </View>
-        </View>
+        ))}
+      </View>
 
-        <View className="mb-6 rounded-2xl border border-border bg-card p-5 shadow-sm">
-          <Text className="mb-4 text-xl font-semibold text-foreground">Event Details</Text>
-          {displayFields.slice(1).map((field) => (
-            <View key={field.key} className="mb-4 last:mb-0">
-              <Text className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                {field.label}
-              </Text>
-              <Text className="text-base leading-5 text-foreground">
-                {field.value || 'Not specified'}
-              </Text>
-            </View>
-          ))}
-        </View>
-
-        {currentEvent.eventRequestTags && currentEvent.eventRequestTags.length > 0 && (
-          <View className="mb-6">
-            <Text className="mb-3 text-lg font-semibold text-foreground">Tags</Text>
-            <View className="flex-row flex-wrap gap-2">
-              {currentEvent.eventRequestTags.map((tag) => (
-                <View key={tag} className="rounded-full bg-primary/10 px-3 py-1.5">
-                  <Text className="text-sm font-medium text-primary">#{tag}</Text>
-                </View>
-              ))}
-            </View>
+      {currentEvent.eventRequestTags && currentEvent.eventRequestTags.length > 0 && (
+        <View className="mb-6">
+          <Text className="mb-3 text-lg font-semibold text-foreground">Tags</Text>
+          <View className="flex-row flex-wrap gap-2">
+            {currentEvent.eventRequestTags.map((tag) => (
+              <View key={tag} className="rounded-full bg-primary/10 px-3 py-1.5">
+                <Text className="text-sm font-medium text-primary">#{tag}</Text>
+              </View>
+            ))}
           </View>
-        )}
-      </ScrollView>
-    </SafeAreaView>
+        </View>
+      )}
+    </View>
   );
 }
