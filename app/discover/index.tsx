@@ -1,10 +1,10 @@
-import { View, ScrollView } from 'react-native';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { useState } from 'react';
+import { ScrollView, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import EventsScreen from './events';
 import RequestsScreen from './requests';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Text } from '@/components/ui/text';
 
 export default function DiscoverIndex() {
   const [eventsViewIsActive, setEventsViewIsActive] = useState(true);
