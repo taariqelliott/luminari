@@ -3,13 +3,12 @@ import { api } from '@/convex/_generated/api';
 import { useQuery } from 'convex/react';
 import { Href, Link } from 'expo-router';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function EventsScreen() {
   const events = useQuery(api.eventCreation.getAllEvents);
 
   return (
-    <View className='flex-1'>
+    <View className="flex-1">
       <View className="flex-1 bg-background">
         <View className="px-6 pb-2 pt-4">
           <Text className="text-3xl font-bold text-foreground">Discover</Text>
