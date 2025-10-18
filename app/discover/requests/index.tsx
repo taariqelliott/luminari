@@ -3,7 +3,6 @@ import { api } from '@/convex/_generated/api';
 import { useQuery } from 'convex/react';
 import { Link } from 'expo-router';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function RequestsScreen() {
   const requests = useQuery(api.requestCreation.getAllEventRequests);
