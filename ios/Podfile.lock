@@ -6,7 +6,7 @@ PODS:
   - EXImageLoader (6.0.0):
     - ExpoModulesCore
     - React-Core
-  - Expo (54.0.7):
+  - Expo (54.0.13):
     - ExpoModulesCore
     - hermes-engine
     - RCTRequired
@@ -31,17 +31,17 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - ExpoAsset (12.0.8):
+  - ExpoAsset (12.0.9):
     - ExpoModulesCore
   - ExpoCrypto (15.0.7):
     - ExpoModulesCore
-  - ExpoFileSystem (19.0.14):
+  - ExpoFileSystem (19.0.17):
     - ExpoModulesCore
-  - ExpoFont (14.0.8):
+  - ExpoFont (14.0.9):
     - ExpoModulesCore
   - ExpoHaptics (15.0.7):
     - ExpoModulesCore
-  - ExpoHead (6.0.7):
+  - ExpoHead (6.0.12):
     - ExpoModulesCore
     - RNScreens
   - ExpoImagePicker (17.0.8):
@@ -50,7 +50,7 @@ PODS:
     - ExpoModulesCore
   - ExpoLinking (8.0.8):
     - ExpoModulesCore
-  - ExpoModulesCore (3.0.15):
+  - ExpoModulesCore (3.0.21):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -79,7 +79,7 @@ PODS:
     - ExpoModulesCore
   - ExpoSystemUI (6.0.7):
     - ExpoModulesCore
-  - ExpoWebBrowser (15.0.7):
+  - ExpoWebBrowser (15.0.8):
     - ExpoModulesCore
   - FBLazyVector (0.81.4)
   - hermes-engine (0.81.4):
@@ -1856,7 +1856,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - RNReanimated (4.1.0):
+  - RNReanimated (4.1.3):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1878,10 +1878,10 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-    - RNReanimated/reanimated (= 4.1.0)
+    - RNReanimated/reanimated (= 4.1.3)
     - RNWorklets
     - Yoga
-  - RNReanimated/reanimated (4.1.0):
+  - RNReanimated/reanimated (4.1.3):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1903,10 +1903,10 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-    - RNReanimated/reanimated/apple (= 4.1.0)
+    - RNReanimated/reanimated/apple (= 4.1.3)
     - RNWorklets
     - Yoga
-  - RNReanimated/reanimated/apple (4.1.0):
+  - RNReanimated/reanimated/apple (4.1.3):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2399,21 +2399,21 @@ SPEC CHECKSUMS:
   EXApplication: 296622817d459f46b6c5fe8691f4aac44d2b79e7
   EXConstants: a95804601ee4a6aa7800645f9b070d753b1142b3
   EXImageLoader: 189e3476581efe3ad4d1d3fb4735b7179eb26f05
-  Expo: e7fd83aab1bfff6cac8ce73b6a79aaf89e8b2b1e
-  ExpoAsset: 84810d6fed8179f04d4a7a4a6b37028bbd726e26
+  Expo: cbb1d4e1148cc55a1cc35d8b4f20669518bfa19c
+  ExpoAsset: 9ba6fbd677fb8e241a3899ac00fa735bc911eadf
   ExpoCrypto: c1fbce112d1b6b79652bbe380b4fd4cc91676595
-  ExpoFileSystem: 4fb06865906e781329eb67166bd64fc4749c3019
-  ExpoFont: 86ceec09ffed1c99cfee36ceb79ba149074901b5
+  ExpoFileSystem: b79eadbda7b7f285f378f95f959cc9313a1c9c61
+  ExpoFont: cf9d90ec1d3b97c4f513211905724c8171f82961
   ExpoHaptics: 807476b0c39e9d82b7270349d6487928ce32df84
-  ExpoHead: 9cfb3370834cab0459b3f516a9b76aae944f02f4
+  ExpoHead: 7141e494b0773a8f0dc5ca3366ce91b1300f5a9d
   ExpoImagePicker: d251aab45a1b1857e4156fed88511b278b4eee1c
   ExpoKeepAwake: 1a2e820692e933c94a565ec3fbbe38ac31658ffe
   ExpoLinking: f051f28e50ea9269ff539317c166adec81d9342d
-  ExpoModulesCore: ecb96f70bf2a80d31e87ce0a2ac980563c0df6e5
+  ExpoModulesCore: af2a10213318b5d0bda74ecf1d78073b8a33975e
   ExpoSecureStore: 9c6571fe3fcb045a671c4011c451546eaaab98fd
   ExpoSplashScreen: cbb839de72110dea1851dd3e85080b7923af2540
   ExpoSystemUI: 6cd74248a2282adf6dec488a75fa532d69dee314
-  ExpoWebBrowser: 533bc2a1b188eec1c10e4926decf658f1687b5e5
+  ExpoWebBrowser: d04a0d6247a0bea4519fbc2ea816610019ad83e0
   FBLazyVector: 9e0cd874afd81d9a4d36679daca991b58b260d42
   hermes-engine: 35c763d57c9832d0eef764316ca1c4d043581394
   RCTDeprecation: 7487d6dda857ccd4cb3dd6ecfccdc3170e85dcbc
@@ -2485,7 +2485,7 @@ SPEC CHECKSUMS:
   ReactCommon: 149b6c05126f2e99f2ed0d3c63539369546f8cae
   ReactNativeDependencies: ed6d1e64802b150399f04f1d5728ec16b437251e
   RNDateTimePicker: 3b90b0645499e9ae1a86298f23275a648283d415
-  RNReanimated: 20c098ad6ed3cd6569263ed54d055e53e82da861
+  RNReanimated: d6282d5be09ec53b2b69e4addeae2f342c4c99ed
   RNScreens: 33bbd1d0f86ed957557620dc94054b71db0a94ee
   RNSVG: ac3047fdd9c0ebac9d0b731a352bddf216af6242
   RNWorklets: 76fce72926e28e304afb44f0da23b2d24f2c1fa0
@@ -2494,6 +2494,6 @@ SPEC CHECKSUMS:
   SwiftUIIntrospect: fee9aa07293ee280373a591e1824e8ddc869ba5d
   Yoga: 2c1f55d9d91a1cec2fb8cc6dd27da33199ffdb52
 
-PODFILE CHECKSUM: 575bc71892833aaf586355ca6823e07cfd818a7c
+PODFILE CHECKSUM: 92906ef2230644233a404b54030c8ff910c78da3
 
 COCOAPODS: 1.16.2

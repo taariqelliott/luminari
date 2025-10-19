@@ -1,7 +1,6 @@
-import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import EventsScreen from './events';
 import RequestsScreen from './requests';
@@ -26,13 +25,17 @@ export default function DiscoverIndex() {
           Browse requests for upcoming events
         </Text>
       </View>
-      <View className="flex-row items-center justify-center gap-2">
-        <Button className="w-32" onPress={makeEventsViewVisible}>
-          <Text>Events</Text>
-        </Button>
-        <Button className="w-32" onPress={makeRequestsViewVisible}>
-          <Text>Requests</Text>
-        </Button>
+      <View className="flex-row items-center justify-center gap-2 rounded border border-secondary">
+        <TouchableOpacity
+          className={`h-10 w-32 items-center justify-center ${eventsViewIsActive ? 'bg-secondary' : 'bg-transparent'}`}
+          onPress={makeEventsViewVisible}>
+          <Text className="text-center">Events</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          className={`h-10 w-32 items-center justify-center ${requestsViewIsActive ? 'bg-secondary' : 'bg-transparent'}`}
+          onPress={makeRequestsViewVisible}>
+          <Text className="text-center">Requests</Text>
+        </TouchableOpacity>
       </View>
 
       <ScrollView>

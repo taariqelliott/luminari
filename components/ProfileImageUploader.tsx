@@ -33,8 +33,8 @@ export default function ProfileImageUploader() {
 
   if (!currentUser) return null;
 
-  const iconColor = colorScheme === 'dark' ? THEME.dark.accent : THEME.light.accentForeground;
-  const buttonTextColor = colorScheme === 'dark' ? 'text-accent' : 'text-accent-foreground';
+  const iconColor = THEME.light.accentForeground;
+  const buttonTextColor = THEME.light.accentForeground;
   const cancelTextColor = 'text-accent-foreground';
   const uploadButtonColor = colorScheme === 'light' ? iconColor : THEME.dark.primary;
 
