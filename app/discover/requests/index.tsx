@@ -11,7 +11,7 @@ export default function RequestsScreen() {
     <View className="flex-1">
       <View className="flex-1 bg-background">
         <View className="px-6 pb-2 pt-4">
-          <Text className="text-3xl font-bold text-foreground">Event Requests</Text>
+          <Text className="text-3xl font-bold text-foreground">Requests</Text>
           <Text className="mt-2 text-sm text-muted-foreground">
             Browse requests for upcoming events
           </Text>
