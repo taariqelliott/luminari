@@ -13,7 +13,7 @@ export default function RequestsScreen() {
         <View className="px-6 pb-2 pt-4">
           <Text className="text-3xl font-bold text-foreground">Requests</Text>
           <Text className="mt-2 text-sm text-muted-foreground">
-            Browse requests for upcoming events
+            Browse requests for potential events you can support
           </Text>
         </View>
 
