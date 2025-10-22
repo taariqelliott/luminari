@@ -58,7 +58,7 @@ export default defineSchema({
     eventOrganizationId: v.optional(v.id('organizations')),
     eventSchoolName: v.string(),
     eventSchoolId: v.optional(v.id('schools')),
-    attendingUserIds: v.optional(v.id('users')),
+    attendingUserIds: v.optional(v.array(v.id('users'))),
     createdBy: v.id('users'),
     eventTags: v.array(v.string()),
     eventImgUrl: v.optional(v.string()),

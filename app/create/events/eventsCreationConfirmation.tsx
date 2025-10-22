@@ -30,7 +30,7 @@ export const eventCreationSchema = z.object({
   eventSchoolName: z.string(),
   createdBy: z.custom<Id<'users'>>(),
   eventTags: z.array(z.string()),
-  attendingCountIds: z.array(z.custom<Id<'users'>>()),
+  attendingUserIds: z.array(z.custom<Id<'users'>>()),
 });
 
 export type EventCreationFormData = z.infer<typeof eventCreationSchema>;
@@ -77,7 +77,7 @@ export default function EventsCreationConfirmationPage() {
       eventSchoolName: currentUser?.schoolName!,
       createdBy: currentUser?._id!,
       eventTags,
-      attendingCountIds: [],
+      attendingUserIds: [],
     };
 
     await createEvent(formData);

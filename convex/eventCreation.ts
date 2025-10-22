@@ -12,7 +12,7 @@ export const addEvent = mutation({
     eventContactPhone: v.optional(v.string()),
     eventOrganizationId: v.optional(v.id('organizations')),
     eventSchoolName: v.string(),
-    attendingCountIds: v.optional(v.array(v.id('users'))),
+    attendingUserIds: v.optional(v.array(v.id('users'))),
     createdBy: v.id('users'),
     eventTags: v.array(v.string()),
     eventImgUrl: v.optional(v.string()),

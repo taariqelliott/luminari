@@ -38,8 +38,8 @@ type EventSchoolIdState = {
   eventSchoolId: Id<'schools'>;
 };
 
-type AttendingCountIdsState = {
-  attendingCountIds: Id<'users'>[];
+type attendingUserIdsState = {
+  attendingUserIds: Id<'users'>[];
 };
 
 type CreatedByState = {
@@ -95,8 +95,8 @@ type EventSchoolIdAction = {
   updateEventSchoolId: (eventSchoolId: EventSchoolIdState['eventSchoolId']) => void;
 };
 
-type AttendingCountIdsAction = {
-  updateAttendingCountIds: (attendingCountIds: AttendingCountIdsState['attendingCountIds']) => void;
+type attendingUserIdsAction = {
+  updateattendingUserIds: (attendingUserIds: attendingUserIdsState['attendingUserIds']) => void;
 };
 
 type CreatedByAction = {
@@ -165,10 +165,10 @@ export const useEventSchoolIdStore = create<EventSchoolIdState & EventSchoolIdAc
   updateEventSchoolId: (eventSchoolId) => set(() => ({ eventSchoolId })),
 }));
 
-export const useAttendingCountIdsStore = create<AttendingCountIdsState & AttendingCountIdsAction>(
+export const useattendingUserIdsStore = create<attendingUserIdsState & attendingUserIdsAction>(
   (set) => ({
-    attendingCountIds: [] as Id<'users'>[],
-    updateAttendingCountIds: (attendingCountIds) => set(() => ({ attendingCountIds })),
+    attendingUserIds: [] as Id<'users'>[],
+    updateattendingUserIds: (attendingUserIds) => set(() => ({ attendingUserIds })),
   })
 );
 
