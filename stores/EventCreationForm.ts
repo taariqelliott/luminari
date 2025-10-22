@@ -38,12 +38,8 @@ type EventSchoolIdState = {
   eventSchoolId: Id<'schools'>;
 };
 
-type AttendingCountState = {
-  attendingCount: number;
-};
-
-type MaybeAttendingCountState = {
-  maybeAttendingCount: number;
+type AttendingCountIdsState = {
+  attendingCountIds: Id<'users'>[];
 };
 
 type CreatedByState = {
@@ -99,14 +95,8 @@ type EventSchoolIdAction = {
   updateEventSchoolId: (eventSchoolId: EventSchoolIdState['eventSchoolId']) => void;
 };
 
-type AttendingCountAction = {
-  updateAttendingCount: (attendingCount: AttendingCountState['attendingCount']) => void;
-};
-
-type MaybeAttendingCountAction = {
-  updateMaybeAttendingCount: (
-    maybeAttendingCount: MaybeAttendingCountState['maybeAttendingCount']
-  ) => void;
+type AttendingCountIdsAction = {
+  updateAttendingCountIds: (attendingCountIds: AttendingCountIdsState['attendingCountIds']) => void;
 };
 
 type CreatedByAction = {
@@ -175,17 +165,12 @@ export const useEventSchoolIdStore = create<EventSchoolIdState & EventSchoolIdAc
   updateEventSchoolId: (eventSchoolId) => set(() => ({ eventSchoolId })),
 }));
 
-export const useAttendingCountStore = create<AttendingCountState & AttendingCountAction>((set) => ({
-  attendingCount: 0,
-  updateAttendingCount: (attendingCount) => set(() => ({ attendingCount })),
-}));
-
-export const useMaybeAttendingCountStore = create<
-  MaybeAttendingCountState & MaybeAttendingCountAction
->((set) => ({
-  maybeAttendingCount: 0,
-  updateMaybeAttendingCount: (maybeAttendingCount) => set(() => ({ maybeAttendingCount })),
-}));
+export const useAttendingCountIdsStore = create<AttendingCountIdsState & AttendingCountIdsAction>(
+  (set) => ({
+    attendingCountIds: [] as Id<'users'>[],
+    updateAttendingCountIds: (attendingCountIds) => set(() => ({ attendingCountIds })),
+  })
+);
 
 export const useCreatedByStore = create<CreatedByState & CreatedByAction>((set) => ({
   createdBy: '' as Id<'users'>,

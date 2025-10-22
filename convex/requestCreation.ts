@@ -13,7 +13,7 @@ export const addEventRequest = mutation({
     eventRequestTags: v.array(v.string()),
     eventRequestContactEmail: v.string(),
     eventRequestLikeCount: v.optional(v.number()),
-    likedByUsers: v.optional(v.array(v.id('users'))),
+    supportedByUserIds: v.optional(v.array(v.id('users'))),
     eventRequestMessages: v.optional(
       v.array(
         v.object({

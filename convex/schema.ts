@@ -17,7 +17,6 @@ export default defineSchema({
     organizationIds: v.optional(v.array(v.id('organizations'))),
     profileImgUrl: v.optional(v.string()),
     attendingEvents: v.optional(v.array(v.id('events'))),
-    maybeAttendingEvents: v.optional(v.array(v.id('events'))),
   }).index('byClerkId', ['clerkId']),
 
   schools: defineTable({
@@ -59,8 +58,7 @@ export default defineSchema({
     eventOrganizationId: v.optional(v.id('organizations')),
     eventSchoolName: v.string(),
     eventSchoolId: v.optional(v.id('schools')),
-    attendingCount: v.optional(v.number()),
-    maybeAttendingCount: v.optional(v.number()),
+    attendingUserIds: v.optional(v.id('users')),
     createdBy: v.id('users'),
     eventTags: v.array(v.string()),
     eventImgUrl: v.optional(v.string()),
@@ -77,7 +75,7 @@ export default defineSchema({
     eventRequestTags: v.array(v.string()),
     eventRequestContactEmail: v.string(),
     eventRequestLikeCount: v.optional(v.number()),
-    likedByUsers: v.optional(v.array(v.id('users'))),
+    supportedByUserIds: v.optional(v.array(v.id('users'))),
     eventRequestMessages: v.optional(
       v.array(
         v.object({

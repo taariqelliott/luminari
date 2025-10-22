@@ -13,7 +13,6 @@ import {
   useEventStartTimeStore,
   useEventTagsStore,
 } from '@/stores/EventCreationForm';
-import { useEventRequestTagsStore } from '@/stores/EventRequestForm';
 import { useUser } from '@clerk/clerk-expo';
 import { CommonActions, StackActions, useNavigation } from '@react-navigation/native';
 import { useMutation, useQuery } from 'convex/react';
@@ -31,14 +30,12 @@ export const eventCreationSchema = z.object({
   eventSchoolName: z.string(),
   createdBy: z.custom<Id<'users'>>(),
   eventTags: z.array(z.string()),
-  attendingCount: z.number(),
+  attendingCountIds: z.array(z.custom<Id<'users'>>()),
 });
-
-const resetTagsArray = useEventTagsStore((state) => state.updateEventTags);
 
 export type EventCreationFormData = z.infer<typeof eventCreationSchema>;
 
-export default function EventsCreationConfimrationPage() {
+export default function EventsCreationConfirmationPage() {
   const { user } = useUser();
   const currentUser = useQuery(api.users.currentUser);
 
@@ -50,10 +47,12 @@ export default function EventsCreationConfimrationPage() {
   const eventContactEmail = useEventContactEmailStore((state) => state.eventContactEmail);
   const eventContactPhone = useEventContactPhoneStore((state) => state.eventContactPhone);
   const eventTags = useEventTagsStore((state) => state.eventTags);
+  const resetTagsArray = useEventTagsStore((state) => state.updateEventTags);
+
   const createEvent = useMutation(api.eventCreation.addEvent);
   const navigation = useNavigation();
 
-  const submitEventForm = () => {
+  const submitEventForm = async () => {
     if (
       !user ||
       !eventDate ||
@@ -63,8 +62,9 @@ export default function EventsCreationConfimrationPage() {
       !eventContactPerson ||
       !eventContactEmail ||
       !eventTags
-    )
+    ) {
       return;
+    }
 
     const formData: EventCreationFormData = {
       eventName,
@@ -73,13 +73,14 @@ export default function EventsCreationConfimrationPage() {
       eventEndTime,
       eventContactPerson,
       eventContactEmail,
-      eventTags,
       eventContactPhone,
       eventSchoolName: currentUser?.schoolName!,
       createdBy: currentUser?._id!,
-      attendingCount: 0,
+      eventTags,
+      attendingCountIds: [],
     };
-    createEvent(formData);
+
+    await createEvent(formData);
     resetTagsArray([]);
     navigation.dispatch(StackActions.popToTop());
     navigation.dispatch(CommonActions.navigate('discover'));

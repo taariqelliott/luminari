@@ -26,7 +26,8 @@ export const eventRequestCreationSchema = z.object({
   eventRequestTags: z.array(z.string()),
   eventRequestContactEmail: z.string(),
   eventRequestLikeCount: z.optional(z.number()),
-  likedByUsers: z.optional(z.array(z.custom<Id<'users'>>())),
+  supportedByUserIds: z.optional(z.array(z.custom<Id<'users'>>())),
+  attendingCountIds: [],
   eventRequestMessages: z.optional(
     z.array(
       z.object({
@@ -75,6 +76,7 @@ export default function EventRequestConfirmation() {
       eventRequestTags,
       eventRequestContactEmail,
       eventRequestStatus: 'pending',
+      attendingCountIds: [],
     };
 
     createEventRequest(formData);

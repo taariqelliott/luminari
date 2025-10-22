@@ -103,16 +103,14 @@ export default function EventsScreen() {
                     <View className="ml-auto mt-1 flex-row items-end justify-center gap-1">
                       <TouchableOpacity
                         onPress={() => {
-                          if (event.attendingCount) {
-                            event.attendingCount += 1;
-                          }
+                          console.log(event);
                         }}>
                         <ThumbsUp
                           size={24}
                           color={colorScheme === 'dark' ? THEME.dark.primary : THEME.light.primary}
                         />
                       </TouchableOpacity>
-                      <Text className="text-sm font-medium">{event.attendingCount}</Text>
+                      <Text className="text-sm font-medium">{event.attendingUserIds?.length}</Text>
                     </View>
                   </View>
                   <View></View>
