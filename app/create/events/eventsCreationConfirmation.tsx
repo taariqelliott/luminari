@@ -13,6 +13,7 @@ import {
   useEventStartTimeStore,
   useEventTagsStore,
 } from '@/stores/EventCreationForm';
+import { useEventRequestTagsStore } from '@/stores/EventRequestForm';
 import { useUser } from '@clerk/clerk-expo';
 import { CommonActions, StackActions, useNavigation } from '@react-navigation/native';
 import { useMutation, useQuery } from 'convex/react';
@@ -30,7 +31,10 @@ export const eventCreationSchema = z.object({
   eventSchoolName: z.string(),
   createdBy: z.custom<Id<'users'>>(),
   eventTags: z.array(z.string()),
+  attendingCount: z.number(),
 });
+
+const resetTagsArray = useEventTagsStore((state) => state.updateEventTags);
 
 export type EventCreationFormData = z.infer<typeof eventCreationSchema>;
 
@@ -73,8 +77,10 @@ export default function EventsCreationConfimrationPage() {
       eventContactPhone,
       eventSchoolName: currentUser?.schoolName!,
       createdBy: currentUser?._id!,
+      attendingCount: 0,
     };
     createEvent(formData);
+    resetTagsArray([]);
     navigation.dispatch(StackActions.popToTop());
     navigation.dispatch(CommonActions.navigate('discover'));
   };

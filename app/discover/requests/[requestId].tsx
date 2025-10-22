@@ -67,7 +67,7 @@ export default function EventRequestDetailsPage() {
       <View className="mb-6 rounded-2xl border border-border bg-card p-5 shadow-sm">
         <Text className="mb-4 text-xl font-semibold text-foreground">Event Details</Text>
         {displayFields.slice(1).map((field) => (
-          <View key={field.key} className="mb-4 last:mb-0">
+          <View key={field.key} className="mb-2">
             <Text className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
               {field.label}
             </Text>

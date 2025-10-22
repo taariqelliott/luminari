@@ -18,19 +18,21 @@ export default function DiscoverIndex() {
     setEventsViewIsActive(false);
   };
   return (
-    <SafeAreaView className="flex-1 items-center justify-center">
+    <SafeAreaView className="flex-1">
       <View className="px-6 pb-2 pt-4">
         <Text className="text-3xl font-bold text-foreground">Event Requests</Text>
         <Text className="mt-2 text-sm text-muted-foreground">
           Browse requests for upcoming events
         </Text>
       </View>
-      <View className="flex-row items-center justify-center gap-2 rounded border border-secondary">
+
+      <View className="mx-auto flex-row items-center justify-center gap-2 rounded border border-secondary">
         <TouchableOpacity
           className={`h-10 w-32 items-center justify-center ${eventsViewIsActive ? 'bg-secondary' : 'bg-transparent'}`}
           onPress={makeEventsViewVisible}>
           <Text className="text-center">Events</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           className={`h-10 w-32 items-center justify-center ${requestsViewIsActive ? 'bg-secondary' : 'bg-transparent'}`}
           onPress={makeRequestsViewVisible}>
@@ -38,7 +40,7 @@ export default function DiscoverIndex() {
         </TouchableOpacity>
       </View>
 
-      <ScrollView>
+      <ScrollView className="w-full flex-1">
         {eventsViewIsActive && <EventsScreen />}
         {requestsViewIsActive && <RequestsScreen />}
       </ScrollView>

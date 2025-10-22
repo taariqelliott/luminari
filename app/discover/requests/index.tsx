@@ -8,7 +8,7 @@ export default function RequestsScreen() {
   const requests = useQuery(api.requestCreation.getAllEventRequests);
 
   return (
-    <View className="flex-1">
+    <View className="mx-auto w-full flex-1">
       <View className="flex-1 bg-background">
         <View className="px-6 pb-2 pt-4">
           <Text className="text-3xl font-bold text-foreground">Requests</Text>
@@ -35,7 +35,7 @@ export default function RequestsScreen() {
           contentContainerClassName="px-4 py-2"
           showsVerticalScrollIndicator={false}
           className="flex-1">
-          <View className="flex-row flex-wrap justify-between gap-y-2">
+          <View className="flex-row flex-wrap justify-between gap-3.5">
             {requests?.map((request) => (
               <View key={request._id} className="w-[48%]">
                 <View className="min-h-[290px] rounded-2xl border border-border bg-card shadow-sm">
@@ -74,7 +74,7 @@ export default function RequestsScreen() {
                           </View>
                           <View className="flex-row items-center">
                             <View className="mr-2 h-2 w-2 rounded-full bg-blue-500" />
-                            <Text className="mr-2 text-xs text-muted-foreground">School ID:</Text>
+                            <Text className="mr-2 text-xs text-muted-foreground">Desc:</Text>
                             <Text
                               className="flex-1 text-xs font-medium text-foreground"
                               numberOfLines={1}>

@@ -1,14 +1,18 @@
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
+import { THEME } from '@/lib/theme';
 import { useQuery } from 'convex/react';
 import { Href, Link } from 'expo-router';
+import { ThumbsUp } from 'lucide-react-native';
+import { useColorScheme } from 'nativewind';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 
 export default function EventsScreen() {
   const events = useQuery(api.eventCreation.getAllEvents);
+  const { colorScheme } = useColorScheme();
 
   return (
-    <View className="flex-1">
+    <View className="mx-auto w-full flex-1">
       <View className="flex-1 bg-background">
         <View className="px-6 pb-2 pt-4">
           <Text className="text-3xl font-bold text-foreground">Events</Text>
@@ -96,7 +100,22 @@ export default function EventsScreen() {
                         </Text>
                       ))}
                     </ScrollView>
+                    <View className="ml-auto mt-1 flex-row items-end justify-center gap-1">
+                      <TouchableOpacity
+                        onPress={() => {
+                          if (event.attendingCount) {
+                            event.attendingCount += 1;
+                          }
+                        }}>
+                        <ThumbsUp
+                          size={24}
+                          color={colorScheme === 'dark' ? THEME.dark.primary : THEME.light.primary}
+                        />
+                      </TouchableOpacity>
+                      <Text className="text-sm font-medium">{event.attendingCount}</Text>
+                    </View>
                   </View>
+                  <View></View>
                 </View>
               </View>
             ))}
