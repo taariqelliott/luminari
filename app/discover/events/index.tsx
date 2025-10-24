@@ -134,7 +134,7 @@ export default function EventsScreen() {
                           color={colorScheme === 'dark' ? THEME.dark.primary : THEME.light.primary}
                         />
                       </TouchableOpacity>
-                      <Text className="font-medium">{event.attendingUserIds?.length}</Text>
+                      <Text className="text-sm font-medium">{event.attendingUserIds?.length}</Text>
                     </View>
                   </View>
                   <View></View>
