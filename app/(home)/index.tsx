@@ -20,7 +20,7 @@ export default function HomeScreen() {
   const [isSplashScreenActive, setIsSplashScreenActive] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsSplashScreenActive(false), 200);
+    const timer = setTimeout(() => setIsSplashScreenActive(false), 500);
     return () => clearTimeout(timer);
   }, []);
 

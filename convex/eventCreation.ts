@@ -19,7 +19,6 @@ export const addEvent = mutation({
   },
   handler: async (ctx, args) => {
     const newEventId = await ctx.db.insert('events', args);
-    console.log(args);
     return newEventId;
   },
 });
@@ -42,5 +41,37 @@ export const getEventById = query({
       .filter((q) => q.eq(q.field('_id'), args.id))
       .first();
     return event;
+  },
+});
+
+export const addUserToEventAttendees = mutation({
+  args: {
+    userId: v.id('users'),
+    eventId: v.id('events'),
+    attendingUserIds: v.array(v.id('users')),
+  },
+  handler: async (ctx, args) => {
+    const { userId, eventId, attendingUserIds } = args;
+    const newUserIds = [userId, ...attendingUserIds];
+    const addUserToEventAttendance = await ctx.db.patch(eventId, {
+      attendingUserIds: newUserIds,
+    });
+    return addUserToEventAttendance;
+  },
+});
+
+export const deleteUserFromEventAttendees = mutation({
+  args: {
+    userId: v.id('users'),
+    eventId: v.id('events'),
+    attendingUserIds: v.array(v.id('users')),
+  },
+  handler: async (ctx, args) => {
+    const { userId, eventId, attendingUserIds } = args;
+    const usersNotIncludingRemovedUser = attendingUserIds.filter((id) => userId !== id);
+    const addUserToEventAttendance = await ctx.db.patch(eventId, {
+      attendingUserIds: usersNotIncludingRemovedUser,
+    });
+    return addUserToEventAttendance;
   },
 });

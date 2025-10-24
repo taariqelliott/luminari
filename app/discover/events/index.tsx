@@ -1,7 +1,7 @@
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
 import { THEME } from '@/lib/theme';
-import { useQuery } from 'convex/react';
+import { useMutation, useQuery } from 'convex/react';
 import { Href, Link } from 'expo-router';
 import { ThumbsUp } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
@@ -10,6 +10,9 @@ import { ScrollView, TouchableOpacity, View } from 'react-native';
 export default function EventsScreen() {
   const events = useQuery(api.eventCreation.getAllEvents);
   const { colorScheme } = useColorScheme();
+  const currentUser = useQuery(api.users.currentUser);
+  const addAttendeeToEvent = useMutation(api.eventCreation.addUserToEventAttendees);
+  const deleteAttendeeFromEvent = useMutation(api.eventCreation.deleteUserFromEventAttendees);
 
   return (
     <View className="mx-auto w-full flex-1">
@@ -100,17 +103,38 @@ export default function EventsScreen() {
                         </Text>
                       ))}
                     </ScrollView>
-                    <View className="ml-auto mt-1 flex-row items-end justify-center gap-1">
+                    <View className="ml-auto mt-1 flex-row items-end gap-1">
                       <TouchableOpacity
                         onPress={() => {
-                          console.log(event);
+                          if (event.attendingUserIds && currentUser?._id) {
+                            if (!event.attendingUserIds?.includes(currentUser?._id)) {
+                              addAttendeeToEvent({
+                                attendingUserIds: event.attendingUserIds,
+                                eventId: event._id,
+                                userId: currentUser?._id,
+                              });
+                            } else {
+                              deleteAttendeeFromEvent({
+                                attendingUserIds: event.attendingUserIds,
+                                eventId: event._id,
+                                userId: currentUser?._id,
+                              });
+                            }
+                          }
                         }}>
                         <ThumbsUp
+                          stroke={
+                            currentUser?._id && event.attendingUserIds?.includes(currentUser?._id)
+                              ? THEME.dark.primary
+                              : colorScheme === 'dark'
+                                ? THEME.light.input
+                                : THEME.dark.input
+                          }
                           size={24}
                           color={colorScheme === 'dark' ? THEME.dark.primary : THEME.light.primary}
                         />
                       </TouchableOpacity>
-                      <Text className="text-sm font-medium">{event.attendingUserIds?.length}</Text>
+                      <Text className="font-medium">{event.attendingUserIds?.length}</Text>
                     </View>
                   </View>
                   <View></View>
