@@ -1,6 +1,6 @@
 import { Text } from '@/components/ui/text';
 import { useState } from 'react';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import EventsScreen from './events';
 import RequestsScreen from './requests';
@@ -40,10 +40,10 @@ export default function DiscoverIndex() {
         </TouchableOpacity>
       </View>
 
-      <ScrollView className="w-full flex-1">
+      <View className="w-full flex-1">
         {eventsViewIsActive && <EventsScreen />}
         {requestsViewIsActive && <RequestsScreen />}
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
