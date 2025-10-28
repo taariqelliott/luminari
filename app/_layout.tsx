@@ -16,9 +16,9 @@ import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'nativewind';
 import { useEffect } from 'react';
 import { LogBox } from 'react-native';
-import { MMKV } from 'react-native-mmkv';
+import { createMMKV } from 'react-native-mmkv';
 
-export const storage = new MMKV();
+export const storage = createMMKV();
 export { ErrorBoundary } from 'expo-router';
 
 LogBox.ignoreLogs(['Open debugger to view warnings.']);
