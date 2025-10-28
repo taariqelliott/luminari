@@ -30,7 +30,7 @@
     "@rn-primitives/tabs": "^1.2.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "convex": "^1.26.2",
+    "convex": "1.28.0",
     "expo": "54.0.20",
     "expo-auth-session": "~7.0.8",
     "expo-build-properties": "~1.0.9",
