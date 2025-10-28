@@ -1,6 +1,6 @@
 import { Text } from '@/components/ui/text';
 import { useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { Pressable, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import EventsScreen from './events';
 import RequestsScreen from './requests';
@@ -27,17 +27,17 @@ export default function DiscoverIndex() {
       </View>
 
       <View className="mx-auto flex-row items-center justify-center gap-2 rounded border border-secondary">
-        <TouchableOpacity
+        <Pressable
           className={`h-10 w-32 items-center justify-center ${eventsViewIsActive ? 'bg-secondary' : 'bg-transparent'}`}
           onPress={makeEventsViewVisible}>
           <Text className="text-center">Events</Text>
-        </TouchableOpacity>
+        </Pressable>
 
-        <TouchableOpacity
+        <Pressable
           className={`h-10 w-32 items-center justify-center ${requestsViewIsActive ? 'bg-secondary' : 'bg-transparent'}`}
           onPress={makeRequestsViewVisible}>
           <Text className="text-center">Requests</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <View className="w-full flex-1">

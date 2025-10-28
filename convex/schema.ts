@@ -76,6 +76,7 @@ export default defineSchema({
     eventRequestContactEmail: v.string(),
     eventRequestLikeCount: v.optional(v.number()),
     supportedByUserIds: v.optional(v.array(v.id('users'))),
+    attendingUserIds: v.optional(v.array(v.id('users'))),
     eventRequestMessages: v.optional(
       v.array(
         v.object({

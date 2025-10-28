@@ -11,8 +11,8 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   ScrollView,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -21,10 +21,11 @@ export default function EventsScreen() {
   const events = useQuery(api.eventCreation.getAllEvents);
   const { colorScheme } = useColorScheme();
   const currentUser = useQuery(api.users.currentUser);
+
   const addAttendeeToEvent = useMutation(api.eventCreation.addUserToEventAttendees);
   const deleteAttendeeFromEvent = useMutation(api.eventCreation.deleteUserFromEventAttendees);
-  const [eventsSearchQuery, setEventsSearchQuery] = useState('');
 
+  const [eventsSearchQuery, setEventsSearchQuery] = useState('');
   const filteredEvents = events?.filter((event) =>
     event.eventName.toLowerCase().includes(eventsSearchQuery.toLowerCase())
   );
@@ -78,12 +79,12 @@ export default function EventsScreen() {
               contentContainerClassName="px-4 py-2"
               showsVerticalScrollIndicator={false}
               className="flex-1">
-              <View className="flex-row flex-wrap justify-between gap-y-2">
+              <View className="flex-row flex-wrap justify-between gap-3.5">
                 {filteredEvents?.map((event) => (
                   <View key={event._id} className="w-[48%]">
                     <View className="min-h-[290px] rounded-2xl border border-border bg-card shadow-sm">
                       <Link href={`/discover/events/${event._id}` as Href} asChild>
-                        <TouchableOpacity activeOpacity={0.8} className="flex-1">
+                        <Pressable className="flex-1">
                           <View className="p-4 pb-0">
                             <Text
                               className="mb-2 text-lg font-bold leading-tight"
@@ -126,7 +127,7 @@ export default function EventsScreen() {
                               </View>
                             </View>
                           </View>
-                        </TouchableOpacity>
+                        </Pressable>
                       </Link>
 
                       <View className="px-4 pb-4">
@@ -142,7 +143,7 @@ export default function EventsScreen() {
                           ))}
                         </ScrollView>
                         <View className="ml-auto mt-1 flex-row items-end gap-1">
-                          <TouchableOpacity
+                          <Pressable
                             onPress={() => {
                               if (event.attendingUserIds && currentUser?._id) {
                                 if (!event.attendingUserIds?.includes(currentUser?._id)) {
@@ -174,13 +175,12 @@ export default function EventsScreen() {
                                 colorScheme === 'dark' ? THEME.dark.primary : THEME.light.primary
                               }
                             />
-                          </TouchableOpacity>
+                          </Pressable>
                           <Text className="text-sm font-medium">
                             {event.attendingUserIds?.length}
                           </Text>
                         </View>
                       </View>
-                      <View></View>
                     </View>
                   </View>
                 ))}

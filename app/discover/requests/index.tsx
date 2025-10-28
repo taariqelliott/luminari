@@ -1,26 +1,34 @@
 import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
-import { useQuery } from 'convex/react';
+import { THEME } from '@/lib/theme';
+import { useMutation, useQuery } from 'convex/react';
 import { Link } from 'expo-router';
+import { ThumbsUp } from 'lucide-react-native';
+import { useColorScheme } from 'nativewind';
 import { useState } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   ScrollView,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 
 export default function RequestsScreen() {
   const requests = useQuery(api.requestCreation.getAllEventRequests);
+  const { colorScheme } = useColorScheme();
+  const currentUser = useQuery(api.users.currentUser);
+
+  const addAttendeeToRequest = useMutation(api.requestCreation.addUserToRequestAttendees);
+  const deleteAttendeeFromRequest = useMutation(api.requestCreation.deleteUserFromRequestAttendees);
+
   const [requestSearchQuery, setRequestSearchQuery] = useState('');
   const filteredRequests = requests?.filter((request) =>
     request.eventRequestName.toLowerCase().includes(requestSearchQuery.toLowerCase())
   );
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView
@@ -77,7 +85,7 @@ export default function RequestsScreen() {
                   <View key={request._id} className="w-[48%]">
                     <View className="min-h-[290px] rounded-2xl border border-border bg-card shadow-sm">
                       <Link href={`/discover/requests/${request._id}`} asChild>
-                        <TouchableOpacity activeOpacity={0.8} className="flex-1">
+                        <Pressable className="flex-1">
                           <View className="p-4 pb-0">
                             <Text
                               className="mb-2 text-lg font-bold leading-tight"
@@ -122,7 +130,7 @@ export default function RequestsScreen() {
                               </View>
                             </View>
                           </View>
-                        </TouchableOpacity>
+                        </Pressable>
                       </Link>
 
                       <View className="px-4 pb-4">
@@ -139,6 +147,44 @@ export default function RequestsScreen() {
                             </Text>
                           ))}
                         </ScrollView>
+                        <View className="ml-auto mt-1 flex-row items-end gap-1">
+                          <Pressable
+                            onPress={() => {
+                              if (request.attendingUserIds && currentUser?._id) {
+                                if (!request.attendingUserIds?.includes(currentUser?._id)) {
+                                  addAttendeeToRequest({
+                                    attendingUserIds: request.attendingUserIds,
+                                    eventRequestId: request._id,
+                                    userId: currentUser?._id,
+                                  });
+                                } else {
+                                  deleteAttendeeFromRequest({
+                                    attendingUserIds: request.attendingUserIds,
+                                    eventRequestId: request._id,
+                                    userId: currentUser?._id,
+                                  });
+                                }
+                              }
+                            }}>
+                            <ThumbsUp
+                              stroke={
+                                currentUser?._id &&
+                                request.attendingUserIds?.includes(currentUser?._id)
+                                  ? THEME.dark.primary
+                                  : colorScheme === 'dark'
+                                    ? THEME.light.input
+                                    : THEME.dark.input
+                              }
+                              size={24}
+                              color={
+                                colorScheme === 'dark' ? THEME.dark.primary : THEME.light.primary
+                              }
+                            />
+                          </Pressable>
+                          <Text className="text-sm font-medium">
+                            {request.attendingUserIds?.length}
+                          </Text>
+                        </View>
                       </View>
                     </View>
                   </View>

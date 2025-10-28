@@ -60,3 +60,35 @@ export const deleteEventRequestById = mutation({
     return eventRequest;
   },
 });
+
+export const addUserToRequestAttendees = mutation({
+  args: {
+    userId: v.id('users'),
+    eventRequestId: v.id('eventRequests'),
+    attendingUserIds: v.array(v.id('users')),
+  },
+  handler: async (ctx, args) => {
+    const { userId, eventRequestId, attendingUserIds } = args;
+    const newUserIds = [userId, ...attendingUserIds];
+    const addUserToRequestAttendance = await ctx.db.patch(eventRequestId, {
+      attendingUserIds: newUserIds,
+    });
+    return addUserToRequestAttendance;
+  },
+});
+
+export const deleteUserFromRequestAttendees = mutation({
+  args: {
+    userId: v.id('users'),
+    eventRequestId: v.id('eventRequests'),
+    attendingUserIds: v.array(v.id('users')),
+  },
+  handler: async (ctx, args) => {
+    const { userId, eventRequestId, attendingUserIds } = args;
+    const usersNotIncludingRemovedUser = attendingUserIds.filter((id) => userId !== id);
+    const addUserToEventRequestAttendance = await ctx.db.patch(eventRequestId, {
+      attendingUserIds: usersNotIncludingRemovedUser,
+    });
+    return addUserToEventRequestAttendance;
+  },
+});
