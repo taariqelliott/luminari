@@ -34,7 +34,7 @@ export default function CreateScreen() {
               </Button>
             </Link>
 
-            <Link href="/create/requests" asChild>
+            <Link href="/create/requests/eventsRequestsPageOne" asChild>
               <Button variant="outline" className="h-24 w-full rounded-2xl border-2 border-border">
                 <View className="items-center">
                   <Text className="mb-1 text-xl">📝</Text>

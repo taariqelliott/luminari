@@ -26,9 +26,8 @@ import {
   View,
 } from 'react-native';
 
-export default function Index() {
+export default function RequestsPageOne() {
   const currentUser = useQuery(api.users.currentUser);
-
   const eventRequestName = useEventRequestNameStore((s) => s.eventRequestName);
   const eventRequestDescription = useEventRequestDescriptionStore((s) => s.eventRequestDescription);
   const eventRequestTags = useEventRequestTagsStore((s) => s.eventRequestTags);
