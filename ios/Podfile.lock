@@ -6,7 +6,7 @@ PODS:
   - EXImageLoader (6.0.0):
     - ExpoModulesCore
     - React-Core
-  - Expo (54.0.20):
+  - Expo (54.0.21):
     - ExpoModulesCore
     - hermes-engine
     - RCTRequired
@@ -41,7 +41,7 @@ PODS:
     - ExpoModulesCore
   - ExpoHaptics (15.0.7):
     - ExpoModulesCore
-  - ExpoHead (6.0.13):
+  - ExpoHead (6.0.14):
     - ExpoModulesCore
     - RNScreens
   - ExpoImagePicker (17.0.8):
@@ -50,7 +50,7 @@ PODS:
     - ExpoModulesCore
   - ExpoLinking (8.0.8):
     - ExpoModulesCore
-  - ExpoModulesCore (3.0.22):
+  - ExpoModulesCore (3.0.23):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1413,7 +1413,31 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-  - react-native-bottom-tabs (0.11.2):
+  - react-native-bottom-tabs (1.0.2):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - react-native-bottom-tabs/common (= 1.0.2)
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - SwiftUIIntrospect (~> 1.0)
+    - Yoga
+  - react-native-bottom-tabs/common (1.0.2):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1434,15 +1458,13 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-    - SDWebImage (>= 5.19.1)
-    - SDWebImageSVGCoder (>= 1.7.0)
     - SwiftUIIntrospect (~> 1.0)
     - Yoga
   - react-native-config (1.5.9):
     - react-native-config/App (= 1.5.9)
   - react-native-config/App (1.5.9):
     - React-Core
-  - react-native-safe-area-context (5.6.1):
+  - react-native-safe-area-context (5.6.2):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1454,8 +1476,8 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-safe-area-context/common (= 5.6.1)
-    - react-native-safe-area-context/fabric (= 5.6.1)
+    - react-native-safe-area-context/common (= 5.6.2)
+    - react-native-safe-area-context/fabric (= 5.6.2)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -1466,7 +1488,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-safe-area-context/common (5.6.1):
+  - react-native-safe-area-context/common (5.6.2):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1488,7 +1510,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-safe-area-context/fabric (5.6.1):
+  - react-native-safe-area-context/fabric (5.6.2):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2120,11 +2142,6 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - SDWebImage (5.21.2):
-    - SDWebImage/Core (= 5.21.2)
-  - SDWebImage/Core (5.21.2)
-  - SDWebImageSVGCoder (1.8.0):
-    - SDWebImage/Core (~> 5.6)
   - SwiftUIIntrospect (1.3.0)
   - Yoga (0.0.0)
 
@@ -2229,8 +2246,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - MMKVCore
-    - SDWebImage
-    - SDWebImageSVGCoder
     - SwiftUIIntrospect
 
 EXTERNAL SOURCES:
@@ -2430,17 +2445,17 @@ SPEC CHECKSUMS:
   EXApplication: 296622817d459f46b6c5fe8691f4aac44d2b79e7
   EXConstants: fd688cef4e401dcf798a021cfb5d87c890c30ba3
   EXImageLoader: 189e3476581efe3ad4d1d3fb4735b7179eb26f05
-  Expo: 1eae5a52f4532767fc1c40eb4cca4f202d88db1e
+  Expo: e0ce97d01f9b02e977a8fb475c9c54dad1607f62
   ExpoAsset: 9ba6fbd677fb8e241a3899ac00fa735bc911eadf
   ExpoCrypto: c1fbce112d1b6b79652bbe380b4fd4cc91676595
   ExpoFileSystem: b79eadbda7b7f285f378f95f959cc9313a1c9c61
   ExpoFont: cf9d90ec1d3b97c4f513211905724c8171f82961
   ExpoHaptics: 807476b0c39e9d82b7270349d6487928ce32df84
-  ExpoHead: 66d25bb51bcd6d62acc0bf5f15e8d156abd3e936
+  ExpoHead: e317214fa14edeaf17748d39ec9e550a3d1194fb
   ExpoImagePicker: d251aab45a1b1857e4156fed88511b278b4eee1c
   ExpoKeepAwake: 1a2e820692e933c94a565ec3fbbe38ac31658ffe
   ExpoLinking: f051f28e50ea9269ff539317c166adec81d9342d
-  ExpoModulesCore: a6fb0ff8f971a47c7c9f0d9dcf5a941158f97114
+  ExpoModulesCore: 1cef0882bb7eaff978e5028fd8b1cb578e94cf9f
   ExpoSecureStore: 9c6571fe3fcb045a671c4011c451546eaaab98fd
   ExpoSplashScreen: cbb839de72110dea1851dd3e85080b7923af2540
   ExpoSystemUI: 2761aa6875849af83286364811d46e8ed8ea64c7
@@ -2483,9 +2498,9 @@ SPEC CHECKSUMS:
   React-logger: 50fdb9a8236da90c0b1072da5c32ee03aeb5bf28
   React-Mapbuffer: 0164bc6ba0866e6314d86851620e6f1f95a1b4fb
   React-microtasksnativemodule: f5972fb404f7c363ff34b2292e72a716956c590c
-  react-native-bottom-tabs: 22f8b0167c75ba041323e3472110760142735096
+  react-native-bottom-tabs: f85a5345a201a1c57ce4d2b2ebb45d7c25bef6c2
   react-native-config: d08b60865268872495a43e211059b4606131fe01
-  react-native-safe-area-context: 8dc43e60dd67fd2be098486fd8195e143fb47c6f
+  react-native-safe-area-context: c5d42c4294aa175415947e23c2ac956253abfc7d
   React-NativeModulesApple: 8969913947d5b576de4ed371a939455a8daf28aa
   React-oscompat: ce47230ed20185e91de62d8c6d139ae61763d09c
   React-perflogger: 02b010e665772c7dcb859d85d44c1bfc5ac7c0e4
@@ -2522,8 +2537,6 @@ SPEC CHECKSUMS:
   RNScreens: 33bbd1d0f86ed957557620dc94054b71db0a94ee
   RNSVG: ac3047fdd9c0ebac9d0b731a352bddf216af6242
   RNWorklets: 76fce72926e28e304afb44f0da23b2d24f2c1fa0
-  SDWebImage: 9f177d83116802728e122410fb25ad88f5c7608a
-  SDWebImageSVGCoder: 8e10c8f6cc879c7dfb317b284e13dd589379f01c
   SwiftUIIntrospect: fee9aa07293ee280373a591e1824e8ddc869ba5d
   Yoga: 65431d43277b661ebc7289c6c5d82f64ce42cfe0
 

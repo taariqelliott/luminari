@@ -10,7 +10,7 @@ import {
   useSchoolNameStore,
   useUsernameStore,
 } from '@/stores/UserInformationStore';
-import { useUser } from '@clerk/clerk-react';
+import { useUser } from '@clerk/clerk-expo';
 import { useMutation } from 'convex/react';
 import { router } from 'expo-router';
 import { View } from 'react-native';
