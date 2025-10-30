@@ -29,7 +29,7 @@ export default function CreateLayout() {
         }}
       />
       <Stack.Screen
-        name="requests/eventsRequestsPageOne.tsx"
+        name="requests/eventsRequestsPageOne"
         options={{
           title: 'Request',
           headerShadowVisible: false,
