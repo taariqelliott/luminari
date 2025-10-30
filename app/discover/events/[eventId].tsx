@@ -73,7 +73,7 @@ export default function EventsPage() {
               {field.label}
             </Text>
             <Text className="text-base leading-5 text-foreground">
-              {field.value || 'Not specified'}
+              {field.key !== 'attendingUserIds' ? field.value || 'Not specified' : field.value || 0}
             </Text>
           </View>
         ))}
