@@ -1,6 +1,6 @@
 import { Text } from '@/components/ui/text';
 import { useState } from 'react';
-import { Pressable, TouchableOpacity, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import EventsScreen from './events';
 import RequestsScreen from './requests';
