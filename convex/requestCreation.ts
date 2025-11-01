@@ -4,8 +4,6 @@ import { mutation, query } from './_generated/server';
 export const addEventRequest = mutation({
   args: {
     eventRequestName: v.string(),
-    eventRequestCreatedById: v.id('users'),
-    eventRequestCreatedBy: v.string(),
     eventRequestDescription: v.string(),
     eventRequestSchoolId: v.optional(v.id('schools')),
     eventRequestSchoolName: v.string(),
@@ -13,6 +11,7 @@ export const addEventRequest = mutation({
     eventRequestTags: v.array(v.string()),
     eventRequestContactEmail: v.string(),
     eventRequestLikeCount: v.optional(v.number()),
+    createdBy: v.id('users'),
     supportedByUserIds: v.optional(v.array(v.id('users'))),
     eventRequestMessages: v.optional(
       v.array(
@@ -54,7 +53,9 @@ export const getEventRequestById = query({
 });
 
 export const deleteEventRequestById = mutation({
-  args: { id: v.id('eventRequests') },
+  args: {
+    id: v.id('eventRequests'),
+  },
   handler: async (ctx, args) => {
     const eventRequest = await ctx.db.delete(args.id);
     return eventRequest;
@@ -65,13 +66,13 @@ export const addUserToRequestAttendees = mutation({
   args: {
     userId: v.id('users'),
     eventRequestId: v.id('eventRequests'),
-    attendingUserIds: v.array(v.id('users')),
+    supportedByUserIds: v.array(v.id('users')),
   },
   handler: async (ctx, args) => {
-    const { userId, eventRequestId, attendingUserIds } = args;
-    const newUserIds = [userId, ...attendingUserIds];
+    const { userId, eventRequestId, supportedByUserIds } = args;
+    const newUserIds = [userId, ...supportedByUserIds];
     const addUserToRequestAttendance = await ctx.db.patch(eventRequestId, {
-      attendingUserIds: newUserIds,
+      supportedByUserIds: newUserIds,
     });
     return addUserToRequestAttendance;
   },
@@ -81,13 +82,13 @@ export const deleteUserFromRequestAttendees = mutation({
   args: {
     userId: v.id('users'),
     eventRequestId: v.id('eventRequests'),
-    attendingUserIds: v.array(v.id('users')),
+    supportedByUserIds: v.array(v.id('users')),
   },
   handler: async (ctx, args) => {
-    const { userId, eventRequestId, attendingUserIds } = args;
-    const usersNotIncludingRemovedUser = attendingUserIds.filter((id) => userId !== id);
+    const { userId, eventRequestId, supportedByUserIds } = args;
+    const usersNotIncludingRemovedUser = supportedByUserIds.filter((id) => userId !== id);
     const addUserToEventRequestAttendance = await ctx.db.patch(eventRequestId, {
-      attendingUserIds: usersNotIncludingRemovedUser,
+      supportedByUserIds: usersNotIncludingRemovedUser,
     });
     return addUserToEventRequestAttendance;
   },

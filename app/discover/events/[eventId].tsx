@@ -1,18 +1,28 @@
+import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
 import type { Id } from '@/convex/_generated/dataModel';
-import { useQuery } from 'convex/react';
-import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { useMutation, useQuery } from 'convex/react';
+import { router, useLocalSearchParams, useNavigation } from 'expo-router';
 import { useEffect } from 'react';
 import { Image, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function EventsPage() {
   const { eventId } = useLocalSearchParams();
+  const deleteEventMutation = useMutation(api.eventCreation.deleteEventById);
+  const currentUser = useQuery(api.users.currentUser);
   const currentEvent = useQuery(api.eventCreation.getEventById, {
     id: eventId as Id<'events'>,
   });
   const navigation = useNavigation();
+
+  const deleteEvent = () => {
+    if (currentEvent) {
+      deleteEventMutation({ id: currentEvent?._id });
+    }
+    router.push('/discover');
+  };
 
   useEffect(() => {
     if (currentEvent?.eventName) {
@@ -78,6 +88,13 @@ export default function EventsPage() {
           </View>
         ))}
       </View>
+      {currentUser?._id === currentEvent.createdBy && (
+        <View>
+          <Button onPress={deleteEvent}>
+            <Text>Delete</Text>
+          </Button>
+        </View>
+      )}
 
       {currentEvent.eventTags && currentEvent.eventTags.length > 0 && (
         <View className="mb-6">

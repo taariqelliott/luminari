@@ -60,7 +60,7 @@ export default function RequestsScreen() {
               </View>
             )}
 
-            {filteredRequests?.length === 0 && (
+            {filteredRequests?.length === 0 && filteredRequests && filteredRequests.length > 0 && (
               <View className="flex-1 items-center justify-center px-8 pt-2">
                 <View className="items-center rounded-2xl border border-border bg-card p-8 shadow-sm">
                   <View className="mb-4 h-16 w-16 items-center justify-center rounded-full bg-muted">
@@ -102,7 +102,7 @@ export default function RequestsScreen() {
                           <View className="flex-1 p-4">
                             <View className="mb-4">
                               <Text className="mb-1 text-sm font-semibold text-foreground">
-                                {request.eventRequestCreatedBy}
+                                {request.createdBy}
                               </Text>
                               <Text className="text-xs text-muted-foreground">
                                 {request.eventRequestContactEmail}
@@ -150,16 +150,16 @@ export default function RequestsScreen() {
                         <View className="ml-auto mt-1 flex-row items-end gap-1">
                           <Pressable
                             onPress={() => {
-                              if (request.attendingUserIds && currentUser?._id) {
-                                if (!request.attendingUserIds?.includes(currentUser?._id)) {
+                              if (request.supportedByUserIds && currentUser?._id) {
+                                if (!request.supportedByUserIds?.includes(currentUser?._id)) {
                                   addAttendeeToRequest({
-                                    attendingUserIds: request.attendingUserIds,
+                                    supportedByUserIds: request.supportedByUserIds,
                                     eventRequestId: request._id,
                                     userId: currentUser?._id,
                                   });
                                 } else {
                                   deleteAttendeeFromRequest({
-                                    attendingUserIds: request.attendingUserIds,
+                                    supportedByUserIds: request.supportedByUserIds,
                                     eventRequestId: request._id,
                                     userId: currentUser?._id,
                                   });
@@ -169,7 +169,7 @@ export default function RequestsScreen() {
                             <ThumbsUp
                               stroke={
                                 currentUser?._id &&
-                                request.attendingUserIds?.includes(currentUser?._id)
+                                request.supportedByUserIds?.includes(currentUser?._id)
                                   ? THEME.dark.primary
                                   : colorScheme === 'dark'
                                     ? THEME.light.input
@@ -182,7 +182,7 @@ export default function RequestsScreen() {
                             />
                           </Pressable>
                           <Text className="text-sm font-medium">
-                            {request.attendingUserIds?.length}
+                            {request.supportedByUserIds?.length}
                           </Text>
                         </View>
                       </View>

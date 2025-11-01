@@ -1,26 +1,37 @@
+import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
-import type { Id } from '@/convex/_generated/dataModel';
-import { useQuery } from 'convex/react';
-import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { Id } from '@/convex/_generated/dataModel';
+
+import { useMutation, useQuery } from 'convex/react';
+import { router, useLocalSearchParams, useNavigation } from 'expo-router';
 import { useEffect } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function EventRequestDetailsPage() {
-  const { requestId } = useLocalSearchParams();
-  const currentEvent = useQuery(api.requestCreation.getEventRequestById, {
-    id: requestId as Id<'eventRequests'>,
+  const { eventRequestId } = useLocalSearchParams();
+
+  const deleteEventRequestMutation = useMutation(api.requestCreation.deleteEventRequestById);
+  const currentEventRequest = useQuery(api.requestCreation.getEventRequestById, {
+    id: eventRequestId as Id<'eventRequests'>,
   });
+  const currentUser = useQuery(api.users.currentUser);
   const navigation = useNavigation();
+  const deleteEventRequest = () => {
+    if (currentEventRequest) {
+      deleteEventRequestMutation({ id: currentEventRequest?._id });
+    }
+    router.push('/discover');
+  };
 
   useEffect(() => {
-    if (currentEvent?.eventRequestName) {
-      navigation.setOptions({ title: currentEvent.eventRequestName });
+    if (currentEventRequest?.eventRequestName) {
+      navigation.setOptions({ title: currentEventRequest.eventRequestName });
     }
-  }, [currentEvent, navigation]);
+  }, [currentEventRequest, navigation]);
 
-  if (!currentEvent) {
+  if (!currentEventRequest) {
     return (
       <SafeAreaView className="flex-1 bg-background">
         <View className="flex-1 items-center justify-center">
@@ -31,23 +42,27 @@ export default function EventRequestDetailsPage() {
   }
 
   const displayFields = [
-    { key: 'eventRequestName', label: 'Event Name', value: currentEvent.eventRequestName },
-    { key: 'eventRequestSchoolName', label: 'School', value: currentEvent.eventRequestSchoolName },
+    { key: 'eventRequestName', label: 'Event Name', value: currentEventRequest.eventRequestName },
+    {
+      key: 'eventRequestSchoolName',
+      label: 'School',
+      value: currentEventRequest.eventRequestSchoolName,
+    },
     {
       key: 'eventRequestCreatedBy',
       label: 'Created By',
-      value: currentEvent.eventRequestCreatedBy,
+      value: currentEventRequest.createdBy,
     },
     {
       key: 'eventRequestContactEmail',
       label: 'Contact Email',
-      value: currentEvent.eventRequestContactEmail,
+      value: currentEventRequest.eventRequestContactEmail,
     },
-    { key: 'eventRequestStatus', label: 'Status', value: currentEvent.eventRequestStatus },
+    { key: 'eventRequestStatus', label: 'Status', value: currentEventRequest.eventRequestStatus },
     {
       key: 'eventRequestDescription',
       label: 'Description',
-      value: currentEvent.eventRequestDescription,
+      value: currentEventRequest.eventRequestDescription,
     },
   ];
 
@@ -55,11 +70,11 @@ export default function EventRequestDetailsPage() {
     <View className="flex-1 px-6 py-4">
       <View className="mb-6">
         <Text className="mb-2 text-3xl font-bold text-foreground">
-          {currentEvent.eventRequestName}
+          {currentEventRequest.eventRequestName}
         </Text>
         <View className="mt-2 self-start rounded-full bg-primary/10 px-3 py-1">
           <Text className="text-sm font-medium text-primary">
-            {currentEvent.eventRequestStatus}
+            {currentEventRequest.eventRequestStatus}
           </Text>
         </View>
       </View>
@@ -78,11 +93,19 @@ export default function EventRequestDetailsPage() {
         ))}
       </View>
 
-      {currentEvent.eventRequestTags && currentEvent.eventRequestTags.length > 0 && (
+      {currentUser?._id === currentEventRequest.createdBy && (
+        <View>
+          <Button onPress={deleteEventRequest}>
+            <Text>Delete</Text>
+          </Button>
+        </View>
+      )}
+
+      {currentEventRequest.eventRequestTags && currentEventRequest.eventRequestTags.length > 0 && (
         <View className="mb-6">
           <Text className="mb-3 text-lg font-semibold text-foreground">Tags</Text>
           <View className="flex-row flex-wrap gap-2">
-            {currentEvent.eventRequestTags.map((tag) => (
+            {currentEventRequest.eventRequestTags.map((tag) => (
               <View key={tag} className="rounded-full bg-primary/10 px-3 py-1.5">
                 <Text className="text-sm font-medium text-primary">#{tag}</Text>
               </View>

@@ -66,8 +66,7 @@ export default defineSchema({
 
   eventRequests: defineTable({
     eventRequestName: v.string(),
-    eventRequestCreatedById: v.id('users'),
-    eventRequestCreatedBy: v.string(),
+    createdBy: v.id('users'),
     eventRequestDescription: v.string(),
     eventRequestSchoolId: v.optional(v.id('schools')),
     eventRequestSchoolName: v.string(),
@@ -76,7 +75,6 @@ export default defineSchema({
     eventRequestContactEmail: v.string(),
     eventRequestLikeCount: v.optional(v.number()),
     supportedByUserIds: v.optional(v.array(v.id('users'))),
-    attendingUserIds: v.optional(v.array(v.id('users'))),
     eventRequestMessages: v.optional(
       v.array(
         v.object({

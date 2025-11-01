@@ -59,7 +59,7 @@ export default function EventsScreen() {
               </View>
             )}
 
-            {filteredEvents?.length === 0 && (
+            {filteredEvents?.length === 0 && events && events?.length > 0 && (
               <View className="flex-1 items-center justify-center px-8 pt-2">
                 <View className="items-center rounded-2xl border border-border bg-card p-8 shadow-sm">
                   <View className="mb-4 h-16 w-16 items-center justify-center rounded-full bg-muted">

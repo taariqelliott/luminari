@@ -17,8 +17,7 @@ import z from 'zod';
 
 export const eventRequestCreationSchema = z.object({
   eventRequestName: z.string(),
-  eventRequestCreatedById: z.custom<Id<'users'>>(),
-  eventRequestCreatedBy: z.string(),
+  createdBy: z.custom<Id<'users'>>(),
   eventRequestDescription: z.string(),
   eventRequestSchoolId: z.optional(z.custom<Id<'schools'>>()),
   eventRequestSchoolName: z.string(),
@@ -27,7 +26,6 @@ export const eventRequestCreationSchema = z.object({
   eventRequestContactEmail: z.string(),
   eventRequestLikeCount: z.optional(z.number()),
   supportedByUserIds: z.optional(z.array(z.custom<Id<'users'>>())),
-  attendingUserIds: z.array(z.custom<Id<'users'>>()),
   eventRequestMessages: z.optional(
     z.array(
       z.object({
@@ -69,15 +67,13 @@ export default function EventRequestConfirmation() {
 
     const formData: EventRequestCreationFormData = {
       eventRequestName,
-      eventRequestCreatedById: currentUser._id,
-      eventRequestCreatedBy,
+      createdBy: currentUser._id,
       eventRequestDescription,
       eventRequestSchoolName,
       eventRequestTags,
       eventRequestContactEmail,
       eventRequestStatus: 'pending',
       supportedByUserIds: [],
-      attendingUserIds: [],
     };
 
     createEventRequest(formData);
