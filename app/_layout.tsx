@@ -1,119 +1,3 @@
-// import '@/global.css';
-// import { NAV_THEME, THEME } from '@/lib/theme';
-// import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
-// import { tokenCache } from '@clerk/clerk-expo/token-cache';
-// import { ThemeProvider } from '@react-navigation/native';
-// import { PortalHost } from '@rn-primitives/portal';
-// import { ConvexReactClient } from 'convex/react';
-// import { ConvexProviderWithClerk } from 'convex/react-clerk';
-// import { Tabs } from 'expo-router';
-// import { StatusBar } from 'expo-status-bar';
-// import { useColorScheme } from 'nativewind';
-// import { useEffect } from 'react';
-// import { LogBox } from 'react-native';
-// import { createMMKV } from 'react-native-mmkv';
-// import { Ionicons } from '@expo/vector-icons';
-
-// export const storage = createMMKV();
-// export { ErrorBoundary } from 'expo-router';
-
-// LogBox.ignoreLogs(['Open debugger to view warnings.']);
-
-// const convexUrl = process.env.EXPO_PUBLIC_CONVEX_URL;
-// const convex = new ConvexReactClient(convexUrl!);
-// const clerkKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
-
-// export type ColorSelection = 'light' | 'dark' | undefined;
-
-// export default function RootLayout() {
-//   const { colorScheme, setColorScheme } = useColorScheme();
-
-//   const tabBarActiveTintColor = colorScheme === 'dark' ? THEME.dark.primary : THEME.light.primary;
-
-//   useEffect(() => {
-//     const storedMode = storage.getString('colorScheme') as ColorSelection;
-//     if (storedMode && storedMode !== colorScheme) {
-//       setColorScheme(storedMode);
-//     }
-//   }, []);
-
-//   useEffect(() => {
-//     if (colorScheme) {
-//       storage.set('colorScheme', colorScheme);
-//     }
-//   }, [colorScheme]);
-
-//   return (
-//     <ClerkProvider publishableKey={clerkKey} tokenCache={tokenCache} telemetry={false}>
-//       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
-//         <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
-//           <StatusBar style="auto" />
-//           <Tabs
-//             screenOptions={{
-//               tabBarActiveTintColor,
-//             }}>
-//             <Tabs.Screen
-//               name="(home)"
-//               options={{
-//                 title: 'Home',
-//                 tabBarLabel: 'Home',
-//                 tabBarIcon: ({ color, size }) => <Ionicons name="home" size={size} color={color} />,
-//               }}
-//             />
-//             <Tabs.Screen
-//               name="discover"
-//               options={{
-//                 title: 'Discover',
-//                 tabBarLabel: 'Discover',
-//                 tabBarIcon: ({ color, size }) => (
-//                   <Ionicons name="search" size={size} color={color} />
-//                 ),
-//               }}
-//             />
-//             <Tabs.Screen
-//               name="create"
-//               options={{
-//                 title: 'Create',
-//                 tabBarLabel: 'Create',
-//                 tabBarIcon: ({ color, size }) => (
-//                   <Ionicons name="add-circle" size={size} color={color} />
-//                 ),
-//               }}
-//             />
-//             <Tabs.Screen
-//               name="profile"
-//               options={{
-//                 title: 'Profile',
-//                 tabBarLabel: 'Profile',
-//                 tabBarIcon: ({ color, size }) => (
-//                   <Ionicons name="person" size={size} color={color} />
-//                 ),
-//               }}
-//             />
-//             <Tabs.Screen
-//               name="settings"
-//               options={{
-//                 title: 'Settings',
-//                 tabBarLabel: 'Settings',
-//                 tabBarIcon: ({ color, size }) => (
-//                   <Ionicons name="settings" size={size} color={color} />
-//                 ),
-//               }}
-//             />
-//             <Tabs.Screen
-//               name="(auth)"
-//               options={{
-//                 href: null,
-//               }}
-//             />
-//           </Tabs>
-//           <PortalHost />
-//         </ThemeProvider>
-//       </ConvexProviderWithClerk>
-//     </ClerkProvider>
-//   );
-// }
-
 import '@/global.css';
 import { NAV_THEME, THEME } from '@/lib/theme';
 import {
@@ -171,6 +55,19 @@ export default function RootLayout() {
       storage.set('colorScheme', colorScheme);
     }
   }, [colorScheme]);
+
+  const screenListeners = ({ route, navigation }: { route: any; navigation: any }) => ({
+    tabPress: (e: { preventDefault: () => void }) => {
+      const rootState = navigation.getState();
+      const tabRoute = rootState.routes.find((r: { name: any }) => r.name === route.name);
+      const stackState = tabRoute?.state;
+      const isNested = stackState && stackState.index ? stackState.index > 0 : false;
+      if (isNested) {
+        e.preventDefault();
+      }
+    },
+  });
+
   return (
     <ClerkProvider publishableKey={clerkKey} tokenCache={tokenCache} telemetry={false}>
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
@@ -178,6 +75,7 @@ export default function RootLayout() {
           <StatusBar style="auto" />
           <Tabs screenOptions={tabBarOptions}>
             <Tabs.Screen
+              listeners={screenListeners}
               name="(home)"
               options={{
                 title: 'Home',
@@ -186,6 +84,7 @@ export default function RootLayout() {
               }}
             />
             <Tabs.Screen
+              listeners={screenListeners}
               name="discover"
               options={{
                 title: 'Discover',
@@ -194,6 +93,7 @@ export default function RootLayout() {
               }}
             />
             <Tabs.Screen
+              listeners={screenListeners}
               name="create"
               options={{
                 title: 'Create',
@@ -202,6 +102,7 @@ export default function RootLayout() {
               }}
             />
             <Tabs.Screen
+              listeners={screenListeners}
               name="profile"
               options={{
                 title: 'Profile',
@@ -210,6 +111,7 @@ export default function RootLayout() {
               }}
             />
             <Tabs.Screen
+              listeners={screenListeners}
               name="settings"
               options={{
                 title: 'Settings',
