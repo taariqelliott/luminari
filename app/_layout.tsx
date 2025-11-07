@@ -15,7 +15,7 @@ import { withLayoutContext } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'nativewind';
 import { useEffect } from 'react';
-import { LogBox } from 'react-native';
+import { LogBox, Platform } from 'react-native';
 import { createMMKV } from 'react-native-mmkv';
 
 export const storage = createMMKV();
@@ -43,6 +43,23 @@ export default function RootLayout() {
     tabBarActiveTintColor: colorScheme === 'dark' ? THEME.dark.primary : THEME.light.primary,
   };
 
+  const screenListeners = ({ route, navigation }: { route: any; navigation: any }) => ({
+    tabPress: (e: { preventDefault: () => void }) => {
+      const platformVersion = Platform.Version;
+      if (platformVersion === '26.1') {
+        const rootState = navigation.getState();
+        const tabRoute = rootState.routes.find((r: { name: any }) => r.name === route.name);
+        const stackState = tabRoute?.state;
+        const isNested = stackState && stackState.index ? stackState.index > 0 : false;
+        if (isNested) {
+          e.preventDefault();
+        }
+      } else {
+        return;
+      }
+    },
+  });
+
   useEffect(() => {
     const storedMode = storage.getString('colorScheme') as ColorSelection;
     if (storedMode && storedMode !== colorScheme) {
@@ -55,18 +72,6 @@ export default function RootLayout() {
       storage.set('colorScheme', colorScheme);
     }
   }, [colorScheme]);
-
-  const screenListeners = ({ route, navigation }: { route: any; navigation: any }) => ({
-    tabPress: (e: { preventDefault: () => void }) => {
-      const rootState = navigation.getState();
-      const tabRoute = rootState.routes.find((r: { name: any }) => r.name === route.name);
-      const stackState = tabRoute?.state;
-      const isNested = stackState && stackState.index ? stackState.index > 0 : false;
-      if (isNested) {
-        e.preventDefault();
-      }
-    },
-  });
 
   return (
     <ClerkProvider publishableKey={clerkKey} tokenCache={tokenCache} telemetry={false}>
