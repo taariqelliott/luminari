@@ -1,11 +1,19 @@
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Separator } from '@/components/ui/separator';
 import { Text } from '@/components/ui/text';
 import { api } from '@/convex/_generated/api';
 import type { Id } from '@/convex/_generated/dataModel';
 import { useMutation, useQuery } from 'convex/react';
 import { router, useLocalSearchParams, useNavigation } from 'expo-router';
-import { useEffect } from 'react';
-import { Image, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function EventsPage() {
@@ -17,9 +25,26 @@ export default function EventsPage() {
   });
   const navigation = useNavigation();
 
+  const [aspectRatio, setAspectRatio] = useState(1);
+
+  const uri =
+    currentEvent?.eventImgUrl ??
+    'https://marketplace.canva.com/EAGS_qOXjpI/1/0/1600w/canva-blue-and-purple-gradient-background-instagram-post-wE1uA0M0RPU.jpg';
+
+  useEffect(() => {
+    if (!uri) return;
+    Image.getSize(
+      uri,
+      (width, height) => {
+        setAspectRatio(width / height);
+      },
+      () => setAspectRatio(1)
+    );
+  }, [uri]);
+
   const deleteEvent = () => {
     if (currentEvent) {
-      deleteEventMutation({ id: currentEvent?._id });
+      deleteEventMutation({ id: currentEvent._id });
     }
     router.push('/discover');
   };
@@ -57,17 +82,42 @@ export default function EventsPage() {
   ];
 
   return (
-    <View className="flex-1 bg-background px-6 py-4">
-      {currentEvent.eventImgUrl && (
-        <View className="mb-6 overflow-hidden rounded-2xl">
-          <Image
-            source={{ uri: currentEvent.eventImgUrl }}
-            className="h-48 w-full rounded-2xl"
-            resizeMode="cover"
-          />
-        </View>
-      )}
+    <ScrollView className="mb-20 flex-1 bg-background px-6 pt-4">
+      <View className="mb-3 rounded-2xl">
+        <Dialog>
+          <DialogTrigger asChild>
+            <TouchableOpacity activeOpacity={0}>
+              <View className="flex justify-center">
+                <Image
+                  source={{ uri }}
+                  className="w-full rounded-2xl"
+                  style={{ aspectRatio }}
+                  resizeMode="cover"
+                />
+              </View>
+            </TouchableOpacity>
+          </DialogTrigger>
 
+          <DialogContent className="sm:max-w-[425px]">
+            <View className="flex justify-center">
+              <Image
+                source={{ uri }}
+                className="w-full rounded-2xl"
+                style={{ aspectRatio }}
+                resizeMode="contain"
+              />
+            </View>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="outline">
+                  <Text>Close</Text>
+                </Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </View>
+      <Separator className="my-2" />
       <View className="mb-6">
         <Text className="mb-2 text-3xl font-bold text-foreground">{currentEvent.eventName}</Text>
         <View className="mt-1 self-start rounded-full bg-primary/10 px-3 py-1">
@@ -88,6 +138,7 @@ export default function EventsPage() {
           </View>
         ))}
       </View>
+
       {currentUser?._id === currentEvent.createdBy && (
         <View>
           <Button onPress={deleteEvent}>
@@ -108,6 +159,6 @@ export default function EventsPage() {
           </View>
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 }

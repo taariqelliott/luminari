@@ -6,8 +6,8 @@ import EventsScreen from './events';
 import RequestsScreen from './requests';
 
 export default function DiscoverIndex() {
-  const [eventsViewIsActive, setEventsViewIsActive] = useState(false);
-  const [requestsViewIsActive, setRequestsViewIsActive] = useState(true);
+  const [eventsViewIsActive, setEventsViewIsActive] = useState(true);
+  const [requestsViewIsActive, setRequestsViewIsActive] = useState(false);
 
   const makeEventsViewVisible = () => {
     setEventsViewIsActive(true);
