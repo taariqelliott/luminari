@@ -8,25 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		345633EB73D5333E5711296A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4A0A2778EC8ED9F9F65384CD /* PrivacyInfo.xcprivacy */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		8E8C42CB5A747E042EC5CE66 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307BB83F3CAD09AF5E89951 /* ExpoModulesProvider.swift */; };
+		8115C0E44FA5F5B7F9BC9CB0 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DED3A26CCEA6AC29EF15C8E /* ExpoModulesProvider.swift */; };
+		87FFA7B068D1137E8406F2E9 /* Pods_luminari.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB35BC289DB757D5A77C2E2 /* Pods_luminari.framework */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		DC4DC61C82AD67F53888FA51 /* Pods_luminari.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EAA9B9572D784575371C70E /* Pods_luminari.framework */; };
+		C461C289B7223C8241CC5545 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A168A7CD1103F67732BD55EF /* PrivacyInfo.xcprivacy */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0EAA9B9572D784575371C70E /* Pods_luminari.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_luminari.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F1F23AD995BB77CACF882BE /* Pods-luminari.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-luminari.debug.xcconfig"; path = "Target Support Files/Pods-luminari/Pods-luminari.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* luminari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = luminari.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = luminari/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = luminari/Info.plist; sourceTree = "<group>"; };
-		4A0A2778EC8ED9F9F65384CD /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = luminari/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		91AA659EC28FC10E799661FE /* Pods-luminari.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-luminari.debug.xcconfig"; path = "Target Support Files/Pods-luminari/Pods-luminari.debug.xcconfig"; sourceTree = "<group>"; };
-		9307BB83F3CAD09AF5E89951 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-luminari/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		3EB35BC289DB757D5A77C2E2 /* Pods_luminari.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_luminari.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DED3A26CCEA6AC29EF15C8E /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-luminari/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		9C1D70582EC8EE1A11E1F53C /* Pods-luminari.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-luminari.release.xcconfig"; path = "Target Support Files/Pods-luminari/Pods-luminari.release.xcconfig"; sourceTree = "<group>"; };
+		A168A7CD1103F67732BD55EF /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = luminari/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = luminari/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		D597F2A8D325D26B36635368 /* Pods-luminari.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-luminari.release.xcconfig"; path = "Target Support Files/Pods-luminari/Pods-luminari.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = luminari/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* luminari-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "luminari-Bridging-Header.h"; path = "luminari/luminari-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -37,13 +37,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC4DC61C82AD67F53888FA51 /* Pods_luminari.framework in Frameworks */,
+				87FFA7B068D1137E8406F2E9 /* Pods_luminari.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		097C85E31CF0DE121CED4844 /* luminari */ = {
+			isa = PBXGroup;
+			children = (
+				6DED3A26CCEA6AC29EF15C8E /* ExpoModulesProvider.swift */,
+			);
+			name = luminari;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* luminari */ = {
 			isa = PBXGroup;
 			children = (
@@ -53,36 +61,36 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				4A0A2778EC8ED9F9F65384CD /* PrivacyInfo.xcprivacy */,
+				A168A7CD1103F67732BD55EF /* PrivacyInfo.xcprivacy */,
 			);
 			name = luminari;
-			sourceTree = "<group>";
-		};
-		1B313F4F6DE75452955DAFD3 /* ExpoModulesProviders */ = {
-			isa = PBXGroup;
-			children = (
-				B04D1147B677F45ED014F680 /* luminari */,
-			);
-			name = ExpoModulesProviders;
-			sourceTree = "<group>";
-		};
-		288D65CD5270473A7BAB6B1F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				91AA659EC28FC10E799661FE /* Pods-luminari.debug.xcconfig */,
-				D597F2A8D325D26B36635368 /* Pods-luminari.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				0EAA9B9572D784575371C70E /* Pods_luminari.framework */,
+				3EB35BC289DB757D5A77C2E2 /* Pods_luminari.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5B555D6F12C5AAA3447453CD /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				097C85E31CF0DE121CED4844 /* luminari */,
+			);
+			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
+		809D13C20B3008FFA0C4A031 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0F1F23AD995BB77CACF882BE /* Pods-luminari.debug.xcconfig */,
+				9C1D70582EC8EE1A11E1F53C /* Pods-luminari.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -99,8 +107,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				288D65CD5270473A7BAB6B1F /* Pods */,
-				1B313F4F6DE75452955DAFD3 /* ExpoModulesProviders */,
+				809D13C20B3008FFA0C4A031 /* Pods */,
+				5B555D6F12C5AAA3447453CD /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -113,14 +121,6 @@
 				13B07F961A680F5B00A75B9A /* luminari.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B04D1147B677F45ED014F680 /* luminari */ = {
-			isa = PBXGroup;
-			children = (
-				9307BB83F3CAD09AF5E89951 /* ExpoModulesProvider.swift */,
-			);
-			name = luminari;
 			sourceTree = "<group>";
 		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
@@ -140,13 +140,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "luminari" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				A2864887DCFE575C860863F1 /* [Expo] Configure project */,
+				96E076D6CC73BCB962A44A44 /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				E3AA248B6FE0016CCD1BA3D2 /* [CP] Embed Pods Frameworks */,
+				CAD3EFEC49BA5695CFB236CD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -198,7 +198,7 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				345633EB73D5333E5711296A /* PrivacyInfo.xcprivacy in Resources */,
+				C461C289B7223C8241CC5545 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +276,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-luminari/Pods-luminari-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A2864887DCFE575C860863F1 /* [Expo] Configure project */ = {
+		96E076D6CC73BCB962A44A44 /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -300,7 +300,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-luminari/expo-configure-project.sh\"\n";
 		};
-		E3AA248B6FE0016CCD1BA3D2 /* [CP] Embed Pods Frameworks */ = {
+		CAD3EFEC49BA5695CFB236CD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -330,7 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				8E8C42CB5A747E042EC5CE66 /* ExpoModulesProvider.swift in Sources */,
+				8115C0E44FA5F5B7F9BC9CB0 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +339,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 91AA659EC28FC10E799661FE /* Pods-luminari.debug.xcconfig */;
+			baseConfigurationReference = 0F1F23AD995BB77CACF882BE /* Pods-luminari.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -378,7 +378,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D597F2A8D325D26B36635368 /* Pods-luminari.release.xcconfig */;
+			baseConfigurationReference = 9C1D70582EC8EE1A11E1F53C /* Pods-luminari.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
